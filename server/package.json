@@ -1,0 +1,25 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Ingrediate Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jojecameron/Ingrediate-App.git"
+  },
+  "author": "jojecameron",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jojecameron/Ingrediate-App/issues"
+  },
+  "homepage": "https://github.com/jojecameron/Ingrediate-App#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "openai": "^3.2.1"
+  }
+}
