@@ -7,6 +7,7 @@ const { Configuration, OpenAIApi } = require('openai');
 const test = ['snack', 'spinach', 'butter', 'cheddar cheese', 'ham', 'eggs', 'milk', 'red pepper', 'sourdough bread', 'lettuce', 'tomato', 'dark chocolate', 'sugar', 'flour'];
 
 const configuration = new Configuration({
+    apiKey : process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
