@@ -17,7 +17,8 @@ const APIController = {
         model: 'text-davinci-003',
         prompt: APIController.generatePrompt(res.locals.ingredients),
         temperature: 0.7,
-        max_tokens: 50
+        // max_tokens: 250
+        max_tokens: 200
     });
     // res.status(200).json({ result: completion.data.choices[0].text });
     res.locals.recipe = completion.data.choices[0].text;
@@ -52,11 +53,35 @@ const APIController = {
     // Animal: ${capitalizedAnimal}
     // Names:`;
 
-    return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The first element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe does not have to include all the ingredients. You can assume there is access to water even if water is not a listed ingredient on the list. You will also provide a link to a recipe website for each recipe.
+    return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The first element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe does not have to include all the ingredients in the list. You can assume there is access to water even if water is not a listed ingredient on the list. You will also provide a link to a similar recipe from a single website for each recipe.
     User: ['dessert', 'carrots', 'flour', 'sugar', 'cream cheese', 'eggs', 'butter', 'walnuts', 'pineapple', 'baking powder', 'powdered sugar', 'brown sugar', 'cinnamon', 'butter', 'milk', 'boneless skinless chicken breasts', 'panko breadcrumbs', 'olive oil', 'vegetable oil', 'kale']
-    Assistant: Carrot Cake: You can use the carrots, flour, sugar, cream cheese, eggs, butter, walnuts, pineapple, baking powder, powdered sugar, brown sugar, cinnamon, and butter to make a delicious carrot cake. Here is a recipe link: https://www.allrecipes.com/recipe/8235/carrot-cake-iii/
+    Assistant: Carrot Cake: |
+    Ingredients:
+    2 cups grated carrots
+    2 cups all-purpose flour
+    1 and 1/2 cups granulated sugar
+    1 cup cream cheese, softened
+    3 large eggs
+    1/2 cup unsalted butter, melted
+    1/2 cup chopped walnuts
+    1/2 cup crushed pineapple, drained
+    2 teaspoons baking powder
+    1 cup powdered sugar
+    1/2 cup packed brown sugar
+    2 teaspoons ground cinnamon
+    1/4 cup unsalted butter, softened
+    Instructions:
+    Preheat the oven to 350°F (175°C). Grease and flour a 9-inch round cake pan.
+    In a large mixing bowl, combine the grated carrots, all-purpose flour, granulated sugar, softened cream cheese, eggs, melted butter, chopped walnuts, crushed pineapple, baking powder, brown sugar, and ground cinnamon. Mix well until all the ingredients are evenly incorporated.
+    Pour the batter into the prepared cake pan, spreading it out evenly.
+    Bake in the preheated oven for 35-40 minutes, or until a toothpick inserted into the center of the cake comes out clean.
+    Remove the cake from the oven and let it cool in the pan for 10 minutes. Then transfer the cake to a wire rack to cool completely.
+    In a small bowl, prepare the cream cheese frosting by combining the powdered sugar and softened butter. Mix until smooth and creamy.
+    Once the cake has cooled, spread the cream cheese frosting evenly over the top of the cake.
+    Serve and enjoy. |
+    Link: |https://www.allrecipes.com/recipe/8235/carrot-cake-iii/
     User: ['breakfast', 'spinach', 'butter', 'cheddar cheese', 'ham', 'eggs', 'milk', 'red pepper']
-    Assistant: Spinach and Ham Breakfast Quiche:
+    Assistant: Spinach and Ham Breakfast Quiche: |
     Ingredients:
     1 tablespoon butter
     1 cup fresh spinach, chopped
@@ -78,8 +103,8 @@ const APIController = {
     Sprinkle the shredded cheddar cheese on top.
     Place the dish in the preheated oven and bake for 25-30 minutes or until the eggs are set and the cheese is melted and lightly browned.
     Remove from the oven and let it cool for a few minutes.
-    Cut into slices and serve hot.
-    Here is a recipe link for reference: https://www.servedfromscratch.com/spinach-ham-and-cheddar-quiche/
+    Cut into slices and serve hot. |
+    Link: |https://www.servedfromscratch.com/spinach-ham-and-cheddar-quiche/
     User: ${ingredients}
     Assistant:`;
     }

@@ -10,14 +10,25 @@ class MainContainer extends Component {
     this.state = {};
     this.state.ingredients = [];
     this.state.dishType = [];
+    this.state.recipeList = [];
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.deleteRecipe = this.deleteRecipe.bind(this);
+    this.favoriteRecipe = this.favoriteRecipe.bind(this);
     this.sendIngredientsToServer = this.sendIngredientsToServer.bind(this)
+  }
+
+  deleteRecipe(recipe) {
+    console.log('deleteRecipe');
+  }
+
+  favoriteRecipe(recipe) {
+    console.log('deleteRecipe');
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('handleSubmit is running');
+    // console.log('handleSubmit is running');
     const listOfIngredients = [];
     this.state.ingredients.forEach(ingredient => {
         listOfIngredients.push(ingredient.label);
@@ -27,9 +38,11 @@ class MainContainer extends Component {
   }
 
   sendIngredientsToServer = async (ingredients) => {
-    console.log('ingredients to send to Server..', ingredients)
-    // console.log(ingredients);
-    // console.log(this.state);
+    if (!ingredients.length) {
+      return alert('Please enter ingredients...');
+    }
+    console.log('ingredients to send to Server..', ingredients);
+    const newState = this.state;
     try {
       const result = await fetch(url, {
         method: 'POST',
@@ -41,28 +54,37 @@ class MainContainer extends Component {
       })
       const data = await result.json();
       console.log(data);
+      newState.recipeList.push(data);
+      // console.log(newState.recipes);
+      this.setState({...newState});
+      console.log(this.state.recipeList);
     } catch (err) {
       console.log(err);
     }
   }
 
   handleChange(value) {
-    console.log('Before', this.state);
+    // console.log('Before', this.state);
     const newState = this.state;
     newState.ingredients = value;
     this.setState({...newState});
-    console.log('After', this.state);
+    // console.log('After', this.state);
   }
 
   render() {
     return (
-      <div className="container">
-        <h1>INGREDIATE</h1>
+      <div className="MainContainer">
+        <h1><em>Ingrediate</em><br/><span>Recipe Generator</span></h1>
         <IngredientForm 
-          handleChange={this.handleChange}
-          handleSubmit ={this.handleSubmit}
+          id = 'IngredientForm'
+          handleChange = {this.handleChange}
+          handleSubmit = {this.handleSubmit}
         />
-        <RecipeContainer />
+        <RecipeContainer 
+          recipeList = {this.state.recipeList}
+          deleteRecipe = {this.deleteRecipe}
+          favoriteRecipe = {this.favoriteRecipe}
+        />
       </div>
     );
   }

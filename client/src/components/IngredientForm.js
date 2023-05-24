@@ -8,7 +8,7 @@ const IngredientForm = (props) => {
   const [ ingredientChoices, setIngredientChoices ] = useState([]);
 
   const handleIngredients = (event, value) => {
-    console.log('handleIngredients is running.');
+    // console.log('handleIngredients is running.');
     setIngredientChoices(value);
   }
 
@@ -18,24 +18,24 @@ const IngredientForm = (props) => {
   }, [ingredientChoices]);
 
   return (
-    <form onSubmit={props.handleSubmit}>
-        <Autocomplete
-            onChange={handleIngredients}
-            multiple
-            id="autocompleteInput"
-            options={ingredients}
-            getOptionLabel={(option) => option.label}
-            // defaultValue={[ingredients[13]]}
-            renderInput={(params) => (
-            <TextField
-                {...params}
-                variant="standard"
-                label="Ingredients"
-                placeholder="Favorites"
-            />
-            )}
+    <form onSubmit={props.handleSubmit} className='IngredientForm'>
+      <Autocomplete
+        onChange={handleIngredients}
+        multiple
+        id="autocompleteInput"
+        options={ingredients}
+        getOptionLabel={(option) => option.label}
+        // defaultValue={[ingredients[13]]}
+        renderInput={(params) => (
+        <TextField
+          {...params}
+          variant="standard"
+          // label="Ingredients"
+          placeholder="Add Ingredients..."
         />
-        <input type="submit" />
+        )}
+      />
+      <input id="submit-button" type="submit" value="Generate Recipe"/>
     </form>
   );
 }

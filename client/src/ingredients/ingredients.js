@@ -58,7 +58,6 @@ const ingredients = [
   { label: 'Potatoes' },
   { label: 'Tomatoes' },
   { label: 'Cucumbers' },
-  { label: 'Bell Peppers' },
   { label: 'Carrots' },
   { label: 'Broccoli' },
   { label: 'Spinach' },
@@ -166,6 +165,9 @@ const ingredients = [
   { label: 'Cardamom' },
   { label: 'Allspice' },
   { label: 'Star Anise' },
+  { label: 'Chives' },
+  { label: 'Green Onion' },
+  { label: 'Artichoke Hearts' }
   ];
   
   export default ingredients;

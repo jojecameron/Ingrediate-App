@@ -6,7 +6,7 @@ import MainContainer from '../containers/MainContainer';
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className='App'>
         <MainContainer />
       </div>
     );

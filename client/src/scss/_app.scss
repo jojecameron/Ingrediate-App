@@ -1,7 +1,105 @@
-body {
-    background-color: $primaryGreen;
+h1 {
+    color: $tertiaryGreen;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    align-self: flex-start;
+    padding-left: 5%;
+    font-size: 50px;
+    span {
+        font-size: 24px;
+        color: $tertiaryGreen;
+        font-family: Arial, Helvetica, sans-serif;
+    }
 }
 
+body {
+    background-color: $primaryGreen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.App {
+    background-color: $primaryGreen;
+}
 #autocompleteInput {
-    background-color: whitesmoke;
+    background-color: $offWhite;
+    margin-top: 10px;
+}
+
+#submit-button {
+    border-radius: 60px;
+    width: 30%;
+    max-width: 200px;
+    min-width: 150px;
+    height: 40%;
+    text-align: center;
+    align-self: center;
+    margin-top: 10px;
+}
+
+.IngredientForm {
+    background-color: $offWhite;
+    width: 85%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 60px;
+    padding: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, .2);
+}
+
+.MainContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: $primaryGreen;
+    width: 100vw;
+    min-height: 100vh;
+    height: fit-content;
+    border-radius: px;
+}
+
+.RecipeContainer {
+    margin-top: 50px;
+    background-color: $offWhite;
+    min-height: 80vh;
+    height: fit-content;
+    width: 90%;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, .2);
+    .recipeDisplay {
+      display: flex;
+      flex-flow: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+        color: $primaryGreen;
+        padding-left: 20px;
+        font-size: 30px;
+    }
+}
+
+.recipe-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.Recipe {
+    background-color: $secondaryGreen;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 350px;
+    float:left;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, .2);
+    p {
+      float: left;
+      overflow: auto;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
 }
