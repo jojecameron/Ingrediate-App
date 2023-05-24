@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AutocompleteInput from '../components/IngredientForm';
+import IngredientForm from '../components/IngredientForm';
 import RecipeContainer from './RecipeContainer';
 
 const url = 'http://localhost:3000/generate'
@@ -30,14 +30,20 @@ class MainContainer extends Component {
     console.log('ingredients to send to Server..', ingredients)
     // console.log(ingredients);
     // console.log(this.state);
-    const result = await fetch(url, {
+    try {
+      const result = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         // mode: 'no-cors',
         body: JSON.stringify( ingredients )
-    })
+      })
+      const data = await result.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   handleChange(value) {
@@ -52,7 +58,7 @@ class MainContainer extends Component {
     return (
       <div className="container">
         <h1>INGREDIATE</h1>
-        <AutocompleteInput 
+        <IngredientForm 
           handleChange={this.handleChange}
           handleSubmit ={this.handleSubmit}
         />

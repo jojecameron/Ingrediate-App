@@ -1,7 +1,7 @@
 const { Configuration, OpenAIApi } = require('openai');
 const axios = require('axios');
 
-const test = ['dinner', 'spinach', 'butter', 'carrots', 'sausage', 'eggs', 'beef'];
+// const test = ['dinner', 'spinach', 'butter', 'carrots', 'sausage', 'eggs', 'beef'];
 
 const configuration = new Configuration({
     apiKey : process.env.OPENAI_API_KEY,

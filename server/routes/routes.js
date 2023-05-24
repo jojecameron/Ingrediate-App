@@ -21,8 +21,9 @@ routes.post('/generate',
   IngredientController.processRequest, 
   APIController.getGPTResult,
   (_req, res) => {
-    console.log('This is result', res.locals.recipe)
-    // res.status(200).json(res.locals.recipe );
+    console.log('This is result', res.locals.recipe);
+    const result = { recipe: res.locals.recipe };
+    res.status(200).send(JSON.stringify(result));
   }
 )
 
