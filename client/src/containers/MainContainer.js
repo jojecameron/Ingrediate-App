@@ -5,6 +5,7 @@ import DishForm from '../components/DishForm';
 import Loading from '../components/Loading';
 
 const url = 'http://localhost:3000/generate'
+const favoritesUrl = 'http://localhost:3000/favorites'
 
 class MainContainer extends Component {
   constructor(props) {
@@ -20,6 +21,8 @@ class MainContainer extends Component {
     this.handleDishChange = this.handleDishChange.bind(this);
     this.favoriteRecipe = this.favoriteRecipe.bind(this);
     this.sendIngredientsToServer = this.sendIngredientsToServer.bind(this)
+    this.saveFavorites = this.saveFavorites.bind(this);
+    this.deleteFavorite = this.deleteFavorite.bind(this);
   }
   
   // on select favorite add to favoriteRecipes array, deselect favorite removes from array
@@ -27,17 +30,54 @@ class MainContainer extends Component {
     const { isFavorite, recipeIndex } = recipe;
     const { favoriteRecipes } = this.state;
     if (isFavorite) {
-      favoriteRecipes.push({index: recipeIndex, recipe: this.state.recipeList[recipeIndex]});
+      const favoritedRecipe = this.state.recipeList[recipeIndex];
+      favoriteRecipes.push({index: recipeIndex, recipe: favoritedRecipe});
       this.setState({ favoriteRecipes })
+      this.saveFavorites({index: recipeIndex, recipe: favoritedRecipe});
     }
     if (this.state.favoriteRecipes.length) {
       if (!isFavorite) {
-        const index = favoriteRecipes.find(recipe => {
+        const index = favoriteRecipes.findIndex(recipe => {
           recipe.index === recipeIndex;
         })
         favoriteRecipes.splice(index, 1);
         this.setState({ favoriteRecipes })
+        this.deleteFavorite(recipeIndex)
       }
+    }
+  }
+
+  saveFavorites = async (favoriteObject) => {
+    console.log('To send to server', favoriteObject);
+    try {
+      const result = await fetch(favoritesUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(favoriteObject)
+      })
+      const data = await result.json();
+      console.log('ADDED TO DATABASE: ', data)
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  deleteFavorite = async (index) => {
+    console.log('To send to server', index);
+    try {
+      const result = await fetch(favoritesUrl, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({index: index})
+      })
+      const data = await result.json();
+      console.log('DELETED FROM DATABASE: ', data)
+    } catch (err) {
+      console.log(err);
     }
   }
 

@@ -18,7 +18,7 @@ const APIController = {
         prompt: APIController.generatePrompt(res.locals.ingredients),
         temperature: 0.7,
         // max_tokens: 250
-        max_tokens: 200
+        max_tokens: 350
     });
     // res.status(200).json({ result: completion.data.choices[0].text });
     res.locals.recipe = completion.data.choices[0].text;
