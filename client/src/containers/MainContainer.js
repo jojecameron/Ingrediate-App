@@ -13,58 +13,58 @@ class MainContainer extends Component {
     this.state.ingredients = [];
     this.state.dishType = [];
     this.state.recipeList = [];
+    this.state.favoriteRecipes = [];
     this.state.isLoading = false;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDishChange = this.handleDishChange.bind(this);
-    this.deleteRecipe = this.deleteRecipe.bind(this);
     this.favoriteRecipe = this.favoriteRecipe.bind(this);
     this.sendIngredientsToServer = this.sendIngredientsToServer.bind(this)
   }
-
-  // add logic to delete recipe from display
-  deleteRecipe(recipe) {
-    console.log('deleteRecipe');
-  }
   
-  // add logic to favorite a recipe on display
+  // on select favorite add to favoriteRecipes array, deselect favorite removes from array
   favoriteRecipe(recipe) {
-    console.log('favoriteRecipe');
+    const { isFavorite, recipeIndex } = recipe;
+    const { favoriteRecipes } = this.state;
+    if (isFavorite) {
+      favoriteRecipes.push({index: recipeIndex, recipe: this.state.recipeList[recipeIndex]});
+      this.setState({ favoriteRecipes })
+    }
+    if (this.state.favoriteRecipes.length) {
+      if (!isFavorite) {
+        const index = favoriteRecipes.find(recipe => {
+          recipe.index === recipeIndex;
+        })
+        favoriteRecipes.splice(index, 1);
+        this.setState({ favoriteRecipes })
+      }
+    }
   }
 
   // preps dishType and ingredients to be sent to server
   handleSubmit(event) {
     event.preventDefault();
-    // console.log('handleSubmit is running');
     const listOfIngredients = [];
     this.state.ingredients.forEach(ingredient => {
         listOfIngredients.push(ingredient.label);
     })
     const { dishType } = this.state;
     const dishAndIngredients = dishType.concat(listOfIngredients)
-    // console.log(dishAndIngredients)
-    // console.log(this.state);
-    // send list of ingredients to Server
     this.sendIngredientsToServer(listOfIngredients);
   }
 
   // updates state for ingredients
   handleChange(value) {
-    // console.log('Before', this.state);
-    // console.log(value)
     const newState = this.state;
     newState.ingredients = value;
     this.setState({...newState});
-    // console.log('After', this.state);
   }
 
   // udpates state for dishType
   handleDishChange(value) {
-    console.log('Before', this.state);
     const newState = this.state;
     newState.dishType = [ value ];
     this.setState({...newState});
-    console.log('After', this.state);
   }
 
   // makes post request to server, handles loading state change, receives data and udpates state
@@ -72,7 +72,6 @@ class MainContainer extends Component {
     if (!ingredients.length) {
       return alert('Please enter ingredients...');
     }
-    console.log('ingredients to send to Server..', ingredients);
     const newState = this.state;
     newState.isLoading = true;
     this.setState({...newState});
@@ -82,16 +81,12 @@ class MainContainer extends Component {
         headers: {
             'Content-Type': 'application/json'
         },
-        // mode: 'no-cors',
         body: JSON.stringify( ingredients )
       })
       const data = await result.json();
-      console.log(data);
       newState.recipeList.push(data);
       newState.isLoading = false;
-      // console.log(newState.recipes);
       this.setState({...newState});
-      console.log(this.state.recipeList);
     } catch (err) {
       console.log(err);
     }
@@ -109,6 +104,7 @@ class MainContainer extends Component {
           id = 'IngredientForm'
           handleChange = {this.handleChange}
           handleSubmit = {this.handleSubmit}
+          isLoading = {this.state.isLoading}
         />
         {this.state.isLoading ? <Loading /> : <br/>}
         <RecipeContainer 

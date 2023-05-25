@@ -68,7 +68,36 @@ body {
 #checkboxes {
     font-family: sans-serif;
     color: $offWhite;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+    width: 40%;
 }
+
+@media screen and (max-width: 804px) {
+    #checkboxes {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 25%;
+    vertical-align: middle;
+    margin-bottom: 6px;
+    border: 2px solid #ddd;
+    // appearance: none;
+    // -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
 
 /*********************CONTAINERS**********************/
 .MainContainer {
@@ -89,7 +118,7 @@ body {
     min-height: 80vh;
     height: fit-content;
     border-radius: 15px;
-    width: 90%;
+    width: 87.5%;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, .2);
     .recipeDisplay {
       display: flex;
@@ -146,5 +175,31 @@ body {
         white-space: pre-line;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         color: $primaryGreen;
+        margin: 0px;
     }
+    p::-webkit-scrollbar {
+        background-color: $secondaryGreen;
+        border-radius: 15px;
+    }
+
+    p::-webkit-scrollbar-thumb {
+        background-color: $primaryGreen;
+        border-radius: 15px;
+    }
+}
+
+
+.favorite {
+    background-color: transparent;
+    border: none;
+    color: $primaryGreen;
+    padding: 0px;
+}
+
+/**************LOADING**************/
+#loading {
+    margin-top: 50px;
+}
+.css-1idz92c-MuiCircularProgress-svg {
+    color: #d8f0d5;
 }

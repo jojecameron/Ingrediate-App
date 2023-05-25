@@ -12,11 +12,12 @@ class RecipeContainer extends Component {
   // Handle recipe components displaying in container
   render() {
     const recipes = this.props.recipeList.map((recipe, i) => {
-      console.log('recipe being generated',recipe.recipe, i);
+    //   console.log('recipe being generated',recipe.recipe, i);
       const splitRecipe = recipe.recipe.split('|');
-      console.log('this is splitRecipe[1]',splitRecipe[1]);
+    //   console.log('this is splitRecipe[1]',splitRecipe[1]);
       return <Recipe 
         key={`Recipe${i}`}
+        recipeIndex={i}
         deleteRecipe = {this.props.deleteRecipe}
         favoriteRecipe = {this.props.favoriteRecipe}
         recipeTitle = {splitRecipe[0]}
