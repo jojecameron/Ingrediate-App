@@ -57,53 +57,57 @@ const APIController = {
     User: ['dessert', 'carrots', 'flour', 'sugar', 'cream cheese', 'eggs', 'butter', 'walnuts', 'pineapple', 'baking powder', 'powdered sugar', 'brown sugar', 'cinnamon', 'butter', 'milk', 'boneless skinless chicken breasts', 'panko breadcrumbs', 'olive oil', 'vegetable oil', 'kale']
     Assistant: Carrot Cake: |
     Ingredients:
-    2 cups grated carrots
-    2 cups all-purpose flour
-    1 and 1/2 cups granulated sugar
-    1 cup cream cheese, softened
-    3 large eggs
-    1/2 cup unsalted butter, melted
-    1/2 cup chopped walnuts
-    1/2 cup crushed pineapple, drained
-    2 teaspoons baking powder
-    1 cup powdered sugar
-    1/2 cup packed brown sugar
-    2 teaspoons ground cinnamon
-    1/4 cup unsalted butter, softened
+
+    - 2 cups grated carrots
+    - 2 cups all-purpose flour
+    - 1 and 1/2 cups granulated sugar
+    - 1 cup cream cheese, softened
+    - 3 large eggs
+    - 1/2 cup unsalted butter, melted
+    - 1/2 cup chopped walnuts
+    - 1/2 cup crushed pineapple, drained
+    - 2 teaspoons baking powder
+    - 1 cup powdered sugar
+    - 1/2 cup packed brown sugar
+    - 2 teaspoons ground cinnamon
+    - 1/4 cup unsalted butter, softened
+
     Instructions:
-    Preheat the oven to 350°F (175°C). Grease and flour a 9-inch round cake pan.
-    In a large mixing bowl, combine the grated carrots, all-purpose flour, granulated sugar, softened cream cheese, eggs, melted butter, chopped walnuts, crushed pineapple, baking powder, brown sugar, and ground cinnamon. Mix well until all the ingredients are evenly incorporated.
-    Pour the batter into the prepared cake pan, spreading it out evenly.
-    Bake in the preheated oven for 35-40 minutes, or until a toothpick inserted into the center of the cake comes out clean.
-    Remove the cake from the oven and let it cool in the pan for 10 minutes. Then transfer the cake to a wire rack to cool completely.
-    In a small bowl, prepare the cream cheese frosting by combining the powdered sugar and softened butter. Mix until smooth and creamy.
-    Once the cake has cooled, spread the cream cheese frosting evenly over the top of the cake.
-    Serve and enjoy. |
+
+    - Preheat the oven to 350°F (175°C). Grease and flour a 9-inch round cake pan.
+    - In a large mixing bowl, combine the grated carrots, all-purpose flour, granulated sugar, softened cream cheese, eggs, melted butter, chopped walnuts, crushed pineapple, baking powder, brown sugar, and ground cinnamon. Mix well until all the ingredients are evenly incorporated.
+    - Pour the batter into the prepared cake pan, spreading it out evenly.
+    - Bake in the preheated oven for 35-40 minutes, or until a toothpick inserted into the center of the cake comes out clean.
+    - Remove the cake from the oven and let it cool in the pan for 10 minutes. - Then transfer the cake to a wire rack to cool completely.
+    - In a small bowl, prepare the cream cheese frosting by combining the powdered sugar and softened butter. Mix until smooth and creamy.
+    - Once the cake has cooled, spread the cream cheese frosting evenly over the top of the cake.
+    - Serve and enjoy. |
     Link: |https://www.allrecipes.com/recipe/8235/carrot-cake-iii/
     User: ['breakfast', 'spinach', 'butter', 'cheddar cheese', 'ham', 'eggs', 'milk', 'red pepper']
     Assistant: Spinach and Ham Breakfast Quiche: |
     Ingredients:
-    1 tablespoon butter
-    1 cup fresh spinach, chopped
-    1/2 cup cooked ham, diced
-    1/2 cup cheddar cheese, shredded
-    4 eggs
-    1/4 cup milk
-    1/4 cup red pepper, diced
-    Salt and pepper to taste
-    Instructions:
-    Preheat your oven to 375°F (190°C).
-    In a skillet, melt the butter over medium heat.
-    Add the chopped spinach and diced red pepper to the skillet. Sauté for 2-3 minutes until the spinach is wilted.
-    In a mixing bowl, beat the eggs and milk together. Season with salt and pepper.
-    Grease a pie dish or a baking dish with butter or cooking spray.
-    Spread the sautéed spinach and red pepper evenly on the bottom of the dish.
-    Sprinkle the diced ham over the vegetables.
-    Pour the beaten eggs and milk mixture over the ham and vegetables.
-    Sprinkle the shredded cheddar cheese on top.
-    Place the dish in the preheated oven and bake for 25-30 minutes or until the eggs are set and the cheese is melted and lightly browned.
-    Remove from the oven and let it cool for a few minutes.
-    Cut into slices and serve hot. |
+
+    - 1 tablespoon butter
+    - 1 cup fresh spinach, chopped
+    - 1/2 cup cooked ham, diced
+    - 1/2 cup cheddar cheese, shredded
+    - 4 eggs
+    - 1/4 cup milk
+    - 1/4 cup red pepper, diced
+    - Salt and pepper to taste
+    - Instructions:
+    - Preheat your oven to 375°F (190°C).
+    - In a skillet, melt the butter over medium heat.
+    - Add the chopped spinach and diced red pepper to the skillet. Sauté for 2-3 minutes until the spinach is wilted.
+    - In a mixing bowl, beat the eggs and milk together. Season with salt and pepper.
+    - Grease a pie dish or a baking dish with butter or cooking spray.
+    - Spread the sautéed spinach and red pepper evenly on the bottom of the dish.
+    - Sprinkle the diced ham over the vegetables.
+    - Pour the beaten eggs and milk mixture over the ham and vegetables.
+    - Sprinkle the shredded cheddar cheese on top.
+    - Place the dish in the preheated oven and bake for 25-30 minutes or until the eggs are set and the cheese is melted and lightly browned.
+    - Remove from the oven and let it cool for a few minutes.
+    - Cut into slices and serve hot. |
     Link: |https://www.servedfromscratch.com/spinach-ham-and-cheddar-quiche/
     User: ${ingredients}
     Assistant:`;

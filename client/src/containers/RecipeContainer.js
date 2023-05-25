@@ -14,7 +14,7 @@ class RecipeContainer extends Component {
     const recipes = this.props.recipeList.map((recipe, i) => {
       console.log('recipe being generated',recipe.recipe, i);
       const splitRecipe = recipe.recipe.split('|');
-      console.log(splitRecipe);
+      console.log('this is splitRecipe[1]',splitRecipe[1]);
       return <Recipe 
         key={`Recipe${i}`}
         deleteRecipe = {this.props.deleteRecipe}
