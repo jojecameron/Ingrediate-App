@@ -103,14 +103,14 @@ const ingredients = [
   { label: 'Kiwi' },
   { label: 'Fig' },
   { label: 'Dates' },
-  { label: 'Powdered Sugar'},
+  { label: 'Powdered Sugar' },
   { label: 'Ham' },
   { label: 'Bell Pepper' },
-  { label: 'Chocolate'},
+  { label: 'Chocolate' },
   { label: 'Dark Chocolate' },
   { label: 'White Chocolate' },
   { label: 'Chia Seeds' },
-  { label: 'Pumpkin'},
+  { label: 'Pumpkin' },
   { label: 'Cream Cheese' },
   { label: 'Brown Sugar' },
   { label: 'Bread Crumbs' },
@@ -167,8 +167,7 @@ const ingredients = [
   { label: 'Star Anise' },
   { label: 'Chives' },
   { label: 'Green Onion' },
-  { label: 'Artichoke Hearts' }
-  ];
-  
-  export default ingredients;
-  
+  { label: 'Artichoke Hearts' },
+];
+
+export default ingredients;
