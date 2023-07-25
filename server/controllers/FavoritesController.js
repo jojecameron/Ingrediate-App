@@ -16,7 +16,6 @@ FavoritesController.getFavorites = async (req, res, next) => {
 
 //adding favorite to database
 FavoritesController.addFavorite = async (req, res, next) => {
-  console.log('WE ARE IN ADDFAVORITES');
   const { index, recipe } = req.body;
   try {
     const newFavorite = await Favorites.create({
@@ -31,7 +30,6 @@ FavoritesController.addFavorite = async (req, res, next) => {
 
 //deleting favorite from database
 FavoritesController.deleteFavorite = async (req, res, next) => {
-  console.log('WE ARE IN DELETEFAVORITES');
   const { index } = req.body;
   try {
     const deletedFavorite = await Favorites.findOneAndDelete({
