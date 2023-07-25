@@ -1,9 +1,8 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import * as React from "react";
+import { useState, useEffect } from "react";
 
 const DishForm = (props) => {
-
-  const [selectedDish, setSelectedDish] = useState('breakfast');
+  const [selectedDish, setSelectedDish] = useState("breakfast");
 
   useEffect(() => {
     props.handleDishChange(selectedDish);
@@ -14,51 +13,49 @@ const DishForm = (props) => {
   };
 
   return (
-    <form id='checkboxes'>
+    <form id="checkboxes">
       <div>
-      <input 
-        type='checkbox' 
-        className='checkbox'
-        name='breakfast'
-        checked={selectedDish === 'breakfast'}
-        onChange={handleDishChange}
+        <input
+          type="checkbox"
+          className="checkbox"
+          name="breakfast"
+          checked={selectedDish === "breakfast"}
+          onChange={handleDishChange}
         />
-      <label>Breakfast</label>
+        <label>Breakfast</label>
       </div>
       <div>
-      <input 
-        type='checkbox' 
-        className='checkbox'
-        name='lunch'
-        checked={selectedDish === 'lunch'}
-        onChange={handleDishChange}
-      />
-      <label>Lunch</label>
-      </div>
-      <div>
-      <input 
-        type='checkbox' 
-        className='checkbox'
-        name='dinner'
-        checked={selectedDish === 'dinner'}
-        onChange={handleDishChange}
+        <input
+          type="checkbox"
+          className="checkbox"
+          name="lunch"
+          checked={selectedDish === "lunch"}
+          onChange={handleDishChange}
         />
-      <label>Dinner</label>
+        <label>Lunch</label>
       </div>
       <div>
-      <input 
-        type='checkbox' 
-        className='checkbox'
-        name='dessert'
-        checked={selectedDish === 'dessert'}
-        onChange={handleDishChange}
+        <input
+          type="checkbox"
+          className="checkbox"
+          name="dinner"
+          checked={selectedDish === "dinner"}
+          onChange={handleDishChange}
         />
-      <label>Dessert</label>
+        <label>Dinner</label>
       </div>
-      
+      <div>
+        <input
+          type="checkbox"
+          className="checkbox"
+          name="dessert"
+          checked={selectedDish === "dessert"}
+          onChange={handleDishChange}
+        />
+        <label>Dessert</label>
+      </div>
     </form>
   );
-}
-  
+};
 
 export default DishForm;

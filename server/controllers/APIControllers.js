@@ -1,57 +1,35 @@
 const { Configuration, OpenAIApi } = require('openai');
 const axios = require('axios');
 
-// const test = ['dinner', 'spinach', 'butter', 'carrots', 'sausage', 'eggs', 'beef'];
-
 const configuration = new Configuration({
-    apiKey : process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
 
 const APIController = {
-
-    getGPTResult: async (req, res, next) => {
+  getGPTResult: async (_req, res, next) => {
     try {
-    const completion = await openai.createCompletion({
+      const completion = await openai.createCompletion({
         model: 'text-davinci-003',
         prompt: APIController.generatePrompt(res.locals.ingredients),
         temperature: 0.7,
-        // max_tokens: 250
-        max_tokens: 350
-    });
-    // res.status(200).json({ result: completion.data.choices[0].text });
-    res.locals.recipe = completion.data.choices[0].text;
-    return next();
+        max_tokens: 350,
+      });
+      res.locals.recipe = completion.data.choices[0].text;
+      return next();
     } catch (error) {
-    // Consider adjusting the error handling logic for your use case
-    if (error.response) {
+      if (error.response) {
         console.error(error.response.status, error.response.data);
-        // res.status(error.response.status).json(error.response.data);
-        return next(error.response.data)
-    } else {
+        return next(error.response.data);
+      } else {
         console.error(`Error with OpenAI API request: ${error.message}`);
-        // res.status(500).json({
-        // error: {
-        //     message: 'An error occurred during your request.',
-        // },
-        // });
         return next(error.message);
+      }
     }
-    }
-    },
+  },
 
-    generatePrompt(ingredients) {
-    // const capitalizedAnimal =
-    //   animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-    // return `Suggest three names for an animal that is a superhero.
-
-    // Animal: Cat
-    // Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-    // Animal: Dog
-    // Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-    // Animal: ${capitalizedAnimal}
-    // Names:`;
+  generatePrompt(ingredients) {
 
     return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The first element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe does not have to include all the ingredients in the list. You can assume there is access to water even if water is not a listed ingredient on the list. You will also provide a link to a similar recipe from a single website for each recipe.
     User: ['dessert', 'carrots', 'flour', 'sugar', 'cream cheese', 'eggs', 'butter', 'walnuts', 'pineapple', 'baking powder', 'powdered sugar', 'brown sugar', 'cinnamon', 'butter', 'milk', 'boneless skinless chicken breasts', 'panko breadcrumbs', 'olive oil', 'vegetable oil', 'kale']
@@ -111,8 +89,7 @@ const APIController = {
     Link: |https://www.servedfromscratch.com/spinach-ham-and-cheddar-quiche/
     User: ${ingredients}
     Assistant:`;
-    }
-}
-
+  },
+};
 
 module.exports = APIController;
