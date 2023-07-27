@@ -15,7 +15,7 @@ Ingrediate is an application for generating custom recipes based on validated, u
 
 ## Prerequisites
 
-1. Currently Ingrediate generates custom recipes with the paid <a href="https://openai.com/blog/openai-api" target="_blank">OpenAI API</a> service, you must have an account a d your own personal API key to use.
+1. Currently Ingrediate generates custom recipes with the paid <a href="https://openai.com/blog/openai-api" target="_blank">OpenAI API</a> service, you must have an account and your own personal API key to use.
 2. You must also have a <a href="https://www.mongodb.com/" target="_blank">MongoDB</a> account and password to be able to persist data into the database.
 
 ## How to use
