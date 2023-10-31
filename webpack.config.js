@@ -12,14 +12,19 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './client/src/index.html', 
+      template: './client/src/index.html',
     }),
   ],
 
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -33,6 +38,10 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
+  },
+
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
   },
 
   devServer: {
