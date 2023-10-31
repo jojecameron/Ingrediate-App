@@ -50,10 +50,10 @@ app.use((err, _req, res, _next) => {
 
 const start = async () => {
   try {
-    await mongoose.connect(
-      `mongodb+srv://jojecam:${MONGODB_PW}@cluster0.co3wbki.mongodb.net/?retryWrites=true&w=majority`
-    );
-    console.log('Connected to Database!');
+    // await mongoose.connect(
+    //   `mongodb+srv://jojecam:${MONGODB_PW}@cluster0.co3wbki.mongodb.net/?retryWrites=true&w=majority`
+    // );
+    // console.log('Connected to Database!');
     app.listen(PORT, () =>
       console.log(`Beep. Boop. Listening on port ${PORT}`)
     );

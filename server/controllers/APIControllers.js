@@ -5,18 +5,52 @@ const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+// set true to avoid using OpenAI API, false to use OpenAI API$$
+const testMode = true;
+
 const openai = new OpenAIApi(configuration);
 
 const APIController = {
   getGPTResult: async (_req, res, next) => {
     try {
-      const completion = await openai.createCompletion({
-        model: 'text-davinci-003',
-        prompt: APIController.generatePrompt(res.locals.ingredients),
-        temperature: 0.7,
-        max_tokens: 350,
-      });
-      res.locals.recipe = completion.data.choices[0].text;
+      if (!testMode) {
+        const completion = await openai.createCompletion({
+          model: 'text-davinci-003',
+          prompt: APIController.generatePrompt(res.locals.ingredients),
+          temperature: 0.7,
+          max_tokens: 350,
+        });
+        res.locals.recipe = completion.data.choices[0].text;
+      } else {
+        res.locals.recipe = `Carrot Cake: |
+        Ingredients:
+    
+        - 2 cups grated carrots
+        - 2 cups all-purpose flour
+        - 1 and 1/2 cups granulated sugar
+        - 1 cup cream cheese, softened
+        - 3 large eggs
+        - 1/2 cup unsalted butter, melted
+        - 1/2 cup chopped walnuts
+        - 1/2 cup crushed pineapple, drained
+        - 2 teaspoons baking powder
+        - 1 cup powdered sugar
+        - 1/2 cup packed brown sugar
+        - 2 teaspoons ground cinnamon
+        - 1/4 cup unsalted butter, softened
+    
+        Instructions:
+    
+        - Preheat the oven to 350°F (175°C). Grease and flour a 9-inch round cake pan.
+        - In a large mixing bowl, combine the grated carrots, all-purpose flour, granulated sugar, softened cream cheese, eggs, melted butter, chopped walnuts, crushed pineapple, baking powder, brown sugar, and ground cinnamon. Mix well until all the ingredients are evenly incorporated.
+        - Pour the batter into the prepared cake pan, spreading it out evenly.
+        - Bake in the preheated oven for 35-40 minutes, or until a toothpick inserted into the center of the cake comes out clean.
+        - Remove the cake from the oven and let it cool in the pan for 10 minutes. - Then transfer the cake to a wire rack to cool completely.
+        - In a small bowl, prepare the cream cheese frosting by combining the powdered sugar and softened butter. Mix until smooth and creamy.
+        - Once the cake has cooled, spread the cream cheese frosting evenly over the top of the cake.
+        - Serve and enjoy. |
+        Link: |https://www.allrecipes.com/recipe/8235/carrot-cake-iii/`
+      }
       return next();
     } catch (error) {
       if (error.response) {
