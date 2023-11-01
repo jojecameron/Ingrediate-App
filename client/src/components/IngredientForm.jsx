@@ -1,28 +1,19 @@
+// IngredientForm.js
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import ingredients from '../ingredients/ingredients';
-import { useState, useEffect } from 'react';
 
-const IngredientForm = (props) => {
-  const [ingredientChoices, setIngredientChoices] = useState([]);
-
-  const handleIngredients = (event, value) => {
-    setIngredientChoices(value);
-  };
-
-  useEffect(() => {
-    props.handleChange(ingredientChoices);
-  }, [ingredientChoices]);
-
+const IngredientForm = ({ setIngredientChoices, handleSubmit }) => {
+  
   return (
-    <form onSubmit={props.handleSubmit} className="IngredientForm">
+    <form onSubmit={handleSubmit} className="IngredientForm">
       <Autocomplete
-        onChange={handleIngredients}
         multiple
         id="autocompleteInput"
         options={ingredients}
         getOptionLabel={(option) => option.label}
+        onChange={(event, value) => setIngredientChoices(value)}
         renderInput={(params) => (
           <TextField
             {...params}

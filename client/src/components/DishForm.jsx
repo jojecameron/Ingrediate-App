@@ -1,15 +1,10 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 
-const DishForm = (props) => {
-  const [selectedDish, setSelectedDish] = useState("breakfast");
-
-  useEffect(() => {
-    props.handleDishChange(selectedDish);
-  }, [selectedDish]);
+const DishForm = ({ setDishType, dishType }) => {
 
   const handleDishChange = (event) => {
-    setSelectedDish(event.target.name);
+    setDishType(event.target.name);
   };
 
   return (
@@ -19,7 +14,7 @@ const DishForm = (props) => {
           type="checkbox"
           className="checkbox"
           name="breakfast"
-          checked={selectedDish === "breakfast"}
+          checked={dishType === "breakfast"}
           onChange={handleDishChange}
         />
         <label>Breakfast</label>
@@ -29,8 +24,8 @@ const DishForm = (props) => {
           type="checkbox"
           className="checkbox"
           name="lunch"
-          checked={selectedDish === "lunch"}
-          onChange={handleDishChange}
+          checked={dishType === "lunch"}
+          onChange={handleDishChange}        
         />
         <label>Lunch</label>
       </div>
@@ -39,8 +34,8 @@ const DishForm = (props) => {
           type="checkbox"
           className="checkbox"
           name="dinner"
-          checked={selectedDish === "dinner"}
-          onChange={handleDishChange}
+          checked={dishType === "dinner"}
+          onChange={handleDishChange}       
         />
         <label>Dinner</label>
       </div>
@@ -49,8 +44,8 @@ const DishForm = (props) => {
           type="checkbox"
           className="checkbox"
           name="dessert"
-          checked={selectedDish === "dessert"}
-          onChange={handleDishChange}
+          checked={dishType === "dessert"}
+          onChange={handleDishChange}        
         />
         <label>Dessert</label>
       </div>

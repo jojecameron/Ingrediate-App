@@ -8,11 +8,11 @@ const url = 'http://localhost:3000/generate';
 const favoritesUrl = 'http://localhost:3000/favorites';
 
 const MainContainer = (props) => {
-    const [ingredients, setIngredients] = useState([]);
-    const [dishType, setDishType] = useState('Breakfast');
-    const [recipeList, setRecipeList] = useState([]);
-    const [favoriteRecipes, setFavoriteRecipes] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+  const [ingredientChoices, setIngredientChoices] = useState([]);
+  const [dishType, setDishType] = useState('Breakfast');
+  const [recipeList, setRecipeList] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // on select favorite add to favoriteRecipes array, deselect favorite removes from array
   const favoriteRecipe = (recipe) => {
@@ -20,7 +20,10 @@ const MainContainer = (props) => {
     if (isFavorite) {
       const favoritedRecipe = recipeList[recipeIndex];
       favoriteRecipes.push({ index: recipeIndex, recipe: favoritedRecipe });
-      setFavoriteRecipes([{ index: recipeIndex, recipe: favoritedRecipe }, ...favoriteRecipes]);
+      setFavoriteRecipes([
+        { index: recipeIndex, recipe: favoritedRecipe },
+        ...favoriteRecipes,
+      ]);
       // TBD should throttle call to server
       // saveFavorites({ index: recipeIndex, recipe: favoritedRecipe });
     }
@@ -34,11 +37,11 @@ const MainContainer = (props) => {
         // this.deleteFavorite(recipeIndex);
       }
     }
-  }
+  };
 
   const deleteRecipe = () => {
     console.log('deleted recipe');
-  }
+  };
 
   const saveFavorites = async (favoriteObject) => {
     console.log('To send to server', favoriteObject);
@@ -78,24 +81,14 @@ const MainContainer = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const listOfIngredients = [];
-    ingredients.forEach((ingredient) => {
+    ingredientChoices.forEach((ingredient) => {
       listOfIngredients.push(ingredient.label);
     });
     const dishAndIngredients = dishType.concat(listOfIngredients);
     console.log('this is dishAndIngredients', dishAndIngredients);
     console.log('this is listOfIngredients', listOfIngredients);
     sendIngredientsToServer(listOfIngredients);
-  }
-
-  // updates state for ingredients
-  const handleChange = (value) => {
-    setIngredients([value, ...ingredients ]);
-  }
-
-  // udpates state for dishType
-  const handleDishChange = (value) => {
-    setDishType(value);
-  }
+  };
 
   // makes post request to server, handles loading state change, receives data and udpates state
   const sendIngredientsToServer = async (ingredients) => {
@@ -119,28 +112,32 @@ const MainContainer = (props) => {
     }
   };
 
-    return (
-      <div className="MainContainer">
-        <h1>
-          <em>Ingrediate</em>
-          <br />
-          <span>Recipe Generator</span>
-        </h1>
-        <DishForm id="DishForm" handleDishChange={handleDishChange} />
-        <IngredientForm
-          id="IngredientForm"
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          isLoading={isLoading}
-        />
-        {isLoading ? <Loading /> : <br />}
-        <RecipeContainer
-          recipeList={recipeList}
-          deleteRecipe={deleteRecipe}
-          favoriteRecipe={favoriteRecipe}
-        />
-      </div>
-    );
+  return (
+    <section className="MainContainer">
+      <h1>
+        <em>Ingrediate</em>
+        <br />
+        <span>Recipe Generator</span>
+      </h1>
+      <DishForm 
+        id="DishForm" 
+        setDishType={setDishType} 
+        dishType={dishType} 
+      />
+      <IngredientForm
+        id="IngredientForm"
+        handleSubmit={handleSubmit}
+        isLoading={isLoading}
+        setIngredientChoices={setIngredientChoices}
+      />
+      {isLoading ? <Loading /> : <br />}
+      <RecipeContainer
+        recipeList={recipeList}
+        deleteRecipe={deleteRecipe}
+        favoriteRecipe={favoriteRecipe}
+      />
+    </section>
+  );
 };
 
 export default MainContainer;
