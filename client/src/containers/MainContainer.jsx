@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import IngredientForm from '../components/IngredientForm';
 import RecipeContainer from './RecipeContainer';
 import DishForm from '../components/DishForm';
@@ -7,47 +7,43 @@ import Loading from '../components/Loading';
 const url = 'http://localhost:3000/generate';
 const favoritesUrl = 'http://localhost:3000/favorites';
 
-class MainContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.state.ingredients = [];
-    this.state.dishType = [];
-    this.state.recipeList = [];
-    this.state.favoriteRecipes = [];
-    this.state.isLoading = false;
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleDishChange = this.handleDishChange.bind(this);
-    this.favoriteRecipe = this.favoriteRecipe.bind(this);
-    this.sendIngredientsToServer = this.sendIngredientsToServer.bind(this);
-    this.saveFavorites = this.saveFavorites.bind(this);
-    this.deleteFavorite = this.deleteFavorite.bind(this);
-  }
+const MainContainer = (props) => {
+  const [ingredientChoices, setIngredientChoices] = useState([]);
+  const [dishType, setDishType] = useState('Breakfast');
+  const [recipeList, setRecipeList] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   // on select favorite add to favoriteRecipes array, deselect favorite removes from array
-  favoriteRecipe(recipe) {
+  const favoriteRecipe = (recipe) => {
     const { isFavorite, recipeIndex } = recipe;
-    const { favoriteRecipes } = this.state;
     if (isFavorite) {
-      const favoritedRecipe = this.state.recipeList[recipeIndex];
+      const favoritedRecipe = recipeList[recipeIndex];
       favoriteRecipes.push({ index: recipeIndex, recipe: favoritedRecipe });
-      this.setState({ favoriteRecipes });
-      this.saveFavorites({ index: recipeIndex, recipe: favoritedRecipe });
+      setFavoriteRecipes([
+        { index: recipeIndex, recipe: favoritedRecipe },
+        ...favoriteRecipes,
+      ]);
+      // TBD should throttle call to server
+      // saveFavorites({ index: recipeIndex, recipe: favoritedRecipe });
     }
-    if (this.state.favoriteRecipes.length) {
+    if (favoriteRecipes.length) {
       if (!isFavorite) {
         const index = favoriteRecipes.findIndex((recipe) => {
           recipe.index === recipeIndex;
         });
-        favoriteRecipes.splice(index, 1);
-        this.setState({ favoriteRecipes });
-        this.deleteFavorite(recipeIndex);
+        setFavoriteRecipes(favoriteRecipes.splice(index, 1));
+        // TBD should throttle call to server
+        // this.deleteFavorite(recipeIndex);
       }
     }
-  }
+  };
 
-  saveFavorites = async (favoriteObject) => {
+  const deleteRecipe = () => {
+    console.log('deleted recipe');
+  };
+
+  const saveFavorites = async (favoriteObject) => {
     console.log('To send to server', favoriteObject);
     try {
       const result = await fetch(favoritesUrl, {
@@ -64,7 +60,7 @@ class MainContainer extends Component {
     }
   };
 
-  deleteFavorite = async (index) => {
+  const deleteFavorite = async (index) => {
     console.log('To send to server', index);
     try {
       const result = await fetch(favoritesUrl, {
@@ -82,39 +78,24 @@ class MainContainer extends Component {
   };
 
   // preps dishType and ingredients to be sent to server
-  handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const listOfIngredients = [];
-    this.state.ingredients.forEach((ingredient) => {
+    ingredientChoices.forEach((ingredient) => {
       listOfIngredients.push(ingredient.label);
     });
-    const { dishType } = this.state;
     const dishAndIngredients = dishType.concat(listOfIngredients);
-    this.sendIngredientsToServer(listOfIngredients);
-  }
-
-  // updates state for ingredients
-  handleChange(value) {
-    const newState = this.state;
-    newState.ingredients = value;
-    this.setState({ ...newState });
-  }
-
-  // udpates state for dishType
-  handleDishChange(value) {
-    const newState = this.state;
-    newState.dishType = [value];
-    this.setState({ ...newState });
-  }
+    console.log('this is dishAndIngredients', dishAndIngredients);
+    console.log('this is listOfIngredients', listOfIngredients);
+    sendIngredientsToServer(listOfIngredients);
+  };
 
   // makes post request to server, handles loading state change, receives data and udpates state
-  sendIngredientsToServer = async (ingredients) => {
+  const sendIngredientsToServer = async (ingredients) => {
     if (!ingredients.length) {
       return alert('Please enter ingredients...');
     }
-    const newState = this.state;
-    newState.isLoading = true;
-    this.setState({ ...newState });
+    setIsLoading(true);
     try {
       const result = await fetch(url, {
         method: 'POST',
@@ -124,38 +105,39 @@ class MainContainer extends Component {
         body: JSON.stringify(ingredients),
       });
       const data = await result.json();
-      newState.recipeList.push(data);
-      newState.isLoading = false;
-      this.setState({ ...newState });
+      setRecipeList([data, ...recipeList]);
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
 
-  render() {
-    return (
-      <div className="MainContainer">
-        <h1>
-          <em>Ingrediate</em>
-          <br />
-          <span>Recipe Generator</span>
-        </h1>
-        <DishForm id="DishForm" handleDishChange={this.handleDishChange} />
-        <IngredientForm
-          id="IngredientForm"
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          isLoading={this.state.isLoading}
-        />
-        {this.state.isLoading ? <Loading /> : <br />}
-        <RecipeContainer
-          recipeList={this.state.recipeList}
-          deleteRecipe={this.deleteRecipe}
-          favoriteRecipe={this.favoriteRecipe}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <section className="MainContainer">
+      <h1>
+        <em>Ingrediate</em>
+        <br />
+        <span>Recipe Generator</span>
+      </h1>
+      <DishForm 
+        id="DishForm" 
+        setDishType={setDishType} 
+        dishType={dishType} 
+      />
+      <IngredientForm
+        id="IngredientForm"
+        handleSubmit={handleSubmit}
+        isLoading={isLoading}
+        setIngredientChoices={setIngredientChoices}
+      />
+      {isLoading ? <Loading /> : <br />}
+      <RecipeContainer
+        recipeList={recipeList}
+        deleteRecipe={deleteRecipe}
+        favoriteRecipe={favoriteRecipe}
+      />
+    </section>
+  );
+};
 
 export default MainContainer;
