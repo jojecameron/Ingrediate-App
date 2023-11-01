@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Recipe from '../components/Recipe';
 
-class RecipeContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
+const RecipeContainer = (props) => {
 
   // Handle recipe components displaying in container
-  render() {
-    const recipes = this.props.recipeList.map((recipe, i) => {
+  
+    const recipes = props.recipeList.map((recipe, i) => {
       //   console.log('recipe being generated',recipe.recipe, i);
       const splitRecipe = recipe.recipe.split('|');
       //   console.log('this is splitRecipe[1]',splitRecipe[1]);
@@ -16,8 +13,8 @@ class RecipeContainer extends Component {
         <Recipe
           key={`Recipe${i}`}
           recipeIndex={i}
-          deleteRecipe={this.props.deleteRecipe}
-          favoriteRecipe={this.props.favoriteRecipe}
+          deleteRecipe={props.deleteRecipe}
+          favoriteRecipe={props.favoriteRecipe}
           recipeTitle={splitRecipe[0]}
           recipeText={splitRecipe[1]}
           recipeLinkTitle={splitRecipe[2]}
@@ -37,7 +34,6 @@ class RecipeContainer extends Component {
         <div className="recipeDisplay">{recipes}</div>
       </div>
     );
-  }
 }
 
 export default RecipeContainer;
