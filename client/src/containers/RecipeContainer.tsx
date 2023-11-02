@@ -2,19 +2,18 @@ import Recipe from '../components/Recipe';
 import { RecipeContainerProps } from '../types';
 
 const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
-  
+
   const {
     recipeList,
     deleteRecipe,
     favoriteRecipe
-  } = props
+  } = props;
   
   const recipes = recipeList.map((recipe, i) => {
     const splitRecipe = recipe.recipe.split('|');
     return (
       <Recipe
         key={`Recipe${i}`}
-        recipeIndex={i}
         deleteRecipe={deleteRecipe}
         favoriteRecipe={favoriteRecipe}
         recipeTitle={splitRecipe[0]}

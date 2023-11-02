@@ -1,4 +1,4 @@
-const ingredients = [
+const ingredients: {label: string}[] = [
   { label: 'Salt' },
   { label: 'Pepper' },
   { label: 'Garlic' },

@@ -1,50 +1,52 @@
-import * as React from "react";
+import { DishFormProps, DishType } from "../types";
 
-const DishForm = ({ setDishType, dishType }) => {
+const DishForm = (props: DishFormProps): JSX.Element => {
 
-  const handleDishChange = (event) => {
-    setDishType(event.target.name);
-  };
+  const { setDishType, dishType } = props;
 
   return (
     <form id="checkboxes">
       <div>
         <input
-          type="checkbox"
+          type="radio"
           className="checkbox"
           name="breakfast"
+          value="breakfast"
           checked={dishType === "breakfast"}
-          onChange={handleDishChange}
+          onChange={(event) => setDishType(event.target.name as DishType)}
         />
         <label>Breakfast</label>
       </div>
       <div>
         <input
-          type="checkbox"
+          type="radio"
           className="checkbox"
           name="lunch"
+          value="lunch"
           checked={dishType === "lunch"}
-          onChange={handleDishChange}        
+          onChange={(event) => setDishType(event.target.name as DishType)}        
         />
         <label>Lunch</label>
       </div>
       <div>
         <input
-          type="checkbox"
+          type="radio"
           className="checkbox"
           name="dinner"
+          value="dinner"
           checked={dishType === "dinner"}
-          onChange={handleDishChange}       
+          onChange={(event) => setDishType(event.target.name as DishType)}       
         />
         <label>Dinner</label>
       </div>
       <div>
         <input
-          type="checkbox"
+          type="radio"
           className="checkbox"
           name="dessert"
+          value="dessert"
           checked={dishType === "dessert"}
-          onChange={handleDishChange}        
+          onChange={(event) => setDishType(event.target.name as DishType)}        
         />
         <label>Dessert</label>
       </div>
