@@ -65,8 +65,8 @@ const APIController = {
 
   generatePrompt(ingredients) {
 
-    return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The first element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe does not have to include all the ingredients in the list. You can assume there is access to water even if water is not a listed ingredient on the list. You will also provide a link to a similar recipe from a single website for each recipe.
-    User: ['dessert', 'carrots', 'flour', 'sugar', 'cream cheese', 'eggs', 'butter', 'walnuts', 'pineapple', 'baking powder', 'powdered sugar', 'brown sugar', 'cinnamon', 'butter', 'milk', 'boneless skinless chicken breasts', 'panko breadcrumbs', 'olive oil', 'vegetable oil', 'kale']
+    return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The last element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe does not have to include all the ingredients in the list. You can assume there is access to water even if water is not a listed ingredient on the list. You will also provide a link to a similar recipe from a single website for each recipe.
+    User: ['carrots', 'flour', 'sugar', 'cream cheese', 'eggs', 'butter', 'walnuts', 'pineapple', 'baking powder', 'powdered sugar', 'brown sugar', 'cinnamon', 'butter', 'milk', 'boneless skinless chicken breasts', 'panko breadcrumbs', 'olive oil', 'vegetable oil', 'kale', 'dessert']
     Assistant: Carrot Cake: |
     Ingredients:
 
@@ -95,7 +95,7 @@ const APIController = {
     - Once the cake has cooled, spread the cream cheese frosting evenly over the top of the cake.
     - Serve and enjoy. |
     Link: |https://www.allrecipes.com/recipe/8235/carrot-cake-iii/
-    User: ['breakfast', 'spinach', 'butter', 'cheddar cheese', 'ham', 'eggs', 'milk', 'red pepper']
+    User: ['spinach', 'butter', 'cheddar cheese', 'ham', 'eggs', 'milk', 'red pepper', 'breakfast']
     Assistant: Spinach and Ham Breakfast Quiche: |
     Ingredients:
 
