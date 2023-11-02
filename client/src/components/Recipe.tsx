@@ -1,27 +1,20 @@
-import * as React from 'react';
 import { FavoriteBorder, Favorite } from '@mui/icons-material';
 import { useState } from 'react';
+import { RecipeProps } from '../types';
 
-interface RecipeProps {
-  recipeIndex: number;
-  deleteRecipe: () => void;
-  favoriteRecipe: (recipe: { isFavorite: boolean; recipeIndex: number }) => void;
-  recipeTitle: string;
-  recipeText: string;
-  recipeLinkTitle: string;
-  recipeLink: string;
-}
+const Recipe = (props: RecipeProps): JSX.Element => {
 
-const Recipe: React.FC<RecipeProps> = ({
-  recipeIndex,
-  deleteRecipe,
-  favoriteRecipe,
-  recipeTitle,
-  recipeText,
-  recipeLinkTitle,
-  recipeLink
-}) => {
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const {
+    recipeIndex,
+    deleteRecipe,
+    favoriteRecipe,
+    recipeTitle,
+    recipeText,
+    recipeLinkTitle,
+    recipeLink,
+  } = props;
 
   const toggleFavorite = () => {
     const newIsFavorite = !isFavorite;
@@ -42,7 +35,7 @@ const Recipe: React.FC<RecipeProps> = ({
       </div>
       <p className="recipe-text">{recipeText}</p>
       <h3 className="recipe-linkTitle">{recipeLinkTitle}</h3>
-      <a className="recipe-link" target="_blank" href={`${recipeLink}`}>
+      <a className="recipe-link" target="_blank" rel="noopener noreferrer" href={recipeLink}>
         {recipeLink}
       </a>
     </div>
