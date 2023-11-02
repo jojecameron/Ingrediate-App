@@ -112,12 +112,10 @@ const MainContainer = (props) => {
         <span>Recipe Generator</span>
       </h1>
       <DishForm 
-        id="DishForm" 
         setDishType={setDishType} 
         dishType={dishType} 
       />
       <IngredientForm
-        id="IngredientForm"
         handleSubmit={handleSubmit}
         isLoading={isLoading}
         setIngredientChoices={setIngredientChoices}

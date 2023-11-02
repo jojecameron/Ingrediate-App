@@ -6,10 +6,10 @@ export interface RecipeProps {
     recipeText: string;
     recipeLinkTitle: string;
     recipeLink: string;
-  }
+};
 
 export interface RecipeContainerProps {
     recipeList: {recipe: string}[];
     deleteRecipe: VoidFunction;
     favoriteRecipe: (recipe: { isFavorite: boolean; recipeIndex: number }) => void;
-  }
+};
