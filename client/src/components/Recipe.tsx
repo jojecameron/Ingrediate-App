@@ -7,7 +7,6 @@ const Recipe = (props: RecipeProps): JSX.Element => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const {
-    recipeIndex,
     deleteRecipe,
     favoriteRecipe,
     recipeTitle,
@@ -17,11 +16,12 @@ const Recipe = (props: RecipeProps): JSX.Element => {
   } = props;
 
   const toggleFavorite = () => {
-    const newIsFavorite = !isFavorite;
-    setIsFavorite(newIsFavorite);
-    favoriteRecipe({
-      isFavorite: newIsFavorite,
-      recipeIndex: recipeIndex,
+    setIsFavorite(!isFavorite);
+    favoriteRecipe(isFavorite ,{
+      recipeTitle: recipeTitle,
+      recipeText: recipeText,
+      recipeLinkTitle: recipeLinkTitle,
+      recipeLink: recipeLink
     });
   };
 

@@ -17,7 +17,7 @@
     "client/**/*.ts",
     "client/**/*.tsx",
     "server/**/*.ts"
-  ],
+, "client/src/index.js"  ],
   "exclude": [
     "node_modules"
   ]

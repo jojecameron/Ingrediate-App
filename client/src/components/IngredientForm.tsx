@@ -1,11 +1,12 @@
-// IngredientForm.js
-import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import ingredients from '../ingredients/ingredients';
+import { IngredientFormProps } from '../types';
 
-const IngredientForm = ({ setIngredientChoices, handleSubmit }) => {
+const IngredientForm = (props: IngredientFormProps): JSX.Element => {
   
+  const { ingredientChoices, setIngredientChoices, handleSubmit } = props;
+
   return (
     <form onSubmit={handleSubmit} className="IngredientForm">
       <Autocomplete
@@ -13,7 +14,7 @@ const IngredientForm = ({ setIngredientChoices, handleSubmit }) => {
         id="autocompleteInput"
         options={ingredients}
         getOptionLabel={(option) => option.label}
-        onChange={(event, value) => setIngredientChoices(value)}
+        onChange={(event, value: {label: string}[]) => setIngredientChoices(value)}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -22,7 +23,7 @@ const IngredientForm = ({ setIngredientChoices, handleSubmit }) => {
           />
         )}
       />
-      <input id="submit-button" type="submit" value="Generate Recipe" />
+      <input id="submit-button" type="submit" value="Generate Recipe" disabled={!ingredientChoices.length} />
     </form>
   );
 };
