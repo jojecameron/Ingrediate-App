@@ -9,34 +9,27 @@ const favoritesUrl = 'http://localhost:3000/favorites';
 
 const MainContainer = (props) => {
   const [ingredientChoices, setIngredientChoices] = useState([]);
-  const [dishType, setDishType] = useState('Breakfast');
+  const [dishType, setDishType] = useState('breakfast');
   const [recipeList, setRecipeList] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // on select favorite add to favoriteRecipes array, deselect favorite removes from array
-  const favoriteRecipe = (recipe) => {
-    const { isFavorite, recipeIndex } = recipe;
-    if (isFavorite) {
-      const favoritedRecipe = recipeList[recipeIndex];
-      favoriteRecipes.push({ index: recipeIndex, recipe: favoritedRecipe });
-      setFavoriteRecipes([
-        { index: recipeIndex, recipe: favoritedRecipe },
-        ...favoriteRecipes,
-      ]);
-      // TBD should throttle call to server
-      // saveFavorites({ index: recipeIndex, recipe: favoritedRecipe });
-    }
-    if (favoriteRecipes.length) {
-      if (!isFavorite) {
-        const index = favoriteRecipes.findIndex((recipe) => {
-          recipe.index === recipeIndex;
-        });
-        setFavoriteRecipes(favoriteRecipes.splice(index, 1));
-        // TBD should throttle call to server
-        // this.deleteFavorite(recipeIndex);
+  const favoriteRecipe = ({ isFavorite, recipeIndex }) => {
+    setFavoriteRecipes((currentFavorites) => {
+      // If the recipe is favorited, add it to the favorites array
+      if (isFavorite) {
+        const favoritedRecipe = recipeList[recipeIndex];
+        return [
+          { index: recipeIndex, recipe: favoritedRecipe },
+          ...currentFavorites,
+        ];
+      } else {
+        // If the recipe is unfavorited, remove it from the favorites array
+        return currentFavorites.filter(
+          (favorite) => favorite.index !== recipeIndex
+        );
       }
-    }
+    });
   };
 
   const deleteRecipe = () => {
@@ -84,9 +77,8 @@ const MainContainer = (props) => {
     ingredientChoices.forEach((ingredient) => {
       listOfIngredients.push(ingredient.label);
     });
-    const dishAndIngredients = dishType.concat(listOfIngredients);
-    console.log('this is dishAndIngredients', dishAndIngredients);
-    console.log('this is listOfIngredients', listOfIngredients);
+    listOfIngredients.push(dishType);
+    console.log(listOfIngredients);
     sendIngredientsToServer(listOfIngredients);
   };
 

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import AutocompleteInput from "./IngredientForm";
 import MainContainer from "../containers/MainContainer";
 
 class App extends Component {
