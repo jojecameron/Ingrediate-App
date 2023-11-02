@@ -1,5 +1,3 @@
-// NEED TO CHANGE DATA FROM MOVIES TO INGREDIENTS
-
 const ingredients = [
   { label: 'Salt' },
   { label: 'Pepper' },
