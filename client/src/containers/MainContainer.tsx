@@ -1,50 +1,43 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import IngredientForm from '../components/IngredientForm';
 import RecipeContainer from './RecipeContainer';
 import DishForm from '../components/DishForm';
 import Loading from '../components/Loading';
+import { DishType, Recipe, Favorite } from '../types';
 
 const url = 'http://localhost:3000/generate';
 const favoritesUrl = 'http://localhost:3000/favorites';
 
-const MainContainer = (props) => {
-  const [ingredientChoices, setIngredientChoices] = useState([]);
-  const [dishType, setDishType] = useState('breakfast');
-  const [recipeList, setRecipeList] = useState([]);
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+interface Ingredient {
+  label: string;
+}
 
-  const favoriteRecipe = ({ isFavorite, recipeIndex }) => {
+const MainContainer = (): JSX.Element => {
+  const [ingredientChoices, setIngredientChoices] = useState<Ingredient[]>([]);
+  const [dishType, setDishType] = useState<DishType>('breakfast');
+  const [recipeList, setRecipeList] = useState<Recipe[]>([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState<Favorite[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const favoriteRecipe = (isFavorite: boolean, recipe: Favorite) => {
     setFavoriteRecipes((currentFavorites) => {
-      // If the recipe is favorited, add it to the favorites array
       if (isFavorite) {
-        const favoritedRecipe = recipeList[recipeIndex];
-        return [
-          { index: recipeIndex, recipe: favoritedRecipe },
-          ...currentFavorites,
-        ];
+        return [...currentFavorites, recipe];
       } else {
-        // If the recipe is unfavorited, remove it from the favorites array
-        return currentFavorites.filter(
-          (favorite) => favorite.index !== recipeIndex
-        );
+        return currentFavorites.filter((fav) => fav.recipeTitle !== recipe.recipeTitle);
       }
     });
   };
 
-  const deleteRecipe = () => {
-    console.log('deleted recipe');
-  };
-
-  const saveFavorites = async (favoriteObject) => {
-    console.log('To send to server', favoriteObject);
+  // stores favorited recipes in db
+  const saveFavorites = async (favorites: Favorite[]) => {
     try {
       const result = await fetch(favoritesUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(favoriteObject),
+        body: JSON.stringify(favoriteRecipes),
       });
       const data = await result.json();
       console.log('ADDED TO DATABASE: ', data);
@@ -53,25 +46,8 @@ const MainContainer = (props) => {
     }
   };
 
-  const deleteFavorite = async (index) => {
-    console.log('To send to server', index);
-    try {
-      const result = await fetch(favoritesUrl, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ index: index }),
-      });
-      const data = await result.json();
-      console.log('DELETED FROM DATABASE: ', data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   // preps dishType and ingredients to be sent to server
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const listOfIngredients = [];
     ingredientChoices.forEach((ingredient) => {
@@ -83,7 +59,7 @@ const MainContainer = (props) => {
   };
 
   // makes post request to server, handles loading state change, receives data and udpates state
-  const sendIngredientsToServer = async (ingredients) => {
+  const sendIngredientsToServer = async (ingredients: string[]) => {
     if (!ingredients.length) {
       return alert('Please enter ingredients...');
     }
@@ -104,6 +80,10 @@ const MainContainer = (props) => {
     }
   };
 
+  const deleteRecipe = () => {
+    console.log('deleted recipe');
+  };
+
   return (
     <section className="MainContainer">
       <h1>
@@ -117,7 +97,7 @@ const MainContainer = (props) => {
       />
       <IngredientForm
         handleSubmit={handleSubmit}
-        isLoading={isLoading}
+        ingredientChoices={ingredientChoices}
         setIngredientChoices={setIngredientChoices}
       />
       {isLoading ? <Loading /> : <br />}

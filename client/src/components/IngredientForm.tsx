@@ -5,7 +5,7 @@ import { IngredientFormProps } from '../types';
 
 const IngredientForm = (props: IngredientFormProps): JSX.Element => {
   
-  const { setIngredientChoices, handleSubmit } = props;
+  const { ingredientChoices, setIngredientChoices, handleSubmit } = props;
 
   return (
     <form onSubmit={handleSubmit} className="IngredientForm">
@@ -23,7 +23,7 @@ const IngredientForm = (props: IngredientFormProps): JSX.Element => {
           />
         )}
       />
-      <input id="submit-button" type="submit" value="Generate Recipe" />
+      <input id="submit-button" type="submit" value="Generate Recipe" disabled={!ingredientChoices.length} />
     </form>
   );
 };

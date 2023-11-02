@@ -1,8 +1,7 @@
-import * as React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
-const Loading = () => (
+const Loading = (): JSX.Element => (
   <div id="loading">
     <Box sx={{ display: 'flex' }}>
       <CircularProgress color="success" />

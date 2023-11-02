@@ -1,4 +1,4 @@
-import { DishFormProps } from "../types";
+import { DishFormProps, DishType } from "../types";
 
 const DishForm = (props: DishFormProps): JSX.Element => {
 
@@ -13,7 +13,7 @@ const DishForm = (props: DishFormProps): JSX.Element => {
           name="breakfast"
           value="breakfast"
           checked={dishType === "breakfast"}
-          onChange={(event) => setDishType(event.target.name)}
+          onChange={(event) => setDishType(event.target.name as DishType)}
         />
         <label>Breakfast</label>
       </div>
@@ -24,7 +24,7 @@ const DishForm = (props: DishFormProps): JSX.Element => {
           name="lunch"
           value="lunch"
           checked={dishType === "lunch"}
-          onChange={(event) => setDishType(event.target.name)}        
+          onChange={(event) => setDishType(event.target.name as DishType)}        
         />
         <label>Lunch</label>
       </div>
@@ -35,7 +35,7 @@ const DishForm = (props: DishFormProps): JSX.Element => {
           name="dinner"
           value="dinner"
           checked={dishType === "dinner"}
-          onChange={(event) => setDishType(event.target.name)}       
+          onChange={(event) => setDishType(event.target.name as DishType)}       
         />
         <label>Dinner</label>
       </div>
@@ -46,7 +46,7 @@ const DishForm = (props: DishFormProps): JSX.Element => {
           name="dessert"
           value="dessert"
           checked={dishType === "dessert"}
-          onChange={(event) => setDishType(event.target.name)}        
+          onChange={(event) => setDishType(event.target.name as DishType)}        
         />
         <label>Dessert</label>
       </div>

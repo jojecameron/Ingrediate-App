@@ -14,7 +14,6 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
     return (
       <Recipe
         key={`Recipe${i}`}
-        recipeIndex={i}
         deleteRecipe={deleteRecipe}
         favoriteRecipe={favoriteRecipe}
         recipeTitle={splitRecipe[0]}

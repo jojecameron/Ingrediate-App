@@ -1,4 +1,6 @@
+export type DishType = 'breakfast' | 'lunch' | 'dinner' | 'dessert';
+
 export interface DishFormProps {
-    setDishType: (dishType: string) => void;
-    dishType: string;
+  setDishType: (dishType: DishType) => void;
+  dishType: string;
 };
