@@ -1,5 +1,5 @@
-const { Configuration, OpenAIApi } = require('openai');
-const axios = require('axios');
+import { Configuration, OpenAIApi } from 'openai';
+import { Request, Response, NextFunction } from 'express';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -11,7 +11,7 @@ const testMode = true;
 const openai = new OpenAIApi(configuration);
 
 const APIController = {
-  getGPTResult: async (_req, res, next) => {
+  getGPTResult: async (_req: Request, res: Response, next: NextFunction) => {
     try {
       if (!testMode) {
         const completion = await openai.createCompletion({
@@ -52,18 +52,21 @@ const APIController = {
         Link: |https://www.allrecipes.com/recipe/8235/carrot-cake-iii/`
       }
       return next();
-    } catch (error) {
-      if (error.response) {
-        console.error(error.response.status, error.response.data);
-        return next(error.response.data);
-      } else {
+    } catch (error: unknown) {
+      let errorMsg = 'An error occurred with the OpenAI API request.';
+      if (error instanceof Error) {
         console.error(`Error with OpenAI API request: ${error.message}`);
-        return next(error.message);
+        errorMsg = error.message;
+      } else if (error instanceof Object && 'response' in error) {
+        const axiosError = error as { response: { status: number; data: unknown } };
+        console.error(axiosError.response.status, axiosError.response.data);
+        errorMsg = JSON.stringify(axiosError.response.data);
       }
+      return next(new Error(errorMsg));
     }
   },
 
-  generatePrompt(ingredients) {
+  generatePrompt(ingredients: string[]) {
 
     return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The last element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe does not have to include all the ingredients in the list. You can assume there is access to water even if water is not a listed ingredient on the list. You will also provide a link to a similar recipe from a single website for each recipe.
     User: ['carrots', 'flour', 'sugar', 'cream cheese', 'eggs', 'butter', 'walnuts', 'pineapple', 'baking powder', 'powdered sugar', 'brown sugar', 'cinnamon', 'butter', 'milk', 'boneless skinless chicken breasts', 'panko breadcrumbs', 'olive oil', 'vegetable oil', 'kale', 'dessert']
@@ -126,4 +129,4 @@ const APIController = {
   },
 };
 
-module.exports = APIController;
+export default APIController;
