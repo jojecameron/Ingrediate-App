@@ -10,7 +10,7 @@ const FavoritesController: FavoritesController = {
       res.locals.favorites = favorites;
       return next();
     } catch (err) {
-      return next({ err: err });
+      return next(err);
     }
   },
 
@@ -24,7 +24,7 @@ const FavoritesController: FavoritesController = {
       res.locals.newFavorite = newFavorite;
       return next();
     } catch (err) {
-      return next({ err: err });
+      return next(err);
     }
   },
 
@@ -37,7 +37,7 @@ const FavoritesController: FavoritesController = {
       });
       res.locals.deletedFavorite = deletedFavorite;
     } catch (err) {
-      return next({ err: err });
+      return next(err);
     }
   },
 };

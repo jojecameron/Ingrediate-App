@@ -1,5 +1,6 @@
 import { Configuration, OpenAIApi } from 'openai';
 import { Request, Response, NextFunction } from 'express';
+import { APIController } from '../types';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -10,7 +11,7 @@ const testMode = true;
 
 const openai = new OpenAIApi(configuration);
 
-const APIController = {
+const APIController: APIController = {
   getGPTResult: async (_req: Request, res: Response, next: NextFunction) => {
     try {
       if (!testMode) {
