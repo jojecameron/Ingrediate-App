@@ -54,7 +54,6 @@ const MainContainer = (): JSX.Element => {
       listOfIngredients.push(ingredient.label);
     });
     listOfIngredients.push(dishType);
-    console.log(listOfIngredients);
     sendIngredientsToServer(listOfIngredients);
   };
 
