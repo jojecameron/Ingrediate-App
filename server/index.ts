@@ -1,22 +1,24 @@
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const { routes } = require('./routes/routes.js');
-const cors = require('cors');
+import express, { Request, Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import routes from './routes/routes';
+import cors from 'cors';
+
 dotenv.config();
+
+const app = express();
 mongoose.set('strictQuery', false);
 
 // -------------CONNECTION TO PORT--------------//
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
 // -------------MONGODB CONNECTION STRING--------------//
 
-const MONGODB_PW = process.env.MONGODB_PW;
+const MONGODB_PW = process.env.MONGODB_PW as string;
 
 // -------------parse incoming requests------------//
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
     origin: 'http://localhost:8080',
@@ -31,7 +33,7 @@ app.use(routes);
  * 404 handler
  */
 
-app.use('*', (_req, res) => {
+app.use('*', (_req: Request, res: Response) => {
   res.status(404).send('Not Found');
 });
 
@@ -41,7 +43,7 @@ app.use('*', (_req, res) => {
  * Global error handler
  */
 
-app.use((err, _req, res, _next) => {
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   console.log(err);
   res.status(500).send({ error: err });
 });
@@ -57,11 +59,11 @@ const start = async () => {
     app.listen(PORT, () =>
       console.log(`Beep. Boop. Listening on port ${PORT}`)
     );
-  } catch (err) {
+  } catch (err: any) {
     console.log('Database Error:', err.message);
   }
 };
 
 start();
 
-module.exports = app;
+export default app;
