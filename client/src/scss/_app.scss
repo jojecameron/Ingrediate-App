@@ -51,6 +51,33 @@ body {
   border: solid $primaryGreen 2px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
 }
+
+#submit-button:hover {
+  transition-duration: 700ms;
+  color: $offWhite;
+  background-color: $primaryGreen;
+}
+
+header {
+  color: $tertiaryGreen;
+  font-family: $mainFont;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  a {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    padding: 5px 10px 5px 10px;
+    border: 1px solid $tertiaryGreen;
+    border-radius: 30px;
+  }
+  a:hover {
+    color: $primaryGreen;
+    background-color: $tertiaryGreen;
+    transition: 700ms;
+  }
+}
 /*********************FORMS**********************/
 .IngredientForm {
   background-color: $offWhite;
