@@ -1,4 +1,5 @@
 describe('modal functionality', () => {
+  
   it('should open log in modal', () => {
     cy.visit('http://localhost:8080/');
     cy.contains('Log in').click();

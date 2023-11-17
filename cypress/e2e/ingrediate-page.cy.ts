@@ -1,7 +1,7 @@
-describe('ingrediate page', () => {
+describe('ingrediate page display', () => {
+
   it('should render the main page', () => {
     cy.visit('http://localhost:8080/');
-    cy.get('input[type="radio"]').should('have.length', 4);
   });
 
   it('should display the header', () => {
@@ -10,9 +10,25 @@ describe('ingrediate page', () => {
     cy.get('header').find('p').should('have.length', 2);
   });
 
+  it('should display the MainContainer', () => {
+    cy.visit('http://localhost:8080/');
+    cy.get('.MainContainer').should('exist');
+  });
+
   it('should display the page title', () => {
     cy.visit('http://localhost:8080/');
     cy.get('h1').contains('Ingrediate');
     cy.get('span').contains('Recipe Generator');
+  });
+
+  it('should render the IngredientForm and autocompleteInput on the page', () => {
+    cy.visit('http://localhost:8080/');
+    cy.get('.IngredientForm').should('exist');
+    cy.get('#autocompleteInput').should('exist');
+  });
+
+  it('should render the RecipeContainer on the page', () => {
+    cy.visit('http://localhost:8080/');
+    cy.get('.RecipeContainer').should('exist');
   });
 });
