@@ -64,18 +64,69 @@ header {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  a {
+  p {
     margin-left: 10px;
     margin-right: 10px;
     font-size: 20px;
     padding: 5px 10px 5px 10px;
     border: 1px solid $tertiaryGreen;
     border-radius: 30px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   }
-  a:hover {
+  p:hover {
     color: $primaryGreen;
     background-color: $tertiaryGreen;
     transition: 700ms;
+  }
+}
+
+#modal {
+  border-radius: 15px;
+  background-color: $offWhite;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  h2 {
+    color: $primaryGreen;
+    font-family: $mainFont;
+  }
+  label {
+    color: $primaryGreen;
+    font-family: $mainFont;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  section {
+    display: flex;
+    flex-direction: column;
+  }
+  input {
+    color: $primaryGreen;
+    background-color: $offWhite;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border: 2px solid $primaryGreen;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  #buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #button {
+    width: 115px;
+    color: $offWhite;
+    background-color: $primaryGreen;
+    font-family: $mainFont;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border: 1px solid $tertiaryGreen;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   }
 }
 /*********************FORMS**********************/

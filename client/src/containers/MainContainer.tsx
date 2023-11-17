@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import IngredientForm from '../components/IngredientForm';
 import RecipeContainer from './RecipeContainer';
+import IngredientForm from '../components/IngredientForm';
 import DishForm from '../components/DishForm';
 import Loading from '../components/Loading';
 import Header from '../components/Header';
+import Modal from '../components/Modal';
 import { DishType, Recipe, Favorite } from '../types';
 
 const url = 'http://localhost:3000/generate';
@@ -19,6 +20,8 @@ const MainContainer = (): JSX.Element => {
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState<Favorite[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [modalState, setModalState] = useState<string>('Log in');
 
   const favoriteRecipe = (isFavorite: boolean, recipe: Favorite) => {
     setFavoriteRecipes((currentFavorites) => {
@@ -88,8 +91,20 @@ const MainContainer = (): JSX.Element => {
 
   return (
     <>
-      <Header></Header>
+      <Header 
+      setOpenModal={setOpenModal}
+      setModalState={setModalState}
+      />
       <section className="MainContainer">
+        {!openModal ? (
+          <></>
+        ) : (
+          <>
+            <Modal 
+            setOpenModal={setOpenModal}
+            modalState={modalState} />
+          </>
+        )}
         <h1>
           <em>Ingrediate</em>
           <br />
