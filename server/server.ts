@@ -1,20 +1,15 @@
 import express, { Request, Response, NextFunction } from 'express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import routes from './routes/routes';
 import cors from 'cors';
+import { query } from './models/postgres';
 
 dotenv.config();
 
 const app = express();
-mongoose.set('strictQuery', false);
 
 // -------------CONNECTION TO PORT--------------//
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
-
-// -------------MONGODB CONNECTION STRING--------------//
-
-const MONGODB_PW = process.env.MONGODB_PW as string;
 
 // -------------parse incoming requests------------//
 app.use(express.json());
@@ -52,13 +47,18 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 
 const start = async () => {
   try {
-    // await mongoose.connect(
-    //   `mongodb+srv://jojecam:${MONGODB_PW}@cluster0.co3wbki.mongodb.net/?retryWrites=true&w=majority`
-    // );
-    // console.log('Connected to Database!');
-    app.listen(PORT, () =>
-      console.log(`Beep. Boop. Listening on port ${PORT}`)
-    );
+    // Test the database connection by executing a simple query
+    const testQueryResult = await query({ text: 'SELECT NOW()' });
+
+    if (testQueryResult.rows.length > 0) {
+      console.log('Database connected successfully.');
+      // Start the server once the database connection is established
+      app.listen(PORT, () =>
+        console.log(`Beep. Boop. Listening on port ${PORT}`)
+      );
+    } else {
+      throw new Error('Database connection test failed.');
+    }
   } catch (err: any) {
     console.log('Database Error:', err.message);
   }
