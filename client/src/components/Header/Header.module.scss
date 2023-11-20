@@ -1,0 +1,41 @@
+header {
+  align-items: flex-start;
+  color: $tertiaryGreen;
+  display: flex;
+  font-family: $mainFont;
+  justify-content: space-between;
+  width: 100vw;
+
+  div {
+    align-items: flex-start;
+    display: flex;
+    justify-content: flex-start;
+  }
+  p {
+    border: 1px solid $tertiaryGreen;
+    border-radius: 30px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px 10px 5px 10px;
+  }
+  p:hover {
+    background-color: $tertiaryGreen;
+    color: $primaryGreen;
+    transition: 700ms;
+  }
+  h1 {
+    align-self: flex-start;
+    color: $tertiaryGreen;
+    font-family: $mainFont;
+    font-size: 50px;
+    padding-left: 5%;
+
+    span {
+      color: $tertiaryGreen;
+      font-family: $mainFont;
+      font-size: 24px;
+    }
+  }
+}

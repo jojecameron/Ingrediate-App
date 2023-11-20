@@ -1,0 +1,48 @@
+.IngredientForm {
+  background-color: $offWhite;
+  border-radius: 60px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: space-around;
+  padding: 20px;
+  width: 85%;
+}
+
+#autocompleteInput {
+  background-color: $offWhite;
+  margin-top: 10px;
+}
+
+.css-1h51icj-MuiAutocomplete-root .MuiAutocomplete-tag {
+  background-color: $primaryGreen;
+  color: $offWhite;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+#submit-button {
+  align-self: center;
+  background-color: $offWhite;
+  border: solid $primaryGreen 2px;
+  border-radius: 60px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  color: $primaryGreen;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  height: 40%;
+  margin-top: 10px;
+  max-width: 200px;
+  min-width: 150px;
+  padding: 10px;
+  text-align: center;
+  width: 30%;
+}
+
+#submit-button:hover {
+  background-color: $primaryGreen;
+  color: $offWhite;
+  transition-duration: 700ms;
+}

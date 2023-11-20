@@ -1,0 +1,11 @@
+.MainContainer {
+  align-items: center;
+  background-color: $primaryGreen;
+  border-radius: px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100vw;
+}
