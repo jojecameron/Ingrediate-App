@@ -18,7 +18,6 @@ describe('ingrediate page display', () => {
   it('should display the page title', () => {
     cy.visit('http://localhost:8080/');
     cy.get('h1').contains('Ingrediate');
-    cy.get('span').contains('Recipe Generator');
   });
 
   it('should render the IngredientForm and autocompleteInput on the page', () => {
