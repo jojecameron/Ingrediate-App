@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import ClearIcon from '@mui/icons-material/Clear';
 
 interface ModalProps {
-    setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-    modalState: string;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  modalState: string;
+  setModalState: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Modal = (props: ModalProps): JSX.Element => {
-
-  const {setOpenModal, modalState} = props;
+  const { setOpenModal, modalState, setModalState } = props;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -20,17 +20,19 @@ const Modal = (props: ModalProps): JSX.Element => {
 
   return (
     <section id="modal">
-      <h2>{modalState}</h2>
+      <ClearIcon id="clear" onClick={() => setOpenModal(false)}/>
+      <h1>{modalState}</h1>
       <form onSubmit={handleSubmit}>
         <section>
           <label>Username</label>
-          <input type="text" />
+          <input type="text" autoFocus
+          />
         </section>
         <section>
           <label>Password</label>
           <input type="password" />
         </section>
-        <section id="buttons">
+        <section id="bottom">
           <input
             id="button"
             type="submit"
@@ -38,6 +40,17 @@ const Modal = (props: ModalProps): JSX.Element => {
           />
         </section>
       </form>
+      {modalState === 'Log in' ? (
+            <>
+              <p>Need an account?</p>
+              <span onClick={() => setModalState('Sign up')}>Sign up</span>
+            </>
+          ) : (
+            <>
+              <p>Already have an account?</p>
+              <span onClick={() => setModalState('Log in')}>Log in</span>
+            </>
+          )}
     </section>
   );
 };

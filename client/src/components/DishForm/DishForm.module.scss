@@ -8,9 +8,9 @@
   width: 40%;
 }
 
-@media screen and (max-width: 804px) {
+@media screen and (max-width: 600px) {
   #checkboxes {
-    align-items: flex-start;
+    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -18,9 +18,6 @@
 }
 
 .checkbox {
-  background-color: white;
-  border: 2px solid #ddd;
-  border-radius: 25%;
   cursor: pointer;
   height: 20px;
   margin-bottom: 6px;

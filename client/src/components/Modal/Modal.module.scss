@@ -1,16 +1,32 @@
 #modal {
   align-items: center;
   background-color: $offWhite;
+  border: 2px solid $primaryGreen;
   border-radius: 15px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 20px;
+  left: 50%;
+  padding: 50px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  z-index: 9999;
 
-  h2 {
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+  }
+
+  h1 {
     color: $primaryGreen;
     font-family: $mainFont;
+    font-size: 34px;
   }
   label {
     color: $primaryGreen;
@@ -23,15 +39,17 @@
     flex-direction: column;
   }
   input {
-    background-color: $offWhite;
+    background-color: whitesmoke;
     border: 2px solid $primaryGreen;
     border-radius: 5px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
     color: $primaryGreen;
     font-size: 20px;
+    height: 2em;
     margin-bottom: 20px;
+    width: 100%;
   }
-  #buttons {
+  #bottom {
     align-items: center;
     display: flex;
     justify-content: center;
@@ -47,4 +65,39 @@
     margin-bottom: 20px;
     width: 115px;
   }
+  #button:hover {
+    background-color: $tertiaryGreen;
+    border: $primaryGreen 1px solid;
+    color: $primaryGreen;
+    transition-duration: 700ms;
+  }
+  p {
+    font-family: $mainFont;
+  }
+  span {
+    color: $primaryGreen;
+    cursor: pointer;
+    font-family: $mainFont;
+    font-size: 18px;
+  }
+  #clear {
+    background-color: tomato;
+    border: none;
+    border-radius: 7.5px;
+    color: $offWhite;
+    height: 20px;
+    left: 10px;
+    position: absolute;
+    top: 10px;
+    width: 20px;
+  }
+  
+  #clear:hover {
+    background-color: red;
+    color: $offWhite;
+    scale: 1.1;
+    transition-duration: 700ms;
+  }
 }
+
+

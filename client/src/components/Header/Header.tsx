@@ -21,8 +21,6 @@ const Header = (props: HeaderProps): JSX.Element => {
       <div>
         <h1>
           <em>Ingrediate</em>
-          <br />
-          <span>Recipe Generator</span>
         </h1>
       </div>
       <div>

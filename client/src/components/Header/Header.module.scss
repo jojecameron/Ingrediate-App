@@ -1,5 +1,5 @@
 header {
-  align-items: flex-start;
+  align-items: center;
   color: $tertiaryGreen;
   display: flex;
   font-family: $mainFont;
@@ -7,14 +7,16 @@ header {
   width: 100vw;
 
   div {
-    align-items: flex-start;
+    align-items: center;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+    margin: 0px 20px 0px 20px;
   }
   p {
     border: 1px solid $tertiaryGreen;
     border-radius: 30px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
     font-size: 20px;
     margin-left: 10px;
     margin-right: 10px;
@@ -25,17 +27,29 @@ header {
     color: $primaryGreen;
     transition: 700ms;
   }
+  @media screen and (max-width: 600px) {
+    p {
+      font-size: 16px;
+    }
+  }
+
   h1 {
-    align-self: flex-start;
     color: $tertiaryGreen;
     font-family: $mainFont;
     font-size: 50px;
-    padding-left: 5%;
+    margin-bottom: 0px;
+    margin-top: 0px;
 
     span {
       color: $tertiaryGreen;
       font-family: $mainFont;
       font-size: 24px;
+      margin-left: 10px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    h1 {
+      font-size: 40px;
     }
   }
 }

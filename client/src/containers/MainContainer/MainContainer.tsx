@@ -88,16 +88,21 @@ const MainContainer = (): JSX.Element => {
   const deleteRecipe = () => {
     console.log('deleted recipe');
   };
-
+  //make the overlay have an onclick that closes the modal
   return (
     <>
       <Header setOpenModal={setOpenModal} setModalState={setModalState} />
       <section className="MainContainer">
+        {openModal && <div className="overlay" onClick={() => setOpenModal(false)} />}
         {!openModal ? (
           <></>
         ) : (
           <>
-            <Modal setOpenModal={setOpenModal} modalState={modalState} />
+            <Modal
+              setOpenModal={setOpenModal}
+              modalState={modalState}
+              setModalState={setModalState}
+            />
           </>
         )}
         <DishForm setDishType={setDishType} dishType={dishType} />
