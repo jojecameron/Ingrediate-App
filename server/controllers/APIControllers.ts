@@ -23,34 +23,21 @@ const APIController: APIController = {
         });
         res.locals.recipe = completion.data.choices[0].text;
       } else {
-        res.locals.recipe = `Carrot Cake: |
+        res.locals.recipe = `Test Mode Recipe: |
         Ingredients:
     
-        - 2 cups grated carrots
-        - 2 cups all-purpose flour
-        - 1 and 1/2 cups granulated sugar
-        - 1 cup cream cheese, softened
-        - 3 large eggs
-        - 1/2 cup unsalted butter, melted
-        - 1/2 cup chopped walnuts
-        - 1/2 cup crushed pineapple, drained
-        - 2 teaspoons baking powder
-        - 1 cup powdered sugar
-        - 1/2 cup packed brown sugar
-        - 2 teaspoons ground cinnamon
-        - 1/4 cup unsalted butter, softened
+        - Test Ingredients
     
         Instructions:
     
-        - Preheat the oven to 350°F (175°C). Grease and flour a 9-inch round cake pan.
-        - In a large mixing bowl, combine the grated carrots, all-purpose flour, granulated sugar, softened cream cheese, eggs, melted butter, chopped walnuts, crushed pineapple, baking powder, brown sugar, and ground cinnamon. Mix well until all the ingredients are evenly incorporated.
-        - Pour the batter into the prepared cake pan, spreading it out evenly.
-        - Bake in the preheated oven for 35-40 minutes, or until a toothpick inserted into the center of the cake comes out clean.
-        - Remove the cake from the oven and let it cool in the pan for 10 minutes. - Then transfer the cake to a wire rack to cool completely.
-        - In a small bowl, prepare the cream cheese frosting by combining the powdered sugar and softened butter. Mix until smooth and creamy.
-        - Once the cake has cooled, spread the cream cheese frosting evenly over the top of the cake.
-        - Serve and enjoy. |
-        Link: |https://www.allrecipes.com/recipe/8235/carrot-cake-iii/`
+        - Test Instructions
+
+        - Test Instructions
+
+        - Test Instructions
+
+        - Test Instructions|
+        Link: |https://www.testmodelink.com`
       }
       return next();
     } catch (error: unknown) {
