@@ -1,0 +1,27 @@
+#checkboxes {
+  align-items: center;
+  color: $offWhite;
+  display: flex;
+  font-family: sans-serif;
+  justify-content: space-evenly;
+  padding: 10px;
+  width: 40%;
+}
+
+@media screen and (max-width: 600px) {
+  #checkboxes {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+}
+
+.checkbox {
+  cursor: pointer;
+  height: 20px;
+  margin-bottom: 6px;
+  outline: none;
+  vertical-align: middle;
+  width: 20px;
+}
