@@ -1,0 +1,22 @@
+.RecipeContainer {
+  background-color: $offWhite;
+  border-radius: 15px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  height: fit-content;
+  margin-top: 50px;
+  min-height: 80vh;
+  width: 87.5%;
+
+  .recipeDisplay {
+    align-items: center;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: center;
+  }
+  h1 {
+    color: $primaryGreen;
+    font-family: $mainFont;
+    font-size: 30px;
+    padding-left: 20px;
+  }
+}

@@ -1,2 +1,13 @@
 @import '_variables';
 @import '_app';
+@import '../components/Header/Header.module.scss';
+@import '../components/IngredientForm/IngredientForm.module.scss';
+@import '../components/DishForm/DishForm.module.scss';
+@import '../components/Modal/Modal.module.scss';
+@import '../components/Loading/Loading.module.scss';
+@import '../components/Recipe/Recipe.module.scss';
+@import '../containers/RecipeContainer/RecipeContainer.scss';
+@import '../containers/MainContainer/MainContainer.module.scss';
+
+
+
