@@ -5,14 +5,16 @@ import DishForm from '../../components/DishForm/DishForm';
 import Loading from '../../components/Loading/Loading';
 import Header from '../../components/Header/Header';
 import Modal from '../../components/Modal/Modal';
-import { DishType, Recipe, Favorite } from '../../types';
+import {
+  DishType,
+  Recipe,
+  Favorite,
+  Ingredient,
+  ModalState,
+} from '../../types';
 
 const url = 'http://localhost:3000/generate';
 const favoritesUrl = 'http://localhost:3000/favorites';
-
-interface Ingredient {
-  label: string;
-}
 
 const MainContainer = (): JSX.Element => {
   const [ingredientChoices, setIngredientChoices] = useState<Ingredient[]>([]);
@@ -20,8 +22,10 @@ const MainContainer = (): JSX.Element => {
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState<Favorite[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [openModal, setOpenModal] = useState<boolean>(false);
-  const [modalState, setModalState] = useState<string>('Log in');
+  const [modalState, setModalState] = useState<ModalState>({
+    isOpen: false,
+    modalType: 'Log in',
+  });
 
   const favoriteRecipe = (isFavorite: boolean, recipe: Favorite) => {
     setFavoriteRecipes((currentFavorites) => {
@@ -88,18 +92,19 @@ const MainContainer = (): JSX.Element => {
   const deleteRecipe = () => {
     console.log('deleted recipe');
   };
-  //make the overlay have an onclick that closes the modal
+
   return (
     <>
-      <Header setOpenModal={setOpenModal} setModalState={setModalState} />
+      <Header setModalState={setModalState} />
       <section className="MainContainer">
-        {openModal && <div className="overlay" onClick={() => setOpenModal(false)} />}
-        {!openModal ? (
+        {modalState.isOpen && (
+          <div className="overlay" onClick={() => setModalState({isOpen: false, modalType: 'Log in'})} />
+        )}
+        {!modalState.isOpen ? (
           <></>
         ) : (
           <>
             <Modal
-              setOpenModal={setOpenModal}
               modalState={modalState}
               setModalState={setModalState}
             />

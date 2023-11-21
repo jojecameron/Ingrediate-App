@@ -1,20 +1,7 @@
-interface HeaderProps {
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setModalState: React.Dispatch<React.SetStateAction<string>>;
-}
+import { HeaderProps } from "../../types";
 
 const Header = (props: HeaderProps): JSX.Element => {
-  const { setOpenModal, setModalState } = props;
-
-  const handleLogin = () => {
-    setModalState('Log in');
-    setOpenModal(true);
-  };
-
-  const handleSignup = () => {
-    setModalState('Sign up');
-    setOpenModal(true);
-  };
+  const { setModalState } = props;
 
   return (
     <header>
@@ -24,8 +11,8 @@ const Header = (props: HeaderProps): JSX.Element => {
         </h1>
       </div>
       <div>
-        <p onClick={handleLogin}>Log in</p>
-        <p onClick={handleSignup}>Sign up</p>
+        <p onClick={() => setModalState({isOpen: true, modalType: 'Log in'})}>Log in</p>
+        <p onClick={() => setModalState({isOpen: true, modalType: 'Sign up'})}>Sign up</p>
       </div>
     </header>
   );
