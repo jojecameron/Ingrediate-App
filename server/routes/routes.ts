@@ -6,6 +6,7 @@ const routes = Router();
 import APIController from '../controllers/APIControllers';
 import IngredientController from '../controllers/IngredientControllers';
 import FavoritesController from '../controllers/FavoritesController';
+import UserController from '../controllers/UserController';
 
 // -------------ROUTES------------
 
@@ -22,6 +23,18 @@ routes.post(
     res.status(200).send(JSON.stringify(result));
   }
 );
+
+routes.post('/user/signup', UserController.userSignUp, (_req: Request, res: Response) => {
+  res.status(200).send('User signed up successfully');
+});
+
+routes.post('/user/login', UserController.userLogin, (_req: Request, res: Response) => {
+  res.status(200).send('User logged in successfully');
+});
+
+routes.post('/user/logout', UserController.userSignOut, (_req: Request, res: Response) => {
+  res.status(200).send('User logged out successfully');
+});
 
 routes.get('/favorites', FavoritesController.getFavorites, (_req: Request, res: Response) => {
   res.status(200).json(res.locals.favorites);
