@@ -25,9 +25,7 @@ const Modal = (props: ModalProps): JSX.Element => {
         body: JSON.stringify(formData),
       });
       if (response.ok) {
-        console.log('User data submitted successfully!');
         const data = await response.json();
-        console.log('data: ', data);
         // store user data in state
         setIsLoggedIn({
           loggedIn: true,

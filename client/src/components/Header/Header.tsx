@@ -4,7 +4,6 @@ const Header = (props: HeaderProps): JSX.Element => {
   const { setModalState, isLoggedIn, setIsLoggedIn } = props;
 
   const handleLogOut = async () => {
-    console.log('logging out');
     try {
       const response = await fetch('http://localhost:3000/user/logout', {
         method: 'POST',
@@ -14,7 +13,6 @@ const Header = (props: HeaderProps): JSX.Element => {
         body: JSON.stringify({ firebase_uid: isLoggedIn.firebase_uid }),
       });
       if (response.ok) {
-        console.log('User logged out successfully!');
         setIsLoggedIn({
           loggedIn: false,
           display_name: '',
