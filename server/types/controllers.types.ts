@@ -16,7 +16,7 @@ export interface IngredientController {
 };
 
 export interface UserController {
-  getAllUsers: (req: Request, res: Response, next: NextFunction) => void;
-  createUser: (req: Request, res: Response, next: NextFunction) => void;
-  verifyUser: (req: Request, res: Response, next: NextFunction) => void;
-};
+  userSignUp: (req: Request, res: Response, next: NextFunction) => void;
+  userLogin: (req: Request, res: Response, next: NextFunction) => void;
+  userSignOut: (req: Request, res: Response, next: NextFunction) => void;
+}

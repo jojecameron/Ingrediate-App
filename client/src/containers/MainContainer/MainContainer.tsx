@@ -11,6 +11,7 @@ import {
   Favorite,
   Ingredient,
   ModalState,
+  User,
 } from '../../types';
 
 const url = 'http://localhost:3000/generate';
@@ -25,6 +26,12 @@ const MainContainer = (): JSX.Element => {
   const [modalState, setModalState] = useState<ModalState>({
     isOpen: false,
     modalType: 'Log in',
+  });
+  const [isLoggedIn, setIsLoggedIn] = useState<User>({
+    loggedIn: false,
+    display_name: '',
+    email: '',
+    firebase_uid: '',
   });
 
   const favoriteRecipe = (isFavorite: boolean, recipe: Favorite) => {
@@ -95,10 +102,19 @@ const MainContainer = (): JSX.Element => {
 
   return (
     <>
-      <Header setModalState={setModalState} />
+      <Header
+        setModalState={setModalState}
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+      />
       <section className="MainContainer">
         {modalState.isOpen && (
-          <div className="overlay" onClick={() => setModalState({isOpen: false, modalType: 'Log in'})} />
+          <div
+            className="overlay"
+            onClick={() =>
+              setModalState({ isOpen: false, modalType: 'Log in' })
+            }
+          />
         )}
         {!modalState.isOpen ? (
           <></>
@@ -107,6 +123,7 @@ const MainContainer = (): JSX.Element => {
             <Modal
               modalState={modalState}
               setModalState={setModalState}
+              setIsLoggedIn={setIsLoggedIn}
             />
           </>
         )}
