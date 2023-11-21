@@ -46,13 +46,14 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   let statusCode = 500;
   let errorMessage = 'Internal Server Error';
 
-  if (err.code) {
+  if (err.code && err.message) {
     statusCode = 500;
     errorMessage = err.message;
   }
 
   res.status(statusCode).json({ error: errorMessage });
 });
+
 
 
 // // ------------------- CONNECT TO SERVER AND DB ------------------------

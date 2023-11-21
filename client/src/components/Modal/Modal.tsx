@@ -3,7 +3,7 @@ import { ModalProps } from '../../types';
 import { useState } from 'react';
 
 const Modal = (props: ModalProps): JSX.Element => {
-  const { modalState, setModalState } = props;
+  const { modalState, setModalState, setIsLoggedIn } = props;
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -26,7 +26,15 @@ const Modal = (props: ModalProps): JSX.Element => {
       });
       if (response.ok) {
         console.log('User data submitted successfully!');
-        // close modal
+        const data = await response.json();
+        console.log('data: ', data);
+        // store user data in state
+        setIsLoggedIn({
+          loggedIn: true,
+          display_name: data.display_name,
+          email: data.email,
+          firebase_uid: data.firebase_uid,
+        });
         setModalState({ isOpen: false, modalType: modalState.modalType });
       } else {
         console.error('Failed to submit user data');

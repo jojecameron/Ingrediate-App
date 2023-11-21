@@ -9,55 +9,71 @@ import { auth } from '../firebase/firebaseConfig';
 import { query } from '../models/postgres';
 
 const UserController: UserController = {
-  userSignUp: (req: Request, res: Response, next: NextFunction) => {
+  userSignUp: async (req: Request, res: Response, next: NextFunction) => {
     console.log('HERE in userSignUp');
-    const { email, password } = req.body;
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
-        console.log(user);
-        // query('INSERT INTO users (uid) VALUES ($1, $2)', [uid])
-        // .then(() => {
-        //   res.status(201).json({ message: 'User signed up successfully!' });
-        // })
-        // .catch((dbError) => {
-        //   // Handle database error
-        //   // Notify user sign-up succeeded, but data storage failed
-        //   res.status(500).json({ error: 'User signed up, but data storage failed' });
-        // });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // send to global error handler
+    try {
+      const { email, password } = req.body;
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const user = userCredential.user.uid;
+
+      await query({
+        text: 'INSERT INTO users (firebase_uid, email) VALUES ($1, $2)',
+        params: [user, email],
       });
+
+      res.locals.user = { email: email, firebase_uid: user };
+      next();
+    } catch (error) {
+      console.error('An error occurred:', error);
+      return next({ code: 'INTERNAL_ERROR', message: 'An internal error occurred' });
+    }
+    
   },
 
-  userLogin: (req: Request, res: Response, next: NextFunction) => {
+  userLogin: async (req: Request, res: Response, next: NextFunction) => {
+    console.log('HERE in userLogin');
     const { email, password } = req.body;
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // send user credentials to database to retrieve favorites
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // send to global error handler
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const user = userCredential.user.uid;
+
+      // Find user in the database matching UID
+      const dbResponse = await query({
+        text: 'SELECT * FROM users WHERE firebase_uid = $1',
+        params: [user],
       });
+
+      if (dbResponse.rows.length > 0) {
+        res.locals.user = { email: email, firebase_uid: user };
+        return next();
+      } else {
+        return res.status(404).json({ error: 'User not found' });
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      return next({ code: 'INTERNAL_ERROR', message: 'An internal error occurred' });
+    }
+    
   },
 
-  userSignOut: (req: Request, res: Response, next: NextFunction) => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-      })
-      .catch((error) => {
-        // An error happened.
-        // send to global error handler
-      });
+  userSignOut: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await signOut(auth);
+      console.log('User signed out successfully');
+      next();
+    } catch (error) {
+      console.error('An error occurred:', error);
+      return next({ code: 'INTERNAL_ERROR', message: 'An internal error occurred' });
+    }    
   },
 };
 
