@@ -25,11 +25,11 @@ routes.post(
 );
 
 routes.post('/user/signup', UserController.userSignUp, (_req: Request, res: Response) => {
-  res.status(200).send('User signed up successfully');
+  res.status(200).json(res.locals.user);
 });
 
 routes.post('/user/login', UserController.userLogin, (_req: Request, res: Response) => {
-  res.status(200).send('User logged in successfully');
+  res.status(200).json(res.locals.user);
 });
 
 routes.post('/user/logout', UserController.userSignOut, (_req: Request, res: Response) => {
