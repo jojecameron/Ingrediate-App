@@ -1,56 +1,113 @@
 import ClearIcon from '@mui/icons-material/Clear';
-
-interface ModalProps {
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  modalState: string;
-  setModalState: React.Dispatch<React.SetStateAction<string>>;
-}
+import { ModalProps } from '../../types';
+import { useState } from 'react';
 
 const Modal = (props: ModalProps): JSX.Element => {
-  const { setOpenModal, modalState, setModalState } = props;
+  const { modalState, setModalState, setIsLoggedIn } = props;
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const emailPattern = /\S+@\S+\.\S+/;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (modalState === 'Log in') {
-      // Logic for Log in API call
-    } else {
-      // Logic for Sign up API call
+
+    try {
+      // dynamically change the route based on the modalType
+      const url =
+        modalState.modalType === 'Log in' ? 'http://localhost:3000/user/login' : 'http://localhost:3000/user/signup';
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        // store user data in state
+        setIsLoggedIn({
+          loggedIn: true,
+          display_name: data.display_name,
+          email: data.email,
+          firebase_uid: data.firebase_uid,
+        });
+        setModalState({ isOpen: false, modalType: modalState.modalType });
+      } else {
+        console.error('Failed to submit user data');
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   return (
     <section id="modal">
-      <ClearIcon id="clear" onClick={() => setOpenModal(false)}/>
-      <h1>{modalState}</h1>
+      <ClearIcon
+        id="clear"
+        onClick={() =>
+          setModalState({ isOpen: false, modalType: modalState.modalType })
+        }
+      />
+      <h1>{modalState.modalType}</h1>
       <form onSubmit={handleSubmit}>
         <section>
-          <label>Username</label>
-          <input type="text" autoFocus
+          <label>Email Address</label>
+          <input
+            type="text"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
           />
         </section>
         <section>
-          <label>Password</label>
-          <input type="password" />
+          <label>Password {modalState.modalType === 'Sign up' ? (<span>(Min. 8 characters)</span>) : (<></>)}</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
         </section>
         <section id="bottom">
           <input
             id="button"
             type="submit"
-            value={modalState === 'Log in' ? 'Log in' : 'Sign up'}
+            value={modalState.modalType === 'Log in' ? 'Log in' : 'Sign up'}
+            disabled={!formData.email || !formData.password || formData.password.length < 8 || !emailPattern.test(formData.email)}
           />
         </section>
       </form>
-      {modalState === 'Log in' ? (
-            <>
-              <p>Need an account?</p>
-              <span onClick={() => setModalState('Sign up')}>Sign up</span>
-            </>
-          ) : (
-            <>
-              <p>Already have an account?</p>
-              <span onClick={() => setModalState('Log in')}>Log in</span>
-            </>
-          )}
+      {modalState.modalType === 'Log in' ? (
+        <>
+          <p>Need an account?</p>
+          <span
+            onClick={() =>
+              setModalState({ isOpen: true, modalType: 'Sign up' })
+            }
+          >
+            Sign up
+          </span>
+        </>
+      ) : (
+        <>
+          <p>Already have an account?</p>
+          <span
+            onClick={() => setModalState({ isOpen: true, modalType: 'Log in' })}
+          >
+            Log in
+          </span>
+        </>
+      )}
     </section>
   );
 };

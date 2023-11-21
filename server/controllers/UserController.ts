@@ -1,44 +1,79 @@
 import { Request, Response, NextFunction } from 'express';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
 import { UserController } from '../types';
+import { auth } from '../firebase/firebaseConfig';
+import { query } from '../models/postgres';
 
 const UserController: UserController = {
-  getAllUsers: (req: Request, res: Response, next: NextFunction) => {
-    // User.find({}, (err, users) => {
-    //   res.locals.users = users;
-    //   return next();
-    // });
-  },
-  
-  createUser: async (req: Request, res: Response, next: NextFunction) => {
-    const { body } = req;
+  userSignUp: async (req: Request, res: Response, next: NextFunction) => {
+    console.log('HERE in userSignUp');
     try {
-      // const result = await User.create(body);
-      // res.locals.user = result;
-      return next();
-    } catch (err) {
-      return next(err);
+      const { email, password } = req.body;
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const user = userCredential.user.uid;
+
+      await query({
+        text: 'INSERT INTO users (firebase_uid, email) VALUES ($1, $2)',
+        params: [user, email],
+      });
+
+      res.locals.user = { email: email, firebase_uid: user };
+      next();
+    } catch (error) {
+      console.error('An error occurred:', error);
+      return next({ code: 'INTERNAL_ERROR', message: 'An internal error occurred' });
     }
+    
   },
-  
-  verifyUser: async (req: Request, res: Response, next: NextFunction) => {
-    const { username, password } = req.body;
-    if (!username || !password) {
-      return next('Error: username and password are required');
-    }
+
+  userLogin: async (req: Request, res: Response, next: NextFunction) => {
+    console.log('HERE in userLogin');
+    const { email, password } = req.body;
+
     try {
-      // const user = await User.findOne({ username });
-      // const hashedMatch = await bcrypt.compare(password, user.password);
-      // if (user && hashedMatch) {
-      //   res.locals.user = user;
-      //   res.locals.userExist = true;
-      //   return next();
-      // } else {
-        // res.locals.userExist = false;
-        // return next();
-      // }
-    } catch (err) {
-      return next(err);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const user = userCredential.user.uid;
+
+      // Find user in the database matching UID
+      const dbResponse = await query({
+        text: 'SELECT * FROM users WHERE firebase_uid = $1',
+        params: [user],
+      });
+
+      if (dbResponse.rows.length > 0) {
+        res.locals.user = { email: email, firebase_uid: user };
+        return next();
+      } else {
+        return res.status(404).json({ error: 'User not found' });
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      return next({ code: 'INTERNAL_ERROR', message: 'An internal error occurred' });
     }
+    
+  },
+
+  userSignOut: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await signOut(auth);
+      console.log('User signed out successfully');
+      next();
+    } catch (error) {
+      console.error('An error occurred:', error);
+      return next({ code: 'INTERNAL_ERROR', message: 'An internal error occurred' });
+    }    
   },
 };
 
