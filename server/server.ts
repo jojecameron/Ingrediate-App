@@ -39,9 +39,21 @@ app.use('*', (_req: Request, res: Response) => {
  */
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-  console.log(err);
-  res.status(500).send({ error: err });
+  if (process.env.NODE_ENV === 'development') {
+    console.error(err); 
+  }
+
+  let statusCode = 500;
+  let errorMessage = 'Internal Server Error';
+
+  if (err.code) {
+    statusCode = 500;
+    errorMessage = err.message;
+  }
+
+  res.status(statusCode).json({ error: errorMessage });
 });
+
 
 // // ------------------- CONNECT TO SERVER AND DB ------------------------
 
