@@ -1,17 +1,12 @@
 import ClearIcon from '@mui/icons-material/Clear';
-
-interface ModalProps {
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  modalState: string;
-  setModalState: React.Dispatch<React.SetStateAction<string>>;
-}
+import { ModalProps } from '../../types';
 
 const Modal = (props: ModalProps): JSX.Element => {
-  const { setOpenModal, modalState, setModalState } = props;
+  const { modalState, setModalState } = props;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (modalState === 'Log in') {
+    if (modalState.modalType === 'Log in') {
       // Logic for Log in API call
     } else {
       // Logic for Sign up API call
@@ -20,13 +15,17 @@ const Modal = (props: ModalProps): JSX.Element => {
 
   return (
     <section id="modal">
-      <ClearIcon id="clear" onClick={() => setOpenModal(false)}/>
-      <h1>{modalState}</h1>
+      <ClearIcon
+        id="clear"
+        onClick={() =>
+          setModalState({ isOpen: false, modalType: modalState.modalType })
+        }
+      />
+      <h1>{modalState.modalType}</h1>
       <form onSubmit={handleSubmit}>
         <section>
           <label>Username</label>
-          <input type="text" autoFocus
-          />
+          <input type="text" autoFocus />
         </section>
         <section>
           <label>Password</label>
@@ -36,21 +35,31 @@ const Modal = (props: ModalProps): JSX.Element => {
           <input
             id="button"
             type="submit"
-            value={modalState === 'Log in' ? 'Log in' : 'Sign up'}
+            value={modalState.modalType === 'Log in' ? 'Log in' : 'Sign up'}
           />
         </section>
       </form>
-      {modalState === 'Log in' ? (
-            <>
-              <p>Need an account?</p>
-              <span onClick={() => setModalState('Sign up')}>Sign up</span>
-            </>
-          ) : (
-            <>
-              <p>Already have an account?</p>
-              <span onClick={() => setModalState('Log in')}>Log in</span>
-            </>
-          )}
+      {modalState.modalType === 'Log in' ? (
+        <>
+          <p>Need an account?</p>
+          <span
+            onClick={() =>
+              setModalState({ isOpen: true, modalType: 'Sign up' })
+            }
+          >
+            Sign up
+          </span>
+        </>
+      ) : (
+        <>
+          <p>Already have an account?</p>
+          <span
+            onClick={() => setModalState({ isOpen: true, modalType: 'Log in' })}
+          >
+            Log in
+          </span>
+        </>
+      )}
     </section>
   );
 };
