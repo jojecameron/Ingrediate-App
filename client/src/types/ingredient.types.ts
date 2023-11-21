@@ -1,5 +1,9 @@
 export interface IngredientFormProps {
-  ingredientChoices: {label: string}[] | [];
-  setIngredientChoices: (ingredients: {label: string}[]) => void;
+  ingredientChoices: { label: string }[] | [];
+  setIngredientChoices: (ingredients: { label: string }[]) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-};
+}
+
+export interface Ingredient {
+  label: string;
+}

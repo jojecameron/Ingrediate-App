@@ -1,20 +1,31 @@
-interface HeaderProps {
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setModalState: React.Dispatch<React.SetStateAction<string>>;
-}
+import { HeaderProps } from "../../types";
 
 const Header = (props: HeaderProps): JSX.Element => {
-  const { setOpenModal, setModalState } = props;
+  const { setModalState, isLoggedIn, setIsLoggedIn } = props;
 
-  const handleLogin = () => {
-    setModalState('Log in');
-    setOpenModal(true);
-  };
-
-  const handleSignup = () => {
-    setModalState('Sign up');
-    setOpenModal(true);
-  };
+  const handleLogOut = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/user/logout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ firebase_uid: isLoggedIn.firebase_uid }),
+      });
+      if (response.ok) {
+        setIsLoggedIn({
+          loggedIn: false,
+          display_name: '',
+          email: '',
+          firebase_uid: '',
+        });
+      } else {
+        console.error('Failed to log out user');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   return (
     <header>
@@ -23,10 +34,13 @@ const Header = (props: HeaderProps): JSX.Element => {
           <em>Ingrediate</em>
         </h1>
       </div>
-      <div>
-        <p onClick={handleLogin}>Log in</p>
-        <p onClick={handleSignup}>Sign up</p>
-      </div>
+      {!isLoggedIn.loggedIn ? (<div>
+        <p onClick={() => setModalState({isOpen: true, modalType: 'Log in'})}>Log in</p>
+        <p onClick={() => setModalState({isOpen: true, modalType: 'Sign up'})}>Sign up</p>
+      </div>) : (<div>
+        <p onClick={() => handleLogOut()}>Log out</p>
+      </div>)}
+      
     </header>
   );
 };
