@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import RecipeContainer from '../RecipeContainer/RecipeContainer';
-import IngredientForm from '../../components/IngredientForm/IngredientForm';
-import DishForm from '../../components/DishForm/DishForm';
-import Loading from '../../components/Loading/Loading';
-import Header from '../../components/Header/Header';
-import Modal from '../../components/Modal/Modal';
+import {
+  RecipeContainer,
+  IngredientForm,
+  DishForm,
+  Loading,
+  Header,
+  Modal,
+} from '../../components';
 import {
   DishType,
   Recipe,
@@ -13,9 +15,7 @@ import {
   ModalState,
   User,
 } from '../../types';
-
-const url = 'http://localhost:3000/generate';
-const favoritesUrl = 'http://localhost:3000/favorites';
+import { generateRecipe } from '../../utils/apiUtils';
 
 const MainContainer = (): JSX.Element => {
   const [ingredientChoices, setIngredientChoices] = useState<Ingredient[]>([]);
@@ -34,6 +34,7 @@ const MainContainer = (): JSX.Element => {
     firebase_uid: '',
   });
 
+  // adds or removes favorited recipes from state
   const favoriteRecipe = (isFavorite: boolean, recipe: Favorite) => {
     setFavoriteRecipes((currentFavorites) => {
       if (isFavorite) {
@@ -48,6 +49,7 @@ const MainContainer = (): JSX.Element => {
 
   // stores favorited recipes in db
   const saveFavorites = async (favorites: Favorite[]) => {
+    const favoritesUrl = 'http://localhost:3000/favorites';
     try {
       const result = await fetch(favoritesUrl, {
         method: 'POST',
@@ -74,30 +76,26 @@ const MainContainer = (): JSX.Element => {
     sendIngredientsToServer(listOfIngredients);
   };
 
-  // makes post request to server, handles loading state change, receives data and udpates state
+  // sends ingredients to server
   const sendIngredientsToServer = async (ingredients: string[]) => {
     if (!ingredients.length) {
       return alert('Please enter ingredients...');
     }
     setIsLoading(true);
     try {
-      const result = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(ingredients),
-      });
-      const data = await result.json();
-      setRecipeList([data, ...recipeList]);
+      const result = await generateRecipe(ingredients);
+      setRecipeList([result, ...recipeList]);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const deleteRecipe = () => {
-    console.log('deleted recipe');
+  // deletes recipe from state
+  const deleteRecipe = (id: string) => {
+    setRecipeList((currentRecipes) => {
+      return currentRecipes.filter((recipe) => recipe.id !== id);
+    });
   };
 
   return (
