@@ -34,6 +34,7 @@ const MainContainer = (): JSX.Element => {
     firebase_uid: '',
   });
 
+  // adds or removes favorited recipes from state
   const favoriteRecipe = (isFavorite: boolean, recipe: Favorite) => {
     setFavoriteRecipes((currentFavorites) => {
       if (isFavorite) {
@@ -74,7 +75,7 @@ const MainContainer = (): JSX.Element => {
     sendIngredientsToServer(listOfIngredients);
   };
 
-  // makes post request to server, handles loading state change, receives data and udpates state
+  // sends ingredients to server
   const sendIngredientsToServer = async (ingredients: string[]) => {
     if (!ingredients.length) {
       return alert('Please enter ingredients...');
@@ -96,8 +97,11 @@ const MainContainer = (): JSX.Element => {
     }
   };
 
-  const deleteRecipe = () => {
-    console.log('deleted recipe');
+  // deletes recipe from state
+  const deleteRecipe = (index: number) => {
+    const updatedRecipes = [...recipeList];
+    updatedRecipes.splice(index, 1);
+    setRecipeList(updatedRecipes);
   };
 
   return (

@@ -10,7 +10,8 @@ export interface Favorite {
 }
 
 export interface RecipeProps {
-  deleteRecipe: VoidFunction;
+  index: number;
+  deleteRecipe: (index: number) => void;
   favoriteRecipe: (isFavorite: boolean, recipe: Favorite) => void;
   recipeTitle: string;
   recipeText: string;
@@ -20,6 +21,6 @@ export interface RecipeProps {
 
 export interface RecipeContainerProps {
   recipeList: {recipe: string}[];
-  deleteRecipe: VoidFunction;
+  deleteRecipe: (index: number) => void;
   favoriteRecipe: (isFavorite: boolean, recipe: Favorite) => void;
 };
