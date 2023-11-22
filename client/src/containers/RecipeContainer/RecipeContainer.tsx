@@ -1,4 +1,4 @@
-import Recipe from '../../components/Recipe/Recipe';
+import { Recipe } from '../../components';
 import { RecipeContainerProps } from '../../types';
 
 const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
