@@ -90,6 +90,10 @@ const MainContainer = (): JSX.Element => {
         body: JSON.stringify(ingredients),
       });
       const data = await result.json();
+      // this data.id is a random string that is used to identify the recipe
+      data.id =
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15);
       setRecipeList([data, ...recipeList]);
       setIsLoading(false);
     } catch (err) {
@@ -98,10 +102,10 @@ const MainContainer = (): JSX.Element => {
   };
 
   // deletes recipe from state
-  const deleteRecipe = (index: number) => {
-    const updatedRecipes = [...recipeList];
-    updatedRecipes.splice(index, 1);
-    setRecipeList(updatedRecipes);
+  const deleteRecipe = (id: string) => {
+    setRecipeList((currentRecipes) => {
+      return currentRecipes.filter((recipe) => recipe.id !== id);
+    });
   };
 
   return (
