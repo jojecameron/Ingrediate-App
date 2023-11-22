@@ -14,7 +14,7 @@ const Recipe = (props: RecipeProps): JSX.Element => {
   const [isFavoriteHover, setIsFavoriteHover] = useState(false);
 
   const {
-    index,
+    id,
     deleteRecipe,
     favoriteRecipe,
     recipeTitle,
@@ -46,7 +46,7 @@ const Recipe = (props: RecipeProps): JSX.Element => {
             onMouseEnter={() => setIsDeleteHover(true)}
             onMouseLeave={() => setIsDeleteHover(false)}
             className="delete"
-            onClick={() => deleteRecipe(index)}
+            onClick={() => deleteRecipe(id)}
           >
             {isDeleteHover ? (
               <>

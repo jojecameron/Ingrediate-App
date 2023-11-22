@@ -8,8 +8,8 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
     const splitRecipe = recipe.recipe.split('|');
     return (
       <Recipe
-        key={`Recipe${i}`}
-        index={i}
+        key={recipe.id}
+        id={recipe.id}
         deleteRecipe={deleteRecipe}
         favoriteRecipe={favoriteRecipe}
         recipeTitle={splitRecipe[0]}
