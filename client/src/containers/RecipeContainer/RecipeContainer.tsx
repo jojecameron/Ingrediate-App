@@ -21,15 +21,19 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
   });
 
   return (
-    <div className="RecipeContainer">
+    <>
       <div className="containerTitle">
         <h1>
           <em>Recipes</em>
         </h1>
-        <hr />
+        <h1>
+          <em>Favorites</em>
+        </h1>
       </div>
-      <div className="recipeDisplay">{recipes}</div>
-    </div>
+      <div className="RecipeContainer">
+        <div className="recipeDisplay">{recipes}</div>
+      </div>
+    </>
   );
 };
 
