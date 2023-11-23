@@ -1,22 +1,49 @@
+.containerTitle {
+  display: flex;
+  margin-bottom: 0px;
+  width: 87.5%;
+  h1 {
+    background-color: $tertiaryGreen;
+    border-radius: 15px 15px 0px 0px;
+    border-bottom: $primaryGreen 2px solid;
+    color: $primaryGreen;
+    font-family: $mainFont;
+    font-size: 30px;
+    margin: 0px;
+    padding: 10px 0px 10px 20px;
+    padding-left: 20px;
+    width: 50%;
+  }
+  h1:hover {
+    border-bottom: 0px solid;
+    box-shadow: 1px 2px 15px rgb(217 240 213);
+    cursor: pointer;
+    background-color: $offWhite;
+  }
+}
+
 .RecipeContainer {
   background-color: $offWhite;
-  border-radius: 15px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 0px 0px 15px 15px;
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
   height: fit-content;
-  margin-top: 50px;
+  margin-top: 0px;
   min-height: 80vh;
   width: 87.5%;
 
   .recipeDisplay {
     align-items: center;
+    background-color: $offWhite;
     display: flex;
     flex-flow: wrap;
     justify-content: center;
   }
-  h1 {
-    color: $primaryGreen;
-    font-family: $mainFont;
-    font-size: 30px;
-    padding-left: 20px;
+
+  hr {
+    border: solid $primaryGreen 1px;
+    margin: 0px;
+    width: auto;
   }
 }
