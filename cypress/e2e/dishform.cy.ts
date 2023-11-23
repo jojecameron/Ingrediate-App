@@ -1,12 +1,13 @@
 describe('Dish Form Functionality', () => {
-  
-  it('should default to breakfast', () => {
+  beforeEach(() => {
     cy.visit('http://localhost:8080/');
+  });
+
+  it('should default to breakfast', () => {
     cy.get('input[value="breakfast"]').should('be.checked');
   });
 
   it('should alternate between the selected dish types', () => {
-    cy.visit('http://localhost:8080/');
     cy.get('input[value="lunch"]').click();
     cy.get('input[value="lunch"]').should('be.checked');
     cy.get('input[value="dinner"]').click();
@@ -18,7 +19,6 @@ describe('Dish Form Functionality', () => {
   });
 
   it('should only have one dish type selected at a time', () => {
-    cy.visit('http://localhost:8080/');
     cy.get('input[value="breakfast"]').should('be.checked');
     cy.get('input[value="lunch"]').click();
     cy.get('input[value="lunch"]').should('be.checked');
