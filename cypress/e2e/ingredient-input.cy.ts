@@ -1,7 +1,9 @@
 describe('ingredient input functionality', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:8080/');
+  });
 
   it('should populate and depopulate the ingredient input', () => {
-    cy.visit('http://localhost:8080/');
     //populates ingredient input
     cy.get('#autocompleteInput').type('Salt');
     cy.get('#autocompleteInput-option-0').click();
@@ -19,7 +21,6 @@ describe('ingredient input functionality', () => {
   });
 
   it('should autocomplete the ingredient input', () => {
-    cy.visit('http://localhost:8080/');
     cy.get('#autocompleteInput').type('S');
     cy.get('#autocompleteInput-option-0').click();
     cy.contains('Salt');
@@ -30,21 +31,18 @@ describe('ingredient input functionality', () => {
   });
 
   it('should populate the ingredient input without typing', () => {
-    cy.visit('http://localhost:8080/');
     cy.get('svg').click();
     cy.get('#autocompleteInput-option-166').click();
     cy.contains('Artichoke Hearts');
   });
 
   it('should populate the ingredient input with pressing return', () => {
-    cy.visit('http://localhost:8080/');
     cy.get('#autocompleteInput').type('Artichoke Hearts');
     cy.get('#autocompleteInput-option-0').type('{enter}');
     cy.contains('Artichoke Hearts');
   });
 
   it('should depopulate the ingredient input with pressing delete', () => {
-    cy.visit('http://localhost:8080/');
     cy.get('svg').click();
     cy.get('#autocompleteInput-option-166').click();
     cy.contains('Artichoke Hearts');
