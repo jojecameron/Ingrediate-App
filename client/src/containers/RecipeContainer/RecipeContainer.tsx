@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { Recipe } from '../../components';
 import { RecipeContainerProps } from '../../types';
 
 const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
+  const [favoriteMode, setFavoriteMode] = useState<boolean>(false);
+
   const { recipeList, deleteRecipe, favoriteRecipe } = props;
 
   const recipes = recipeList.map((recipe, i) => {
@@ -23,12 +26,25 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
   return (
     <>
       <div className="containerTitle">
-        <h1>
-          <em>Recipes</em>
-        </h1>
-        <h1>
-          <em>Favorites</em>
-        </h1>
+        {!favoriteMode ? (
+          <>
+            <h1 onClick={() => setFavoriteMode(false)} className="active">
+              <em>Recipes</em>
+            </h1>
+            <h1 onClick={() => setFavoriteMode(true)} className='inactive'>
+              <em>Favorites</em>
+            </h1>
+          </>
+        ) : (
+          <>
+            <h1 onClick={() => setFavoriteMode(false)} className='inactive'>
+              <em>Recipes</em>
+            </h1>
+            <h1 onClick={() => setFavoriteMode(true)} className="active">
+              <em>Favorites</em>
+            </h1>
+          </>
+        )}
       </div>
       <div className="RecipeContainer">
         <div className="recipeDisplay">{recipes}</div>
