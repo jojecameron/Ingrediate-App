@@ -9,10 +9,6 @@ import { useState } from 'react';
 import { RecipeProps } from '../../types';
 
 const Recipe = (props: RecipeProps): JSX.Element => {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [isDeleteHover, setIsDeleteHover] = useState(false);
-  const [isFavoriteHover, setIsFavoriteHover] = useState(false);
-
   const {
     id,
     deleteRecipe,
@@ -21,11 +17,17 @@ const Recipe = (props: RecipeProps): JSX.Element => {
     recipeText,
     recipeLinkTitle,
     recipeLink,
+    favorite,
   } = props;
+
+  const [isFavorite, setIsFavorite] = useState(favorite || false);
+  const [isDeleteHover, setIsDeleteHover] = useState(false);
+  const [isFavoriteHover, setIsFavoriteHover] = useState(false);
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
-    favoriteRecipe(isFavorite, {
+    favoriteRecipe(true, {
+      id: id,
       recipeTitle: recipeTitle,
       recipeText: recipeText,
       recipeLinkTitle: recipeLinkTitle,
@@ -63,21 +65,21 @@ const Recipe = (props: RecipeProps): JSX.Element => {
             className="favorite"
             onMouseEnter={() => setIsFavoriteHover(true)}
             onMouseLeave={() => setIsFavoriteHover(false)}
-            onClick={() => toggleFavorite()}
+            onClick={
+              !isFavorite ? () => toggleFavorite() : () => deleteRecipe(id)
+            }
           >
             <div className="favorite-container">
               {isFavorite && isFavoriteHover ? (
                 <>
                   <HeartBroken color="error" />
-                  <span className="memo">Unfavorite?</span>
+                  <span className="memo">Delete favorite?</span>
                 </>
               ) : (
                 <>
                   {isFavorite ? <Favorite color="error" /> : <FavoriteBorder />}
                   {isFavoriteHover && (
-                    <span className="memo">
-                      {isFavorite ? 'Unfavorite recipe?' : 'Favorite recipe?'}
-                    </span>
+                    <span className="memo">Favorite recipe?</span>
                   )}
                 </>
               )}

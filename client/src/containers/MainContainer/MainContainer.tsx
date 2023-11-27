@@ -36,6 +36,7 @@ const MainContainer = (): JSX.Element => {
 
   // adds or removes favorited recipes from state
   const favoriteRecipe = (isFavorite: boolean, recipe: Favorite) => {
+    deleteRecipe(recipe.id);
     setFavoriteRecipes((currentFavorites) => {
       if (isFavorite) {
         return [...currentFavorites, recipe];
@@ -93,9 +94,15 @@ const MainContainer = (): JSX.Element => {
 
   // deletes recipe from state
   const deleteRecipe = (id: string) => {
-    setRecipeList((currentRecipes) => {
-      return currentRecipes.filter((recipe) => recipe.id !== id);
-    });
+    if (favoriteRecipes.some((recipe) => recipe.id === id)) {
+      setFavoriteRecipes((currentFavorites) => {
+        return currentFavorites.filter((recipe) => recipe.id !== id);
+      });
+    } else {
+      setRecipeList((currentRecipes) => {
+        return currentRecipes.filter((recipe) => recipe.id !== id);
+      });
+    }
   };
 
   return (
@@ -136,6 +143,8 @@ const MainContainer = (): JSX.Element => {
           recipeList={recipeList}
           deleteRecipe={deleteRecipe}
           favoriteRecipe={favoriteRecipe}
+          favoriteRecipes={favoriteRecipes}
+          setFavoriteRecipes={setFavoriteRecipes}
         />
       </section>
     </>

@@ -4,10 +4,12 @@ export interface Recipe {
 }
 
 export interface Favorite {
+  id: string;
   recipeTitle: string;
   recipeText: string;
   recipeLinkTitle: string;
   recipeLink: string;
+  favorite?: boolean;
 }
 
 export interface RecipeProps {
@@ -18,10 +20,13 @@ export interface RecipeProps {
   recipeText: string;
   recipeLinkTitle: string;
   recipeLink: string;
-};
+  favorite?: boolean;
+}
 
 export interface RecipeContainerProps {
-  recipeList: {recipe: string, id: string}[];
+  recipeList: { recipe: string; id: string }[];
   deleteRecipe: (id: string) => void;
   favoriteRecipe: (isFavorite: boolean, recipe: Favorite) => void;
-};
+  favoriteRecipes: Favorite[];
+  setFavoriteRecipes: React.Dispatch<React.SetStateAction<Favorite[]>>;
+}
