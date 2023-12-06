@@ -1,11 +1,12 @@
 .containerTitle {
   display: flex;
   margin-bottom: 0px;
+  margin-top: 40px;
   width: 87.5%;
+
   h1 {
     background-color: $tertiaryGreen;
     border-radius: 15px 15px 0px 0px;
-    border-bottom: $primaryGreen 2px solid;
     color: $primaryGreen;
     font-family: $mainFont;
     font-size: 30px;
@@ -15,10 +16,29 @@
     width: 50%;
   }
   h1:hover {
-    border-bottom: 0px solid;
-    box-shadow: 1px 2px 15px rgb(217 240 213);
-    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition-duration: 100ms;
+  }
+  .active {
     background-color: $offWhite;
+    box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.2);
+    transition-duration: 100ms;
+  }
+  .active:hover {
+    background-color: $offWhite;
+  }
+  .inactive {
+    background-color: $primaryGreen;
+    border: $offWhite solid 1px;
+    color: $offWhite;
+    cursor: pointer;
+    transition-duration: 100ms;
+  }
+
+  .inactive:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: $offWhite solid 1px;
+    // box-shadow: 2px 2px 14px rgba(255, 255, 255, 1);
   }
 }
 
@@ -42,7 +62,6 @@
   }
 
   hr {
-    border: solid $primaryGreen 1px;
     margin: 0px;
     width: auto;
   }
