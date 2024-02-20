@@ -1,4 +1,4 @@
-import { User } from "/Users/johannacameron/Desktop/Codesmith/Ingrediate-App/client/src/types/user.types";
+import { User, Favorite } from './index';
 
 export interface ModalState {
   isOpen: boolean;
@@ -6,13 +6,15 @@ export interface ModalState {
 }
 
 export interface ModalProps {
-    modalState: ModalState;
-    setModalState: React.Dispatch<React.SetStateAction<ModalState>>;
-    setIsLoggedIn: React.Dispatch<React.SetStateAction<User>>;
-  }
+  modalState: ModalState;
+  setModalState: React.Dispatch<React.SetStateAction<ModalState>>;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<User>>;
+  setFavoriteRecipes: React.Dispatch<React.SetStateAction<Favorite[]>>;
+}
 
 export interface HeaderProps {
   setModalState: React.Dispatch<React.SetStateAction<ModalState>>;
   isLoggedIn: User;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<User>>;
+  saveFavorites: () => void;
 }

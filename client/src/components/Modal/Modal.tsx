@@ -3,7 +3,8 @@ import { ModalProps } from '../../types';
 import { useState } from 'react';
 
 const Modal = (props: ModalProps): JSX.Element => {
-  const { modalState, setModalState, setIsLoggedIn } = props;
+  const { modalState, setModalState, setIsLoggedIn, setFavoriteRecipes } =
+    props;
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -16,7 +17,9 @@ const Modal = (props: ModalProps): JSX.Element => {
     try {
       // dynamically change the route based on the modalType
       const url =
-        modalState.modalType === 'Log in' ? 'http://localhost:3000/user/login' : 'http://localhost:3000/user/signup';
+        modalState.modalType === 'Log in'
+          ? 'http://localhost:3000/user/login'
+          : 'http://localhost:3000/user/signup';
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -27,12 +30,17 @@ const Modal = (props: ModalProps): JSX.Element => {
       if (response.ok) {
         const data = await response.json();
         // store user data in state
-        setIsLoggedIn({
+        setIsLoggedIn((prevUserData) => ({
+          ...prevUserData,
           loggedIn: true,
           display_name: data.display_name,
           email: data.email,
           firebase_uid: data.firebase_uid,
-        });
+          user_id: data.user_id,
+        }));
+        if (data.favorites) {
+          setFavoriteRecipes(data.favorites);
+        }
         setModalState({ isOpen: false, modalType: modalState.modalType });
       } else {
         console.error('Failed to submit user data');
@@ -70,7 +78,14 @@ const Modal = (props: ModalProps): JSX.Element => {
           />
         </section>
         <section>
-          <label>Password {modalState.modalType === 'Sign up' ? (<span>(Min. 8 characters)</span>) : (<></>)}</label>
+          <label>
+            Password{' '}
+            {modalState.modalType === 'Sign up' ? (
+              <span>(Min. 8 characters)</span>
+            ) : (
+              <></>
+            )}
+          </label>
           <input
             type="password"
             name="password"
@@ -83,7 +98,12 @@ const Modal = (props: ModalProps): JSX.Element => {
             id="button"
             type="submit"
             value={modalState.modalType === 'Log in' ? 'Log in' : 'Sign up'}
-            disabled={!formData.email || !formData.password || formData.password.length < 8 || !emailPattern.test(formData.email)}
+            disabled={
+              !formData.email ||
+              !formData.password ||
+              formData.password.length < 8 ||
+              !emailPattern.test(formData.email)
+            }
           />
         </section>
       </form>
