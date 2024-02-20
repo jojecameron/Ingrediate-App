@@ -1,5 +1,8 @@
 export interface Recipe {
-  recipe: string;
+  recipeTitle: string;
+  recipeText: string;
+  recipeLinkTitle: string;
+  recipeLink: string;
   id: string;
 }
 
@@ -24,7 +27,11 @@ export interface RecipeProps {
 }
 
 export interface RecipeContainerProps {
-  recipeList: { recipe: string; id: string }[];
+  recipeList: { recipeTitle: string;
+    recipeText: string;
+    recipeLinkTitle: string;
+    recipeLink: string;
+    id: string }[];
   deleteRecipe: (id: string) => void;
   favoriteRecipe: (isFavorite: boolean, recipe: Favorite) => void;
   favoriteRecipes: Favorite[];

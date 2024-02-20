@@ -14,22 +14,20 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
   } = props;
 
   const recipes = recipeList.map((recipe, i) => {
-    const splitRecipe = recipe.recipe.split('|');
     return (
       <Recipe
         key={recipe.id}
         id={recipe.id}
         deleteRecipe={deleteRecipe}
         favoriteRecipe={favoriteRecipe}
-        recipeTitle={splitRecipe[0]}
-        recipeText={splitRecipe[1]}
-        recipeLinkTitle={splitRecipe[2]}
-        recipeLink={splitRecipe[3]}
+        recipeTitle={recipe.recipeTitle}
+        recipeText={recipe.recipeText}
+        recipeLinkTitle={recipe.recipeLinkTitle}
+        recipeLink={recipe.recipeLink}
       />
     );
   });
 
-  // I would like to set the isFavorite local state to true from here? is this possible?
   const favorites = favoriteRecipes.map((favorite) => {
     return (
       <Recipe
@@ -56,6 +54,9 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
             </h1>
             <h1 onClick={() => setFavoriteMode(true)} className="inactive">
               <em>Favorites</em>
+              {favoriteRecipes.length > 0 ? (
+                <span id="numFavorites">{favoriteRecipes.length}</span>
+              ) : null}
             </h1>
           </>
         ) : (

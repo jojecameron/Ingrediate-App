@@ -15,7 +15,7 @@ export const generateRecipe = async (ingredients: string[]) => {
         Math.random().toString(36).substring(2, 15);
       return data;
     } catch (err) {
-      console.log(err);
+      console.error(err);
       throw new Error('Failed to send ingredients to the server.');
     }
   };

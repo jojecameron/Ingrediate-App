@@ -31,6 +31,7 @@ const MainContainer = (): JSX.Element => {
     loggedIn: false,
     display_name: '',
     email: '',
+    user_id: '',
     firebase_uid: '',
   });
 
@@ -49,20 +50,25 @@ const MainContainer = (): JSX.Element => {
   };
 
   // stores favorited recipes in db
-  const saveFavorites = async (favorites: Favorite[]) => {
+  const saveFavorites = async () => {
     const favoritesUrl = 'http://localhost:3000/favorites';
-    try {
-      const result = await fetch(favoritesUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(favoriteRecipes),
-      });
-      const data = await result.json();
-      console.log('ADDED TO DATABASE: ', data);
-    } catch (err) {
-      console.log(err);
+    if (isLoggedIn.loggedIn) {
+      try {
+        const result = await fetch(favoritesUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            favorites: favoriteRecipes,
+            user_id: isLoggedIn.user_id,
+          }),
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      alert('Please log in to save favorites');
     }
   };
 
@@ -88,7 +94,7 @@ const MainContainer = (): JSX.Element => {
       setRecipeList([result, ...recipeList]);
       setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -111,6 +117,7 @@ const MainContainer = (): JSX.Element => {
         setModalState={setModalState}
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
+        saveFavorites={saveFavorites}
       />
       <section className="MainContainer">
         {modalState.isOpen && (
@@ -129,6 +136,7 @@ const MainContainer = (): JSX.Element => {
               modalState={modalState}
               setModalState={setModalState}
               setIsLoggedIn={setIsLoggedIn}
+              setFavoriteRecipes={setFavoriteRecipes}
             />
           </>
         )}

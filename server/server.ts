@@ -11,7 +11,7 @@ const app = express();
 // -------------CONNECTION TO PORT--------------//
 const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
-// -------------parse incoming requests------------//
+// -------------PARSE INCOMING REQUESTS------------//
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
@@ -22,7 +22,7 @@ app.use(
 
 app.use(routes);
 
-// ------------------- UNKNOWN ROUTES ------------------------
+// ------------------- UNKNOWN ROUTES ------------------------//
 
 /**
  * 404 handler
@@ -32,7 +32,7 @@ app.use('*', (_req: Request, res: Response) => {
   res.status(404).send('Not Found');
 });
 
-// ------------------- ERROR HANDLER ------------------------
+// ------------------- ERROR HANDLER ------------------------//
 
 /**
  * Global error handler
@@ -56,7 +56,7 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 
 
 
-// // ------------------- CONNECT TO SERVER AND DB ------------------------
+//------------------- CONNECT TO SERVER AND DB ------------------------//
 
 const start = async () => {
   try {
