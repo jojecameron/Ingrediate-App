@@ -1,34 +1,44 @@
 import { Router, Request, Response } from 'express';
 const routes = Router();
 
-// -------------IMPORT CONTROLLERS-----------
+//-------------IMPORT CONTROLLERS-----------//
 
-import APIController from '../controllers/APIControllers';
-import IngredientController from '../controllers/IngredientControllers';
+import APIController from '../controllers/APIController';
+import RecipeController from '../controllers/RecipeController';
 import FavoritesController from '../controllers/FavoritesController';
 import UserController from '../controllers/UserController';
 
-// -------------ROUTES------------
+//-------------ROUTES------------//
 
 routes.get('/', (_req: Request, res: Response) => {
   res.status(200).send('Hello world!');
 });
 
+//------------RECIPE GENERATOR-----------//
+
 routes.post(
   '/generate',
-  IngredientController.processRequest,
+  RecipeController.processRequest,
   APIController.getGPTResult,
+  RecipeController.parseRecipe,
   (_req, res) => {
-    const result = { recipe: res.locals.recipe };
+    const result = { 
+      recipeTitle: res.locals.recipeTitle,
+      recipeText: res.locals.recipeText,
+      recipeLinkTitle: res.locals.recipeLinkTitle,
+      recipeLink: res.locals.recipeLink
+     };
     res.status(200).send(JSON.stringify(result));
   }
 );
+
+//------------USER AUTHENTICATION-----------//
 
 routes.post('/user/signup', UserController.userSignUp, (_req: Request, res: Response) => {
   res.status(200).json(res.locals.user);
 });
 
-routes.post('/user/login', UserController.userLogin, (_req: Request, res: Response) => {
+routes.post('/user/login', UserController.userLogin, FavoritesController.getFavorites, (_req: Request, res: Response) => {
   res.status(200).json(res.locals.user);
 });
 
@@ -36,16 +46,18 @@ routes.post('/user/logout', UserController.userSignOut, (_req: Request, res: Res
   res.status(200).send('User logged out successfully');
 });
 
-routes.get('/favorites', FavoritesController.getFavorites, (_req: Request, res: Response) => {
-  res.status(200).json(res.locals.favorites);
-});
+//------------FAVORITES-----------//
 
-routes.post('/favorites', FavoritesController.addFavorite, (_req: Request, res: Response) => {
-  res.status(200).json(res.locals.newFavorite);
+// routes.get('/favorites/:user_id', FavoritesController.getFavorites, (_req: Request, res: Response) => {
+//   res.status(200).json(res.locals.favorites);
+// });
+
+routes.post('/favorites', FavoritesController.saveFavorites, (_req: Request, res: Response) => {
+  res.sendStatus(200);
 });
 
 routes.delete('/favorites', FavoritesController.deleteFavorite, (_req: Request, res: Response) => {
   res.sendStatus(200);
 });
 
-export default routes ;
+export default routes;
