@@ -98,12 +98,26 @@ const MainContainer = (): JSX.Element => {
     }
   };
 
-  // deletes recipe from state
-  const deleteRecipe = (id: string) => {
+  // deletes recipe from state and favorite from db
+  const deleteRecipe = async (id: string) => {
     if (favoriteRecipes.some((recipe) => recipe.id === id)) {
-      setFavoriteRecipes((currentFavorites) => {
-        return currentFavorites.filter((recipe) => recipe.id !== id);
-      });
+      try {
+        const favoritesUrl = 'http://localhost:3000/favorites';
+        const result = await fetch(favoritesUrl, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: id,
+          }),
+        });
+        setFavoriteRecipes((currentFavorites) => {
+          return currentFavorites.filter((recipe) => recipe.id !== id);
+        });
+      } catch (err) {
+        console.error(err);
+      }
     } else {
       setRecipeList((currentRecipes) => {
         return currentRecipes.filter((recipe) => recipe.id !== id);

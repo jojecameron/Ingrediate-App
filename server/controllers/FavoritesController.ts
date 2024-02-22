@@ -56,12 +56,14 @@ const FavoritesController: FavoritesController = {
 
   //deleting favorite from database
   deleteFavorite: async (req: Request, res: Response, next: NextFunction) => {
-    const { index } = req.body;
+    const { id } = req.body;
+    const text = 'DELETE FROM favorites WHERE id = $1';
     try {
-      // const deletedFavorite = await Favorites.findOneAndDelete({
-      //   'favorites.index': index,
-      // });
-      // res.locals.deletedFavorite = deletedFavorite;
+      await query({
+        text: text,
+        params: [id],
+      });
+      return next();
     } catch (err) {
       return next(err);
     }
