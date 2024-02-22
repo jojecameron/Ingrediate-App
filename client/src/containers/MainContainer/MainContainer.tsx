@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import RecipeContainer from '../RecipeContainer/RecipeContainer';
-import IngredientForm from '../../components/IngredientForm/IngredientForm';
-import DishForm from '../../components/DishForm/DishForm';
-import Loading from '../../components/Loading/Loading';
-import Header from '../../components/Header/Header';
-import Modal from '../../components/Modal/Modal';
+import {
+  RecipeContainer,
+  IngredientForm,
+  DishForm,
+  Loading,
+  Header,
+  Modal,
+} from '../../components';
 import {
   DishType,
   Recipe,
@@ -13,9 +15,7 @@ import {
   ModalState,
   User,
 } from '../../types';
-
-const url = 'http://localhost:3000/generate';
-const favoritesUrl = 'http://localhost:3000/favorites';
+import { generateRecipe } from '../../utils/apiUtils';
 
 const MainContainer = (): JSX.Element => {
   const [ingredientChoices, setIngredientChoices] = useState<Ingredient[]>([]);
@@ -31,10 +31,13 @@ const MainContainer = (): JSX.Element => {
     loggedIn: false,
     display_name: '',
     email: '',
+    user_id: '',
     firebase_uid: '',
   });
 
+  // adds or removes favorited recipes from state
   const favoriteRecipe = (isFavorite: boolean, recipe: Favorite) => {
+    deleteRecipe(recipe.id);
     setFavoriteRecipes((currentFavorites) => {
       if (isFavorite) {
         return [...currentFavorites, recipe];
@@ -47,19 +50,25 @@ const MainContainer = (): JSX.Element => {
   };
 
   // stores favorited recipes in db
-  const saveFavorites = async (favorites: Favorite[]) => {
-    try {
-      const result = await fetch(favoritesUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(favoriteRecipes),
-      });
-      const data = await result.json();
-      console.log('ADDED TO DATABASE: ', data);
-    } catch (err) {
-      console.log(err);
+  const saveFavorites = async () => {
+    const favoritesUrl = 'http://localhost:3000/favorites';
+    if (isLoggedIn.loggedIn) {
+      try {
+        const result = await fetch(favoritesUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            favorites: favoriteRecipes,
+            user_id: isLoggedIn.user_id,
+          }),
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      alert('Please log in to save favorites');
     }
   };
 
@@ -74,30 +83,46 @@ const MainContainer = (): JSX.Element => {
     sendIngredientsToServer(listOfIngredients);
   };
 
-  // makes post request to server, handles loading state change, receives data and udpates state
+  // sends ingredients to server
   const sendIngredientsToServer = async (ingredients: string[]) => {
     if (!ingredients.length) {
       return alert('Please enter ingredients...');
     }
     setIsLoading(true);
     try {
-      const result = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(ingredients),
-      });
-      const data = await result.json();
-      setRecipeList([data, ...recipeList]);
+      const result = await generateRecipe(ingredients);
+      setRecipeList([result, ...recipeList]);
       setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
-  const deleteRecipe = () => {
-    console.log('deleted recipe');
+  // deletes recipe from state and favorite from db
+  const deleteRecipe = async (id: string) => {
+    if (favoriteRecipes.some((recipe) => recipe.id === id)) {
+      try {
+        const favoritesUrl = 'http://localhost:3000/favorites';
+        const result = await fetch(favoritesUrl, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: id,
+          }),
+        });
+        setFavoriteRecipes((currentFavorites) => {
+          return currentFavorites.filter((recipe) => recipe.id !== id);
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      setRecipeList((currentRecipes) => {
+        return currentRecipes.filter((recipe) => recipe.id !== id);
+      });
+    }
   };
 
   return (
@@ -106,6 +131,7 @@ const MainContainer = (): JSX.Element => {
         setModalState={setModalState}
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
+        saveFavorites={saveFavorites}
       />
       <section className="MainContainer">
         {modalState.isOpen && (
@@ -124,6 +150,7 @@ const MainContainer = (): JSX.Element => {
               modalState={modalState}
               setModalState={setModalState}
               setIsLoggedIn={setIsLoggedIn}
+              setFavoriteRecipes={setFavoriteRecipes}
             />
           </>
         )}
@@ -138,6 +165,8 @@ const MainContainer = (): JSX.Element => {
           recipeList={recipeList}
           deleteRecipe={deleteRecipe}
           favoriteRecipe={favoriteRecipe}
+          favoriteRecipes={favoriteRecipes}
+          setFavoriteRecipes={setFavoriteRecipes}
         />
       </section>
     </>

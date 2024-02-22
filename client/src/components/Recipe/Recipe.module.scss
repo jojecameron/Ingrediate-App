@@ -51,11 +51,48 @@
     background-color: $primaryGreen;
     border-radius: 15px;
   }
+  p::-webkit-scrollbar-track {
+    background-color: $secondaryGreen;
+    border-radius: 15px;
+  }
 }
 
 .favorite {
   background-color: transparent;
   border: none;
   color: $primaryGreen;
+  cursor: pointer;
   padding: 0px;
+}
+
+.favorite:hover {
+  color: crimson;
+}
+
+.favorite-container {
+  position: relative;
+}
+
+.delete {
+  background-color: transparent;
+  border: none;
+  color: $primaryGreen;
+  cursor: pointer;
+  padding: 0px;
+  transform: scale(1.1);
+}
+
+.memo {
+  background-color: $primaryGreen;
+  border: solid $offWhite 2px;
+  border-radius: 5px;
+  bottom: 20px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  color: $offWhite;
+  font-family: $mainFont;
+  font-size: 16px;
+  left: 20px;
+  padding: 5px;
+  position: absolute;
+  width: 100px;
 }

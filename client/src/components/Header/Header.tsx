@@ -1,10 +1,11 @@
 import { HeaderProps } from "../../types";
 
 const Header = (props: HeaderProps): JSX.Element => {
-  const { setModalState, isLoggedIn, setIsLoggedIn } = props;
+  const { setModalState, isLoggedIn, setIsLoggedIn, saveFavorites } = props;
 
   const handleLogOut = async () => {
     try {
+      await saveFavorites();
       const response = await fetch('http://localhost:3000/user/logout', {
         method: 'POST',
         headers: {
@@ -17,6 +18,7 @@ const Header = (props: HeaderProps): JSX.Element => {
           loggedIn: false,
           display_name: '',
           email: '',
+          user_id: '',
           firebase_uid: '',
         });
       } else {

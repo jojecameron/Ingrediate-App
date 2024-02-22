@@ -1,22 +1,83 @@
+.containerTitle {
+  display: flex;
+  margin-bottom: 0px;
+  margin-top: 40px;
+  width: 87.5%;
+
+  h1 {
+    background-color: $tertiaryGreen;
+    border-radius: 15px 15px 0px 0px;
+    color: $primaryGreen;
+    font-family: $mainFont;
+    font-size: 30px;
+    margin: 0px;
+    padding: 10px 0px 10px 20px;
+    padding-left: 20px;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+  }
+  h1:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    transition-duration: 100ms;
+  }
+  .active {
+    background-color: $offWhite;
+    box-shadow: 2px 8px 15px rgba(0, 0, 0, 0.2);
+    transition-duration: 100ms;
+  }
+  .active:hover {
+    background-color: $offWhite;
+  }
+  .inactive {
+    background-color: $primaryGreen;
+    border: $offWhite solid 1px;
+    color: $offWhite;
+    cursor: pointer;
+    transition-duration: 100ms;
+  }
+
+  .inactive:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: $offWhite solid 1px;
+    #numFavorites {
+      color: darkgreen;
+    }
+  }
+
+  #numFavorites {
+    border-radius: 10px;
+    background-color: $offWhite;
+    color: $primaryGreen;
+    font-size: 20px;
+    padding: 5px;
+    width: 20px;
+    margin-right: 15px;
+    text-align: center;
+  }
+}
+
 .RecipeContainer {
   background-color: $offWhite;
-  border-radius: 15px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 0px 0px 15px 15px;
+  box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
   height: fit-content;
-  margin-top: 50px;
+  margin-top: 0px;
   min-height: 80vh;
   width: 87.5%;
 
   .recipeDisplay {
     align-items: center;
+    background-color: $offWhite;
     display: flex;
     flex-flow: wrap;
     justify-content: center;
   }
-  h1 {
-    color: $primaryGreen;
-    font-family: $mainFont;
-    font-size: 30px;
-    padding-left: 20px;
+
+  hr {
+    margin: 0px;
+    width: auto;
   }
 }
