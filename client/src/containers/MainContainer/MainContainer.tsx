@@ -97,6 +97,8 @@ const MainContainer = (): JSX.Element => {
       console.error(err);
     }
   };
+  
+  console.log('this is a test');
 
   // deletes recipe from state and favorite from db
   const deleteRecipe = async (id: string) => {
