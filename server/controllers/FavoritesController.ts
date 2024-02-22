@@ -57,11 +57,26 @@ const FavoritesController: FavoritesController = {
   //deleting favorite from database
   deleteFavorite: async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.body;
-    const text = 'DELETE FROM favorites WHERE id = $1';
+    const text = `DELETE FROM favorites WHERE id = $1`;
     try {
       await query({
         text: text,
         params: [id],
+      });
+      return next();
+    } catch (err) {
+      return next(err);
+    }
+  },
+
+  //updating favorite in database
+  updateFavorite: async (req: Request, res: Response, next: NextFunction) => {
+    const { id, newTitle } = req.body;
+    const text = `UPDATE favorites SET "recipeTitle" = $1 WHERE id = $2`;
+    try {
+      await query({
+        text: text,
+        params: [newTitle, id],
       });
       return next();
     } catch (err) {

@@ -17,4 +17,5 @@ export interface HeaderProps {
   isLoggedIn: User;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<User>>;
   saveFavorites: () => void;
+  setFavoriteRecipes: React.Dispatch<React.SetStateAction<Favorite[]>>;
 }
