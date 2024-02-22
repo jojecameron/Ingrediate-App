@@ -18,11 +18,29 @@ const Recipe = (props: RecipeProps): JSX.Element => {
     recipeLinkTitle,
     recipeLink,
     favorite,
+    updateRecipeTitle,
   } = props;
 
   const [isFavorite, setIsFavorite] = useState(favorite || false);
   const [isDeleteHover, setIsDeleteHover] = useState(false);
   const [isFavoriteHover, setIsFavoriteHover] = useState(false);
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [title, setTitle] = useState(recipeTitle);
+
+  const handleTitleClick = () => {
+    setIsEditingTitle(true);
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const handleEnter = () => {
+    if (title.length) {
+      setIsEditingTitle(false);
+      updateRecipeTitle(id, title, isFavorite);
+    }
+  };
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -87,7 +105,20 @@ const Recipe = (props: RecipeProps): JSX.Element => {
           </button>
         </div>
       </div>
-      <h3 className="recipe-title">{recipeTitle}</h3>
+      {!isEditingTitle ? (
+        <h3 className="recipe-title" onClick={handleTitleClick}>
+          {recipeTitle}
+        </h3>
+      ) : (
+        <input
+          type="text"
+          value={title}
+          onChange={handleTitleChange}
+          onKeyDown={(e) => e.key === 'Enter' && handleEnter()}
+          autoFocus
+        />
+      )}
+
       <p className="recipe-text">{recipeText}</p>
       <h3 className="recipe-linkTitle">{recipeLinkTitle}</h3>
       <a

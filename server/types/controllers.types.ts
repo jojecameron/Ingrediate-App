@@ -9,6 +9,7 @@ export interface FavoritesController {
   getFavorites: (req: Request, res: Response, next: NextFunction) => Promise<void>;
   saveFavorites: (req: Request, res: Response, next: NextFunction) => Promise<void>;
   deleteFavorite: (req: Request, res: Response, next: NextFunction) => Promise<void>;
+  updateFavorite: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 };
 
 export interface RecipeController {
