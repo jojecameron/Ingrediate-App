@@ -28,4 +28,14 @@ describe('recipe generation functionality', () => {
     cy.contains('Generate Recipe').click();
     cy.get('.Recipe').should('have.length', 3);
   });
+
+  it('should change the recipe container state from favorites to recipes when a recipe is generated', () => {
+    cy.get('#autocompleteInput').type('Salt');
+    cy.get('#autocompleteInput-option-0').click();
+    cy.contains('Generate Recipe').click();
+    cy.contains('Favorites').click();
+    cy.get('.Recipe').should('have.length', 0);
+    cy.contains('Generate Recipe').click();
+    cy.get('.Recipe').should('have.length', 2);
+  });
 });
