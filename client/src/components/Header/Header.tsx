@@ -1,7 +1,13 @@
-import { HeaderProps } from "../../types";
+import { HeaderProps } from '../../types';
 
 const Header = (props: HeaderProps): JSX.Element => {
-  const { setModalState, isLoggedIn, setIsLoggedIn, saveFavorites, setFavoriteRecipes } = props;
+  const {
+    setModalState,
+    isLoggedIn,
+    setIsLoggedIn,
+    saveFavorites,
+    setFavoriteRecipes,
+  } = props;
 
   const handleLogOut = async () => {
     try {
@@ -28,7 +34,7 @@ const Header = (props: HeaderProps): JSX.Element => {
     } catch (error) {
       console.error('Error:', error);
     }
-  }
+  };
 
   return (
     <header>
@@ -37,13 +43,29 @@ const Header = (props: HeaderProps): JSX.Element => {
           <em>Ingrediate</em>
         </h1>
       </div>
-      {!isLoggedIn.loggedIn ? (<div>
-        <p onClick={() => setModalState({isOpen: true, modalType: 'Log in'})}>Log in</p>
-        <p onClick={() => setModalState({isOpen: true, modalType: 'Sign up'})}>Sign up</p>
-      </div>) : (<div>
-        <p onClick={() => handleLogOut()}>Log out</p>
-      </div>)}
-      
+      {!isLoggedIn.loggedIn ? (
+        <div>
+          <p
+            onClick={() => setModalState({ isOpen: true, modalType: 'Log in' })}
+          >
+            Log in
+          </p>
+          <p
+            onClick={() =>
+              setModalState({ isOpen: true, modalType: 'Sign up' })
+            }
+          >
+            Sign up
+          </p>
+        </div>
+      ) : (
+        <div>
+          <h2>
+            <em>{isLoggedIn.displayName}</em>
+          </h2>
+          <p onClick={() => handleLogOut()}>Log out</p>
+        </div>
+      )}
     </header>
   );
 };
