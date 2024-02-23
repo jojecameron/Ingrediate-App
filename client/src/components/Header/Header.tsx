@@ -11,15 +11,15 @@ const Header = (props: HeaderProps): JSX.Element => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ firebase_uid: isLoggedIn.firebase_uid }),
+        body: JSON.stringify({ firebaseUid: isLoggedIn.firebaseUid }),
       });
       if (response.ok) {
         setIsLoggedIn({
           loggedIn: false,
-          display_name: '',
+          displayName: '',
           email: '',
-          user_id: '',
-          firebase_uid: '',
+          userId: '',
+          firebaseUid: '',
         });
         setFavoriteRecipes([]);
       } else {

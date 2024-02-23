@@ -30,10 +30,10 @@ const MainContainer = (): JSX.Element => {
   });
   const [isLoggedIn, setIsLoggedIn] = useState<User>({
     loggedIn: false,
-    display_name: '',
+    displayName: '',
     email: '',
-    user_id: '',
-    firebase_uid: '',
+    userId: '',
+    firebaseUid: '',
   });
 
   // adds or removes favorited recipes from state
@@ -62,7 +62,7 @@ const MainContainer = (): JSX.Element => {
           },
           body: JSON.stringify({
             favorites: favoriteRecipes,
-            user_id: isLoggedIn.user_id,
+            userId: isLoggedIn.userId,
           }),
         });
       } catch (err) {
