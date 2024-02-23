@@ -111,6 +111,7 @@ const Recipe = (props: RecipeProps): JSX.Element => {
         </h3>
       ) : (
         <input
+          className="recipe-title-edit"
           type="text"
           value={title}
           onChange={handleTitleChange}
