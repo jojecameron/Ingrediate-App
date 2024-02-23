@@ -115,6 +115,7 @@ const Recipe = (props: RecipeProps): JSX.Element => {
           type="text"
           value={title}
           onChange={handleTitleChange}
+          onBlur={() => handleEnter()}
           onKeyDown={(e) => e.key === 'Enter' && handleEnter()}
           autoFocus
         />

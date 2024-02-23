@@ -1,7 +1,7 @@
 export interface User {
   loggedIn: boolean;
-  display_name: string;
+  displayName: string;
   email: string;
-  user_id: string;
-  firebase_uid: string;
+  userId: string;
+  firebaseUid: string;
 }
