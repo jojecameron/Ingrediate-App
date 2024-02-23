@@ -4,7 +4,6 @@ describe('ingredient input functionality', () => {
   });
 
   it('should populate and depopulate the ingredient input', () => {
-    //populates ingredient input
     cy.get('#autocompleteInput').type('Salt');
     cy.get('#autocompleteInput-option-0').click();
     cy.contains('Salt');
@@ -12,7 +11,6 @@ describe('ingredient input functionality', () => {
     cy.get('#autocompleteInput-option-0').click();
     cy.contains('Salt');
     cy.contains('Pepper');
-    //depoulates ingredient input
     cy.get('[data-tag-index="1"]').find('svg').click();
     cy.contains('Pepper').should('not.exist');
     cy.contains('Salt');
