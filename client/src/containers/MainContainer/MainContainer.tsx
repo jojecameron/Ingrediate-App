@@ -23,6 +23,7 @@ const MainContainer = (): JSX.Element => {
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState<Favorite[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [favoriteMode, setFavoriteMode] = useState<boolean>(false);
   const [modalState, setModalState] = useState<ModalState>({
     isOpen: false,
     modalType: 'Log in',
@@ -93,6 +94,7 @@ const MainContainer = (): JSX.Element => {
       const result = await generateRecipe(ingredients);
       setRecipeList([result, ...recipeList]);
       setIsLoading(false);
+      setFavoriteMode(false);
     } catch (err) {
       console.error(err);
     }
@@ -216,6 +218,8 @@ const MainContainer = (): JSX.Element => {
           favoriteRecipes={favoriteRecipes}
           setFavoriteRecipes={setFavoriteRecipes}
           updateRecipeTitle={updateRecipeTitle}
+          favoriteMode={favoriteMode}
+          setFavoriteMode={setFavoriteMode}
         />
       </section>
     </>

@@ -3,7 +3,6 @@ import { Recipe } from '../../components';
 import { RecipeContainerProps, Favorite } from '../../types';
 
 const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
-  const [favoriteMode, setFavoriteMode] = useState<boolean>(false);
 
   const {
     recipeList,
@@ -11,7 +10,9 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
     favoriteRecipe,
     favoriteRecipes,
     setFavoriteRecipes,
-    updateRecipeTitle
+    updateRecipeTitle,
+    favoriteMode,
+    setFavoriteMode
   } = props;
 
   const recipes = recipeList.map((recipe, i) => {

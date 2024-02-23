@@ -38,4 +38,6 @@ export interface RecipeContainerProps {
   favoriteRecipes: Favorite[];
   setFavoriteRecipes: React.Dispatch<React.SetStateAction<Favorite[]>>;
   updateRecipeTitle: (id: string, newTitle: string, isFavorite: boolean) => void;
+  favoriteMode: boolean;
+  setFavoriteMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
