@@ -60,4 +60,8 @@ routes.delete('/favorites', FavoritesController.deleteFavorite, (_req: Request, 
   res.sendStatus(200);
 });
 
+routes.patch('/favorites', FavoritesController.updateFavorite, (_req: Request, res: Response) => {
+  res.sendStatus(200);
+});
+
 export default routes;

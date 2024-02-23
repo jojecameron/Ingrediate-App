@@ -1,7 +1,7 @@
 import { HeaderProps } from "../../types";
 
 const Header = (props: HeaderProps): JSX.Element => {
-  const { setModalState, isLoggedIn, setIsLoggedIn, saveFavorites } = props;
+  const { setModalState, isLoggedIn, setIsLoggedIn, saveFavorites, setFavoriteRecipes } = props;
 
   const handleLogOut = async () => {
     try {
@@ -21,6 +21,7 @@ const Header = (props: HeaderProps): JSX.Element => {
           user_id: '',
           firebase_uid: '',
         });
+        setFavoriteRecipes([]);
       } else {
         console.error('Failed to log out user');
       }

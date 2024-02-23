@@ -55,6 +55,18 @@
     background-color: $secondaryGreen;
     border-radius: 15px;
   }
+  input {
+    background-color: whitesmoke;
+    border: 2px solid $primaryGreen;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    color: $primaryGreen;
+    font-size: 20px;
+    font-family: $mainFont;
+    margin-top: 0.775em;
+    margin-bottom: 0.775em;
+    width: 100%;
+  }
 }
 
 .favorite {

@@ -39,7 +39,7 @@ const Modal = (props: ModalProps): JSX.Element => {
           user_id: data.user_id,
         }));
         if (data.favorites) {
-          setFavoriteRecipes(data.favorites);
+          setFavoriteRecipes((prevFavorites) => [ ...prevFavorites, ...data.favorites ]);
         }
         setModalState({ isOpen: false, modalType: modalState.modalType });
       } else {

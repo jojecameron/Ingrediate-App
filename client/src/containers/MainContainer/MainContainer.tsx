@@ -83,7 +83,7 @@ const MainContainer = (): JSX.Element => {
     sendIngredientsToServer(listOfIngredients);
   };
 
-  // sends ingredients to server
+  // sends ingredients to recipe generator service
   const sendIngredientsToServer = async (ingredients: string[]) => {
     if (!ingredients.length) {
       return alert('Please enter ingredients...');
@@ -98,7 +98,7 @@ const MainContainer = (): JSX.Element => {
     }
   };
 
-  // deletes recipe from state and favorite from db
+  // deletes recipe from state and favorite from db if logged in
   const deleteRecipe = async (id: string) => {
     if (favoriteRecipes.some((recipe) => recipe.id === id)) {
       try {
@@ -125,6 +125,53 @@ const MainContainer = (): JSX.Element => {
     }
   };
 
+  // updates recipe title in state and db if logged in
+  const updateRecipeTitle = async (
+    id: string,
+    newTitle: string,
+    isFavorite: boolean,
+  ) => {
+    // for favorited recipes
+    if (isFavorite) {
+      // only favorites that are associated with a user
+      if (isLoggedIn.loggedIn) {
+        try {
+          const favoritesUrl = 'http://localhost:3000/favorites';
+          const result = await fetch(favoritesUrl, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              id: id,
+              newTitle: newTitle,
+            }),
+          });
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      setFavoriteRecipes((currentFavorites) => {
+        return currentFavorites.map((recipe) => {
+          if (recipe.id === id) {
+            return { ...recipe, recipeTitle: newTitle };
+          }
+          return recipe;
+        });
+      });
+    } else {
+      // for non-favorited recipes
+      setRecipeList((currentRecipes) => {
+        return currentRecipes.map((recipe) => {
+          if (recipe.id === id) {
+            return { ...recipe, recipeTitle: newTitle };
+          }
+          return recipe;
+        });
+      });
+    }
+  };
+
   return (
     <>
       <Header
@@ -132,6 +179,7 @@ const MainContainer = (): JSX.Element => {
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
         saveFavorites={saveFavorites}
+        setFavoriteRecipes={setFavoriteRecipes}
       />
       <section className="MainContainer">
         {modalState.isOpen && (
@@ -167,6 +215,7 @@ const MainContainer = (): JSX.Element => {
           favoriteRecipe={favoriteRecipe}
           favoriteRecipes={favoriteRecipes}
           setFavoriteRecipes={setFavoriteRecipes}
+          updateRecipeTitle={updateRecipeTitle}
         />
       </section>
     </>
