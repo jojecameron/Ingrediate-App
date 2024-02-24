@@ -3,7 +3,6 @@ import { Recipe } from '../../components';
 import { RecipeContainerProps, Favorite } from '../../types';
 
 const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
-  const [favoriteMode, setFavoriteMode] = useState<boolean>(false);
 
   const {
     recipeList,
@@ -11,6 +10,9 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
     favoriteRecipe,
     favoriteRecipes,
     setFavoriteRecipes,
+    updateRecipeTitle,
+    favoriteMode,
+    setFavoriteMode
   } = props;
 
   const recipes = recipeList.map((recipe, i) => {
@@ -24,6 +26,7 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
         recipeText={recipe.recipeText}
         recipeLinkTitle={recipe.recipeLinkTitle}
         recipeLink={recipe.recipeLink}
+        updateRecipeTitle={updateRecipeTitle}
       />
     );
   });
@@ -39,6 +42,7 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
         recipeText={favorite.recipeText}
         recipeLinkTitle={favorite.recipeLinkTitle}
         recipeLink={favorite.recipeLink}
+        updateRecipeTitle={updateRecipeTitle}
         favorite={true}
       />
     );

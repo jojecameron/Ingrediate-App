@@ -48,7 +48,7 @@ routes.post('/user/logout', UserController.userSignOut, (_req: Request, res: Res
 
 //------------FAVORITES-----------//
 
-// routes.get('/favorites/:user_id', FavoritesController.getFavorites, (_req: Request, res: Response) => {
+// routes.get('/favorites/:userId', FavoritesController.getFavorites, (_req: Request, res: Response) => {
 //   res.status(200).json(res.locals.favorites);
 // });
 
@@ -57,6 +57,10 @@ routes.post('/favorites', FavoritesController.saveFavorites, (_req: Request, res
 });
 
 routes.delete('/favorites', FavoritesController.deleteFavorite, (_req: Request, res: Response) => {
+  res.sendStatus(200);
+});
+
+routes.patch('/favorites', FavoritesController.updateFavorite, (_req: Request, res: Response) => {
   res.sendStatus(200);
 });
 

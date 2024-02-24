@@ -42,6 +42,12 @@
   width: 30%;
 }
 
+@media screen and (max-width: 600px) {
+  #submit-button {
+    font-size: 16px;
+  }
+}
+
 #submit-button:hover {
   background-color: $primaryGreen;
   color: $offWhite;

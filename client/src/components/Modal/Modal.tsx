@@ -33,13 +33,13 @@ const Modal = (props: ModalProps): JSX.Element => {
         setIsLoggedIn((prevUserData) => ({
           ...prevUserData,
           loggedIn: true,
-          display_name: data.display_name,
+          displayName: data.displayName,
           email: data.email,
-          firebase_uid: data.firebase_uid,
-          user_id: data.user_id,
+          firebaseUid: data.firebaseUid,
+          userId: data.userId,
         }));
         if (data.favorites) {
-          setFavoriteRecipes(data.favorites);
+          setFavoriteRecipes((prevFavorites) => [ ...prevFavorites, ...data.favorites ]);
         }
         setModalState({ isOpen: false, modalType: modalState.modalType });
       } else {

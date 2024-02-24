@@ -18,16 +18,24 @@ const UserController: UserController = {
         password,
       );
       const user = userCredential.user.uid;
+      const displayName = email.split('@')[0];
       const dbUser = await query({
-        text: 'INSERT INTO users (firebase_uid, email) VALUES ($1, $2) RETURNING *',
-        params: [user, email],
+        text: `INSERT INTO users ("firebaseUid", email, "displayName") VALUES ($1, $2, $3) RETURNING *`,
+        params: [user, email, displayName],
       });
-      const { user_id } = dbUser.rows[0];
-      res.locals.user = { email: email, user_id: user_id };
+      const { userId } = dbUser.rows[0];
+      res.locals.user = {
+        email: email,
+        userId: userId,
+        displayName: displayName,
+      };
       next();
     } catch (error) {
       console.error('An error occurred:', error);
-      return next({ code: 'INTERNAL_ERROR', message: 'An internal error occurred' });
+      return next({
+        code: 'INTERNAL_ERROR',
+        message: 'An internal error occurred',
+      });
     }
   },
 
@@ -42,18 +50,26 @@ const UserController: UserController = {
       const user = userCredential.user.uid;
       // Find user in the database matching UID
       const dbResponse = await query({
-        text: 'SELECT * FROM users WHERE firebase_uid = $1',
+        text: `SELECT * FROM users WHERE "firebaseUid" = $1`,
         params: [user],
       });
       if (dbResponse.rows.length > 0) {
-        res.locals.user = { email: email, firebase_uid: user, user_id: dbResponse.rows[0].user_id };
+        res.locals.user = {
+          email: email,
+          firebaseUid: user,
+          userId: dbResponse.rows[0].userId,
+          displayName: dbResponse.rows[0].displayName,
+        };
         return next();
       } else {
         return res.status(404).json({ error: 'User not found' });
       }
     } catch (error) {
       console.error('An error occurred:', error);
-      return next({ code: 'INTERNAL_ERROR', message: 'An internal error occurred' });
+      return next({
+        code: 'INTERNAL_ERROR',
+        message: 'An internal error occurred',
+      });
     }
   },
 
@@ -63,8 +79,11 @@ const UserController: UserController = {
       next();
     } catch (error) {
       console.error('An error occurred:', error);
-      return next({ code: 'INTERNAL_ERROR', message: 'An internal error occurred' });
-    }    
+      return next({
+        code: 'INTERNAL_ERROR',
+        message: 'An internal error occurred',
+      });
+    }
   },
 };
 
