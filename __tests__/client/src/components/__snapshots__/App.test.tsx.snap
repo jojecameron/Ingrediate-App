@@ -32,44 +32,56 @@ exports[`renders a basic snapshot 1`] = `
           <input
             checked=""
             class="checkbox"
+            id="breakfast"
             name="breakfast"
             type="radio"
             value="breakfast"
           />
-          <label>
+          <label
+            for="breakfast"
+          >
             Breakfast
           </label>
         </div>
         <div>
           <input
             class="checkbox"
+            id="lunch"
             name="lunch"
             type="radio"
             value="lunch"
           />
-          <label>
+          <label
+            for="lunch"
+          >
             Lunch
           </label>
         </div>
         <div>
           <input
             class="checkbox"
+            id="dinner"
             name="dinner"
             type="radio"
             value="dinner"
           />
-          <label>
+          <label
+            for="dinner"
+          >
             Dinner
           </label>
         </div>
         <div>
           <input
             class="checkbox"
+            id="dessert"
             name="dessert"
             type="radio"
             value="dessert"
           />
-          <label>
+          <label
+            for="dessert"
+          >
             Dessert
           </label>
         </div>
