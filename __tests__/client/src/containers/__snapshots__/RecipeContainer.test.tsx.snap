@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a basic snapshot 1`] = `
+<div>
+  <div
+    class="containerTitle"
+  >
+    <h1
+      class="active"
+    >
+      <em>
+        Recipes
+      </em>
+    </h1>
+    <h1
+      class="inactive"
+    >
+      <em>
+        Favorites
+      </em>
+    </h1>
+  </div>
+  <div
+    class="RecipeContainer"
+  >
+    <div
+      class="recipeDisplay"
+    />
+  </div>
+</div>
+`;
