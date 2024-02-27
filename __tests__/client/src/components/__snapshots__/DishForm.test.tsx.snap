@@ -1,0 +1,271 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a basic snapshot 1`] = `
+<div>
+  <form
+    id="checkboxes"
+  >
+    <div>
+      <input
+        checked=""
+        class="checkbox"
+        name="breakfast"
+        type="radio"
+        value="breakfast"
+      />
+      <label>
+        Breakfast
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="lunch"
+        type="radio"
+        value="lunch"
+      />
+      <label>
+        Lunch
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="dinner"
+        type="radio"
+        value="dinner"
+      />
+      <label>
+        Dinner
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="dessert"
+        type="radio"
+        value="dessert"
+      />
+      <label>
+        Dessert
+      </label>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`renders a snapshot for dishType: breakfast 1`] = `
+<div>
+  <form
+    id="checkboxes"
+  >
+    <div>
+      <input
+        checked=""
+        class="checkbox"
+        name="breakfast"
+        type="radio"
+        value="breakfast"
+      />
+      <label>
+        Breakfast
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="lunch"
+        type="radio"
+        value="lunch"
+      />
+      <label>
+        Lunch
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="dinner"
+        type="radio"
+        value="dinner"
+      />
+      <label>
+        Dinner
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="dessert"
+        type="radio"
+        value="dessert"
+      />
+      <label>
+        Dessert
+      </label>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`renders a snapshot for dishType: dessert 1`] = `
+<div>
+  <form
+    id="checkboxes"
+  >
+    <div>
+      <input
+        class="checkbox"
+        name="breakfast"
+        type="radio"
+        value="breakfast"
+      />
+      <label>
+        Breakfast
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="lunch"
+        type="radio"
+        value="lunch"
+      />
+      <label>
+        Lunch
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="dinner"
+        type="radio"
+        value="dinner"
+      />
+      <label>
+        Dinner
+      </label>
+    </div>
+    <div>
+      <input
+        checked=""
+        class="checkbox"
+        name="dessert"
+        type="radio"
+        value="dessert"
+      />
+      <label>
+        Dessert
+      </label>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`renders a snapshot for dishType: dinner 1`] = `
+<div>
+  <form
+    id="checkboxes"
+  >
+    <div>
+      <input
+        class="checkbox"
+        name="breakfast"
+        type="radio"
+        value="breakfast"
+      />
+      <label>
+        Breakfast
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="lunch"
+        type="radio"
+        value="lunch"
+      />
+      <label>
+        Lunch
+      </label>
+    </div>
+    <div>
+      <input
+        checked=""
+        class="checkbox"
+        name="dinner"
+        type="radio"
+        value="dinner"
+      />
+      <label>
+        Dinner
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="dessert"
+        type="radio"
+        value="dessert"
+      />
+      <label>
+        Dessert
+      </label>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`renders a snapshot for dishType: lunch 1`] = `
+<div>
+  <form
+    id="checkboxes"
+  >
+    <div>
+      <input
+        class="checkbox"
+        name="breakfast"
+        type="radio"
+        value="breakfast"
+      />
+      <label>
+        Breakfast
+      </label>
+    </div>
+    <div>
+      <input
+        checked=""
+        class="checkbox"
+        name="lunch"
+        type="radio"
+        value="lunch"
+      />
+      <label>
+        Lunch
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="dinner"
+        type="radio"
+        value="dinner"
+      />
+      <label>
+        Dinner
+      </label>
+    </div>
+    <div>
+      <input
+        class="checkbox"
+        name="dessert"
+        type="radio"
+        value="dessert"
+      />
+      <label>
+        Dessert
+      </label>
+    </div>
+  </form>
+</div>
+`;

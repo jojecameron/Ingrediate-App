@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a basic snapshot 1`] = `
+<div>
+  <div
+    class="App"
+  >
+    <header>
+      <div>
+        <h1>
+          <em>
+            Ingrediate
+          </em>
+        </h1>
+      </div>
+      <div>
+        <p>
+          Log in
+        </p>
+        <p>
+          Sign up
+        </p>
+      </div>
+    </header>
+    <section
+      class="MainContainer"
+    >
+      <form
+        id="checkboxes"
+      >
+        <div>
+          <input
+            checked=""
+            class="checkbox"
+            name="breakfast"
+            type="radio"
+            value="breakfast"
+          />
+          <label>
+            Breakfast
+          </label>
+        </div>
+        <div>
+          <input
+            class="checkbox"
+            name="lunch"
+            type="radio"
+            value="lunch"
+          />
+          <label>
+            Lunch
+          </label>
+        </div>
+        <div>
+          <input
+            class="checkbox"
+            name="dinner"
+            type="radio"
+            value="dinner"
+          />
+          <label>
+            Dinner
+          </label>
+        </div>
+        <div>
+          <input
+            class="checkbox"
+            name="dessert"
+            type="radio"
+            value="dessert"
+          />
+          <label>
+            Dessert
+          </label>
+        </div>
+      </form>
+      <form
+        class="IngredientForm"
+      >
+        <div
+          class="MuiAutocomplete-root MuiAutocomplete-hasPopupIcon css-1h51icj-MuiAutocomplete-root"
+        >
+          <div
+            class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+          >
+            <div
+              class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiAutocomplete-inputRoot css-l4u8b9-MuiInputBase-root-MuiInput-root"
+            >
+              <input
+                aria-autocomplete="list"
+                aria-expanded="false"
+                aria-invalid="false"
+                autocapitalize="none"
+                autocomplete="off"
+                class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedEnd MuiAutocomplete-input MuiAutocomplete-inputFocused css-1x51dt5-MuiInputBase-input-MuiInput-input"
+                id="autocompleteInput"
+                placeholder="Add Ingredients..."
+                role="combobox"
+                spellcheck="false"
+                type="text"
+                value=""
+              />
+              <div
+                class="MuiAutocomplete-endAdornment css-1q60rmi-MuiAutocomplete-endAdornment"
+              >
+                <button
+                  aria-label="Open"
+                  class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium MuiAutocomplete-popupIndicator css-qzbt6i-MuiButtonBase-root-MuiIconButton-root-MuiAutocomplete-popupIndicator"
+                  tabindex="-1"
+                  title="Open"
+                  type="button"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                    data-testid="ArrowDropDownIcon"
+                    focusable="false"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M7 10l5 5 5-5z"
+                    />
+                  </svg>
+                  <span
+                    class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input
+          disabled=""
+          id="submit-button"
+          type="submit"
+          value="Generate Recipe"
+        />
+      </form>
+      <br />
+      <div
+        class="containerTitle"
+      >
+        <h1
+          class="active"
+        >
+          <em>
+            Recipes
+          </em>
+        </h1>
+        <h1
+          class="inactive"
+        >
+          <em>
+            Favorites
+          </em>
+        </h1>
+      </div>
+      <div
+        class="RecipeContainer"
+      >
+        <div
+          class="recipeDisplay"
+        />
+      </div>
+    </section>
+  </div>
+</div>
+`;
