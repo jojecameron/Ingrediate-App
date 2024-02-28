@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a basic snapshot 1`] = `
+exports[`DishForm renders a basic snapshot 1`] = `
 <div>
   <form
     id="checkboxes"
@@ -9,44 +9,56 @@ exports[`renders a basic snapshot 1`] = `
       <input
         checked=""
         class="checkbox"
+        id="breakfast"
         name="breakfast"
         type="radio"
         value="breakfast"
       />
-      <label>
+      <label
+        for="breakfast"
+      >
         Breakfast
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="lunch"
         name="lunch"
         type="radio"
         value="lunch"
       />
-      <label>
+      <label
+        for="lunch"
+      >
         Lunch
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="dinner"
         name="dinner"
         type="radio"
         value="dinner"
       />
-      <label>
+      <label
+        for="dinner"
+      >
         Dinner
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="dessert"
         name="dessert"
         type="radio"
         value="dessert"
       />
-      <label>
+      <label
+        for="dessert"
+      >
         Dessert
       </label>
     </div>
@@ -54,7 +66,7 @@ exports[`renders a basic snapshot 1`] = `
 </div>
 `;
 
-exports[`renders a snapshot for dishType: breakfast 1`] = `
+exports[`DishForm renders a snapshot for dishType: breakfast 1`] = `
 <div>
   <form
     id="checkboxes"
@@ -63,44 +75,56 @@ exports[`renders a snapshot for dishType: breakfast 1`] = `
       <input
         checked=""
         class="checkbox"
+        id="breakfast"
         name="breakfast"
         type="radio"
         value="breakfast"
       />
-      <label>
+      <label
+        for="breakfast"
+      >
         Breakfast
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="lunch"
         name="lunch"
         type="radio"
         value="lunch"
       />
-      <label>
+      <label
+        for="lunch"
+      >
         Lunch
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="dinner"
         name="dinner"
         type="radio"
         value="dinner"
       />
-      <label>
+      <label
+        for="dinner"
+      >
         Dinner
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="dessert"
         name="dessert"
         type="radio"
         value="dessert"
       />
-      <label>
+      <label
+        for="dessert"
+      >
         Dessert
       </label>
     </div>
@@ -108,7 +132,7 @@ exports[`renders a snapshot for dishType: breakfast 1`] = `
 </div>
 `;
 
-exports[`renders a snapshot for dishType: dessert 1`] = `
+exports[`DishForm renders a snapshot for dishType: dessert 1`] = `
 <div>
   <form
     id="checkboxes"
@@ -116,33 +140,42 @@ exports[`renders a snapshot for dishType: dessert 1`] = `
     <div>
       <input
         class="checkbox"
+        id="breakfast"
         name="breakfast"
         type="radio"
         value="breakfast"
       />
-      <label>
+      <label
+        for="breakfast"
+      >
         Breakfast
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="lunch"
         name="lunch"
         type="radio"
         value="lunch"
       />
-      <label>
+      <label
+        for="lunch"
+      >
         Lunch
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="dinner"
         name="dinner"
         type="radio"
         value="dinner"
       />
-      <label>
+      <label
+        for="dinner"
+      >
         Dinner
       </label>
     </div>
@@ -150,11 +183,14 @@ exports[`renders a snapshot for dishType: dessert 1`] = `
       <input
         checked=""
         class="checkbox"
+        id="dessert"
         name="dessert"
         type="radio"
         value="dessert"
       />
-      <label>
+      <label
+        for="dessert"
+      >
         Dessert
       </label>
     </div>
@@ -162,7 +198,7 @@ exports[`renders a snapshot for dishType: dessert 1`] = `
 </div>
 `;
 
-exports[`renders a snapshot for dishType: dinner 1`] = `
+exports[`DishForm renders a snapshot for dishType: dinner 1`] = `
 <div>
   <form
     id="checkboxes"
@@ -170,22 +206,28 @@ exports[`renders a snapshot for dishType: dinner 1`] = `
     <div>
       <input
         class="checkbox"
+        id="breakfast"
         name="breakfast"
         type="radio"
         value="breakfast"
       />
-      <label>
+      <label
+        for="breakfast"
+      >
         Breakfast
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="lunch"
         name="lunch"
         type="radio"
         value="lunch"
       />
-      <label>
+      <label
+        for="lunch"
+      >
         Lunch
       </label>
     </div>
@@ -193,22 +235,28 @@ exports[`renders a snapshot for dishType: dinner 1`] = `
       <input
         checked=""
         class="checkbox"
+        id="dinner"
         name="dinner"
         type="radio"
         value="dinner"
       />
-      <label>
+      <label
+        for="dinner"
+      >
         Dinner
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="dessert"
         name="dessert"
         type="radio"
         value="dessert"
       />
-      <label>
+      <label
+        for="dessert"
+      >
         Dessert
       </label>
     </div>
@@ -216,7 +264,7 @@ exports[`renders a snapshot for dishType: dinner 1`] = `
 </div>
 `;
 
-exports[`renders a snapshot for dishType: lunch 1`] = `
+exports[`DishForm renders a snapshot for dishType: lunch 1`] = `
 <div>
   <form
     id="checkboxes"
@@ -224,11 +272,14 @@ exports[`renders a snapshot for dishType: lunch 1`] = `
     <div>
       <input
         class="checkbox"
+        id="breakfast"
         name="breakfast"
         type="radio"
         value="breakfast"
       />
-      <label>
+      <label
+        for="breakfast"
+      >
         Breakfast
       </label>
     </div>
@@ -236,33 +287,42 @@ exports[`renders a snapshot for dishType: lunch 1`] = `
       <input
         checked=""
         class="checkbox"
+        id="lunch"
         name="lunch"
         type="radio"
         value="lunch"
       />
-      <label>
+      <label
+        for="lunch"
+      >
         Lunch
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="dinner"
         name="dinner"
         type="radio"
         value="dinner"
       />
-      <label>
+      <label
+        for="dinner"
+      >
         Dinner
       </label>
     </div>
     <div>
       <input
         class="checkbox"
+        id="dessert"
         name="dessert"
         type="radio"
         value="dessert"
       />
-      <label>
+      <label
+        for="dessert"
+      >
         Dessert
       </label>
     </div>
