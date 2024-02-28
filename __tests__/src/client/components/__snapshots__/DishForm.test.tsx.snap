@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders a basic snapshot 1`] = `
+exports[`DishForm renders a basic snapshot 1`] = `
 <div>
   <form
     id="checkboxes"
@@ -66,7 +66,7 @@ exports[`renders a basic snapshot 1`] = `
 </div>
 `;
 
-exports[`renders a snapshot for dishType: breakfast 1`] = `
+exports[`DishForm renders a snapshot for dishType: breakfast 1`] = `
 <div>
   <form
     id="checkboxes"
@@ -132,7 +132,7 @@ exports[`renders a snapshot for dishType: breakfast 1`] = `
 </div>
 `;
 
-exports[`renders a snapshot for dishType: dessert 1`] = `
+exports[`DishForm renders a snapshot for dishType: dessert 1`] = `
 <div>
   <form
     id="checkboxes"
@@ -198,7 +198,7 @@ exports[`renders a snapshot for dishType: dessert 1`] = `
 </div>
 `;
 
-exports[`renders a snapshot for dishType: dinner 1`] = `
+exports[`DishForm renders a snapshot for dishType: dinner 1`] = `
 <div>
   <form
     id="checkboxes"
@@ -264,7 +264,7 @@ exports[`renders a snapshot for dishType: dinner 1`] = `
 </div>
 `;
 
-exports[`renders a snapshot for dishType: lunch 1`] = `
+exports[`DishForm renders a snapshot for dishType: lunch 1`] = `
 <div>
   <form
     id="checkboxes"

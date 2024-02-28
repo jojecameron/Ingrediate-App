@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import RecipeContainer from '../../../../client/src/containers/RecipeContainer/RecipeContainer';
+import RecipeContainer from '../../../../src/client/containers/RecipeContainer/RecipeContainer';
 
 const mockProps = {
   recipeList: [],
