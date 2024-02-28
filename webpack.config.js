@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = {
-  entry: './client/src/index.js',
+  entry: './src/client/index.js',
 
   output: {
     path: path.join(__dirname, 'dist'),
@@ -12,7 +12,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './client/src/index.html',
+      template: './src/client/index.html',
     }),
   ],
 
