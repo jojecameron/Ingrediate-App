@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 export interface APIController {
-  getGPTResult: (_req: Request, res: Response, next: NextFunction) => Promise<void>;
-  generatePrompt: (ingredients: string[]) => string;
+  getAPIResult: (_req: Request, res: Response, next: NextFunction) => Promise<void>;
 };
 
 export interface FavoritesController {
