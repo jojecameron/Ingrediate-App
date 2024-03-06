@@ -4,24 +4,41 @@
   display: flex;
   font-family: sans-serif;
   justify-content: space-evenly;
-  padding: 10px;
-  width: 40%;
+  height: 62.1px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
   #checkboxes {
-    align-items: center;
+    align-items: flex-end;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    height: auto;
+  }
+  .dish-form {
+    align-self: flex-start;
   }
 }
 
 .checkbox {
   cursor: pointer;
   height: 20px;
-  margin-bottom: 6px;
   outline: none;
   vertical-align: middle;
   width: 20px;
+  margin-top: 0px;
+  margin-right: 5px;
+}
+
+.radio-label {
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+}
+
+.dish-form {
+  align-self: baseline;
+  display: flex;
 }
