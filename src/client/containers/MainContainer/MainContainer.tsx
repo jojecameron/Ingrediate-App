@@ -18,6 +18,7 @@ import {
 import { generateRecipe } from '../../utils/apiUtils';
 
 const MainContainer = (): JSX.Element => {
+  const [model, setModel] = useState<string>('text-davinci-003');
   const [ingredientChoices, setIngredientChoices] = useState<Ingredient[]>([]);
   const [dishType, setDishType] = useState<DishType>('breakfast');
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
@@ -91,7 +92,7 @@ const MainContainer = (): JSX.Element => {
     }
     setIsLoading(true);
     try {
-      const result = await generateRecipe(ingredients);
+      const result = await generateRecipe(ingredients, model);
       setRecipeList([result, ...recipeList]);
       setIsLoading(false);
       setFavoriteMode(false);
