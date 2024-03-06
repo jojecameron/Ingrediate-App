@@ -20,8 +20,8 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/server/**/*.ts",
-    "src/client/index.js"
+    "src/server/**/*.ts"
+    // "src/client/index.js"
   ],
   "exclude": ["node_modules", "dist"]
 }
