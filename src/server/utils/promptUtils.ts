@@ -92,4 +92,4 @@ export const generateMistralPrompt = (ingredients: string[]) => {
     Link: |https://www.allrecipes.com/recipe/8235/carrot-cake-iii/
     
     Ready? Here is the prompt for the user's ingredients: ${ingredients}`;
-}
+};

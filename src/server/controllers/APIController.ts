@@ -68,6 +68,25 @@ const APIController: APIController = {
           res.locals.recipe = mistralData.response;
           break;
 
+          case 'llama2':
+            const llama2Completion = await fetch(openSourceLLM, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                model: 'llama2',
+                prompt: generateMistralPrompt(res.locals.ingredients),
+                stream: false,
+              }),
+            });
+            if (!llama2Completion.ok) {
+              throw new Error(`Fetch Error: ${llama2Completion.status} ${llama2Completion.statusText}`);
+            }
+            const llama2Data = await llama2Completion.json();
+            res.locals.recipe = llama2Data.response;
+            break;
+
         default:
           throw new Error(`Invalid model: ${res.locals.model}`);
       }
