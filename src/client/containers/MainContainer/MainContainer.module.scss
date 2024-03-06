@@ -19,3 +19,15 @@
   width: 100%;
   z-index: 999;
 }
+
+.generatorConfiguration {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media screen and (max-width: 700px) {
+  .generatorConfiguration {
+    margin-bottom: 15px;
+  }
+}
