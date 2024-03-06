@@ -1,4 +1,6 @@
-export const generateRecipe = async (ingredients: string[], model: string) => {
+import { Model } from '../types';
+
+export const generateRecipe = async (ingredients: string[], model: Model) => {
     const url = 'http://localhost:3000/generate';
     try {
       const result = await fetch(url, {

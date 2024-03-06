@@ -6,7 +6,9 @@ import {
   Loading,
   Header,
   Modal,
+  DropDown,
 } from '../../components';
+
 import {
   DishType,
   Recipe,
@@ -14,11 +16,12 @@ import {
   Ingredient,
   ModalState,
   User,
+  Model,
 } from '../../types';
 import { generateRecipe } from '../../utils/apiUtils';
 
 const MainContainer = (): JSX.Element => {
-  const [model, setModel] = useState<string>('text-davinci-003');
+  const [model, setModel] = useState<Model>('mistral:7b');
   const [ingredientChoices, setIngredientChoices] = useState<Ingredient[]>([]);
   const [dishType, setDishType] = useState<DishType>('breakfast');
   const [recipeList, setRecipeList] = useState<Recipe[]>([]);
@@ -175,6 +178,10 @@ const MainContainer = (): JSX.Element => {
     }
   };
 
+  const handleModelChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setModel(event.target.value as Model);
+  };
+
   return (
     <>
       <Header
@@ -205,7 +212,15 @@ const MainContainer = (): JSX.Element => {
             />
           </>
         )}
-        <DishForm setDishType={setDishType} dishType={dishType} />
+        <section className="generatorConfiguration">
+          <DishForm setDishType={setDishType} dishType={dishType} />
+          <DropDown
+            onChange={handleModelChange}
+            label={'Active Model:'}
+            options={['mistral:7b', 'text-davinci-003', 'llama2']}
+            value={model}
+          />
+        </section>
         <IngredientForm
           handleSubmit={handleSubmit}
           ingredientChoices={ingredientChoices}
