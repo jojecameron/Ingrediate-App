@@ -24,8 +24,6 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
         favoriteRecipe={favoriteRecipe}
         recipeTitle={recipe.recipeTitle}
         recipeText={recipe.recipeText}
-        recipeLinkTitle={recipe.recipeLinkTitle}
-        recipeLink={recipe.recipeLink}
         updateRecipeTitle={updateRecipeTitle}
       />
     );
@@ -40,8 +38,6 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
         favoriteRecipe={favoriteRecipe}
         recipeTitle={favorite.recipeTitle}
         recipeText={favorite.recipeText}
-        recipeLinkTitle={favorite.recipeLinkTitle}
-        recipeLink={favorite.recipeLink}
         updateRecipeTitle={updateRecipeTitle}
         favorite={true}
       />

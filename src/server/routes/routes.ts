@@ -19,14 +19,12 @@ routes.get('/', (_req: Request, res: Response) => {
 routes.post(
   '/generate',
   RecipeController.processRequest,
-  APIController.getGPTResult,
+  APIController.getAPIResult,
   RecipeController.parseRecipe,
   (_req, res) => {
     const result = { 
       recipeTitle: res.locals.recipeTitle,
       recipeText: res.locals.recipeText,
-      recipeLinkTitle: res.locals.recipeLinkTitle,
-      recipeLink: res.locals.recipeLink
      };
     res.status(200).send(JSON.stringify(result));
   }

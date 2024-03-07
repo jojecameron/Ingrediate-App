@@ -1,0 +1,30 @@
+.dropdown-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-label {
+  font-family: sans-serif;
+  color: $offWhite;
+  font-weight: 800;
+}
+
+.dropdown-select {
+  font-family: sans-serif;
+  font-weight: 800;
+  color: $primaryGreen;
+  padding: 10px;
+  width: auto;
+  margin: 10px 10px;
+  background-color: $offWhite;
+  border: solid $secondaryGreen 2px;
+  border-radius: 60px;
+}
+
+@media screen and (max-width: 700px) {
+  .dropdown-parent {
+    text-align: center;
+    align-self: center;
+  }
+}

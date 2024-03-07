@@ -25,67 +25,115 @@ exports[`renders a basic snapshot 1`] = `
     <section
       class="MainContainer"
     >
-      <form
-        id="checkboxes"
+      <section
+        class="generatorConfiguration"
       >
-        <div>
-          <input
-            checked=""
-            class="checkbox"
-            id="breakfast"
-            name="breakfast"
-            type="radio"
-            value="breakfast"
-          />
-          <label
-            for="breakfast"
+        <div
+          class="dish-form"
+        >
+          <form
+            id="checkboxes"
           >
-            Breakfast
-          </label>
+            <div
+              class="radio-label"
+            >
+              <label
+                for="breakfast"
+              >
+                Breakfast
+              </label>
+              <input
+                checked=""
+                class="checkbox"
+                id="breakfast"
+                name="breakfast"
+                type="radio"
+                value="breakfast"
+              />
+            </div>
+            <div
+              class="radio-label"
+            >
+              <label
+                for="lunch"
+              >
+                Lunch
+              </label>
+              <input
+                class="checkbox"
+                id="lunch"
+                name="lunch"
+                type="radio"
+                value="lunch"
+              />
+            </div>
+            <div
+              class="radio-label"
+            >
+              <label
+                for="dinner"
+              >
+                Dinner
+              </label>
+              <input
+                class="checkbox"
+                id="dinner"
+                name="dinner"
+                type="radio"
+                value="dinner"
+              />
+            </div>
+            <div
+              class="radio-label"
+            >
+              <label
+                for="dessert"
+              >
+                Dessert
+              </label>
+              <input
+                class="checkbox"
+                id="dessert"
+                name="dessert"
+                type="radio"
+                value="dessert"
+              />
+            </div>
+          </form>
         </div>
-        <div>
-          <input
-            class="checkbox"
-            id="lunch"
-            name="lunch"
-            type="radio"
-            value="lunch"
-          />
+        <div
+          class="dropdown-parent"
+        >
           <label
-            for="lunch"
+            class="dropdown-label"
+            for="Active Model:"
           >
-            Lunch
+            Active Model:
           </label>
-        </div>
-        <div>
-          <input
-            class="checkbox"
-            id="dinner"
-            name="dinner"
-            type="radio"
-            value="dinner"
-          />
-          <label
-            for="dinner"
+          <select
+            class="dropdown-select"
           >
-            Dinner
-          </label>
+            <option
+              class="dropdown-option"
+              value="mistral:7b"
+            >
+              mistral:7b
+            </option>
+            <option
+              class="dropdown-option"
+              value="text-davinci-003"
+            >
+              text-davinci-003
+            </option>
+            <option
+              class="dropdown-option"
+              value="llama2"
+            >
+              llama2
+            </option>
+          </select>
         </div>
-        <div>
-          <input
-            class="checkbox"
-            id="dessert"
-            name="dessert"
-            type="radio"
-            value="dessert"
-          />
-          <label
-            for="dessert"
-          >
-            Dessert
-          </label>
-        </div>
-      </form>
+      </section>
       <form
         class="IngredientForm"
       >
