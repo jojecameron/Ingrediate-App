@@ -7,6 +7,8 @@ import {
   Header,
   Modal,
   DropDown,
+  LoginForm,
+  SignupForm,
 } from '../../components';
 
 import {
@@ -14,9 +16,10 @@ import {
   Recipe,
   Favorite,
   Ingredient,
-  ModalState,
+  AccountModal,
   User,
   Model,
+  RecipeModal,
 } from '../../types';
 import { generateRecipe } from '../../utils/apiUtils';
 
@@ -28,7 +31,11 @@ const MainContainer = (): JSX.Element => {
   const [favoriteRecipes, setFavoriteRecipes] = useState<Favorite[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [favoriteMode, setFavoriteMode] = useState<boolean>(false);
-  const [modalState, setModalState] = useState<ModalState>({
+  const [recipeModal, setRecipeModal] = useState<RecipeModal>({
+    isOpen: false,
+    recipe: null,
+  });
+  const [accountModal, setAccountModal] = useState<AccountModal>({
     isOpen: false,
     modalType: 'Log in',
   });
@@ -185,32 +192,61 @@ const MainContainer = (): JSX.Element => {
   return (
     <>
       <Header
-        setModalState={setModalState}
+        setModalState={setAccountModal}
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
         saveFavorites={saveFavorites}
         setFavoriteRecipes={setFavoriteRecipes}
       />
       <section className="MainContainer">
-        {modalState.isOpen && (
+        {accountModal.isOpen && (
           <div
             className="overlay"
             onClick={() =>
-              setModalState({ isOpen: false, modalType: 'Log in' })
+              setAccountModal({ isOpen: false, modalType: 'Log in' })
             }
           />
         )}
-        {!modalState.isOpen ? (
-          <></>
-        ) : (
-          <>
-            <Modal
-              modalState={modalState}
-              setModalState={setModalState}
-              setIsLoggedIn={setIsLoggedIn}
-              setFavoriteRecipes={setFavoriteRecipes}
-            />
-          </>
+        {accountModal.isOpen && (
+          <Modal
+            isOpen={accountModal.isOpen}
+            onClose={() =>
+              setAccountModal({
+                isOpen: false,
+                modalType: accountModal.modalType,
+              })
+            }
+          >
+            {accountModal.modalType === 'Log in' ? (
+              <LoginForm
+                setFavoriteRecipes={setFavoriteRecipes}
+                setIsLoggedIn={setIsLoggedIn}
+                setAccountModal={setAccountModal}
+              />
+            ) : (
+              <SignupForm
+                setIsLoggedIn={setIsLoggedIn}
+                setAccountModal={setAccountModal}
+              />
+            )}
+          </Modal>
+        )}
+        {recipeModal.isOpen && (
+          <div
+            className="overlay"
+            onClick={() =>
+              setRecipeModal({ isOpen: false, recipe: null })
+            }
+          />
+        )}
+        {recipeModal.isOpen && (
+          <Modal
+            isOpen={recipeModal.isOpen}
+            onClose={() => setRecipeModal({ isOpen: false, recipe: null })}
+          >
+            <h2>{recipeModal.recipe?.recipeTitle}</h2>
+            <p>{recipeModal.recipe?.recipeText}</p>
+          </Modal>
         )}
         <section className="generatorConfiguration">
           <DishForm setDishType={setDishType} dishType={dishType} />
@@ -236,6 +272,7 @@ const MainContainer = (): JSX.Element => {
           updateRecipeTitle={updateRecipeTitle}
           favoriteMode={favoriteMode}
           setFavoriteMode={setFavoriteMode}
+          setRecipeModal={setRecipeModal}
         />
       </section>
     </>

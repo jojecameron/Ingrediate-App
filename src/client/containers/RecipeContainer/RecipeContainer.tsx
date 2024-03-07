@@ -12,7 +12,8 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
     setFavoriteRecipes,
     updateRecipeTitle,
     favoriteMode,
-    setFavoriteMode
+    setFavoriteMode,
+    setRecipeModal
   } = props;
 
   const recipes = recipeList.map((recipe, i) => {
@@ -25,6 +26,7 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
         recipeTitle={recipe.recipeTitle}
         recipeText={recipe.recipeText}
         updateRecipeTitle={updateRecipeTitle}
+        setRecipeModal={setRecipeModal}
       />
     );
   });
@@ -40,6 +42,7 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
         recipeText={favorite.recipeText}
         updateRecipeTitle={updateRecipeTitle}
         favorite={true}
+        setRecipeModal={setRecipeModal}
       />
     );
   });
