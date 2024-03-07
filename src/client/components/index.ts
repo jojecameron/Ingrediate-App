@@ -5,3 +5,4 @@ export { default as Header } from './Header/Header';
 export { default as Modal } from './Modal/Modal';
 export { default as Recipe } from './Recipe/Recipe';
 export { default as RecipeContainer } from '../containers/RecipeContainer/RecipeContainer';
+export { default as DropDown } from './DropDown/DropDown';
