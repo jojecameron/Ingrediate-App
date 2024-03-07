@@ -25,8 +25,6 @@ routes.post(
     const result = { 
       recipeTitle: res.locals.recipeTitle,
       recipeText: res.locals.recipeText,
-      recipeLinkTitle: res.locals.recipeLinkTitle,
-      recipeLink: res.locals.recipeLink
      };
     res.status(200).send(JSON.stringify(result));
   }

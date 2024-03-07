@@ -35,8 +35,6 @@ const RecipeController: RecipeController = {
       const splitRecipe = recipe.split('|');
       res.locals.recipeTitle = splitRecipe[0];
       res.locals.recipeText = splitRecipe[1];
-      res.locals.recipeLinkTitle = splitRecipe[2];
-      res.locals.recipeLink = splitRecipe[3];
       return next();
     } catch (error) {
       console.error(
