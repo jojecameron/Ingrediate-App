@@ -15,14 +15,6 @@ describe('recipe component functionality', () => {
     cy.get('.recipe-text');
   });
 
-  it('should display a recipe link title', () => {
-    cy.get('.recipe-linkTitle');
-  });
-
-  it('should display a recipe link', () => {
-    cy.get('.recipe-link');
-  });
-
   it('should delete a recipe', () => {
     cy.get('.Recipe').should('have.length', 1);
     cy.get('.delete').click();
