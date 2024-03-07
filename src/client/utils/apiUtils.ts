@@ -1,4 +1,6 @@
-export const generateRecipe = async (ingredients: string[]) => {
+import { Model } from '../types';
+
+export const generateRecipe = async (ingredients: string[], model: Model) => {
     const url = 'http://localhost:3000/generate';
     try {
       const result = await fetch(url, {
@@ -6,7 +8,7 @@ export const generateRecipe = async (ingredients: string[]) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(ingredients),
+        body: JSON.stringify({ingredients: ingredients, model: model}),
       });
       const data = await result.json();
       // this data.id is a random string that is used to identify the recipe
