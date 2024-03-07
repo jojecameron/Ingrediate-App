@@ -244,7 +244,7 @@ const MainContainer = (): JSX.Element => {
             isOpen={recipeModal.isOpen}
             onClose={() => setRecipeModal({ isOpen: false, recipe: null })}
           >
-            <h2>{recipeModal.recipe?.recipeTitle}</h2>
+            <h3>{recipeModal.recipe?.recipeTitle}</h3>
             <p>{recipeModal.recipe?.recipeText}</p>
           </Modal>
         )}

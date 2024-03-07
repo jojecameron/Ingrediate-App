@@ -12,8 +12,9 @@
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 40%;
+  width: 60%;
   z-index: 9999;
+  max-height: 75%;
 
   form {
     display: flex;
@@ -22,7 +23,6 @@
     justify-content: space-between;
     width: 100%;
   }
-
   h1 {
     color: $primaryGreen;
     font-family: $mainFont;
@@ -48,6 +48,33 @@
     height: 2em;
     margin-bottom: 20px;
     width: 100%;
+  }
+  h3 {
+    color: $primaryGreen;
+    font-family: $mainFont;
+    font-size: 28px;
+  }
+  p {
+    color: $primaryGreen;
+    float: left;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 18px;
+    margin: 0px;
+    overflow: auto;
+    white-space: pre-line;
+  }
+  p::-webkit-scrollbar {
+    background-color: $secondaryGreen;
+    border-radius: 15px;
+  }
+
+  p::-webkit-scrollbar-thumb {
+    background-color: $primaryGreen;
+    border-radius: 15px;
+  }
+  p::-webkit-scrollbar-track {
+    background-color: $secondaryGreen;
+    border-radius: 15px;
   }
   #bottom {
     align-items: center;

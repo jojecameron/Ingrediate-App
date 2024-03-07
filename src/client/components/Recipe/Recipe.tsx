@@ -5,6 +5,7 @@ import {
   DeleteForever,
   HeartBroken,
   AspectRatio,
+  OpenInFull,
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { RecipeProps } from '../../types';
@@ -24,6 +25,7 @@ const Recipe = (props: RecipeProps): JSX.Element => {
   const [isFavorite, setIsFavorite] = useState(favorite || false);
   const [isDeleteHover, setIsDeleteHover] = useState(false);
   const [isFavoriteHover, setIsFavoriteHover] = useState(false);
+  const [isExpandHover, setIsExpandHover] = useState(false);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [title, setTitle] = useState(recipeTitle);
 
@@ -56,8 +58,27 @@ const Recipe = (props: RecipeProps): JSX.Element => {
       <div className="recipe-header">
         {isFavorite ? (
           <>
-            <button onClick={() => setRecipeModal({isOpen: true, recipe: {recipeText: recipeText, recipeTitle: recipeTitle}})}>
-              <AspectRatio />
+            <button
+              className="expand"
+              onClick={() =>
+                setRecipeModal({
+                  isOpen: true,
+                  recipe: { recipeText: recipeText, recipeTitle: recipeTitle },
+                })
+              }
+              onMouseEnter={() => setIsExpandHover(true)}
+              onMouseLeave={() => setIsExpandHover(false)}
+            >
+              {isExpandHover ? (
+                <>
+                  <OpenInFull />
+                  <span id="expand-memo" className="memo">
+                    Expand
+                  </span>
+                </>
+              ) : (
+                <OpenInFull />
+              )}
             </button>
             <div className="delete-invisible">
               {/* Placeholder to maintain space */}
@@ -74,7 +95,9 @@ const Recipe = (props: RecipeProps): JSX.Element => {
             {isDeleteHover ? (
               <>
                 <DeleteForever color="error" />
-                <span className="memo">Delete recipe?</span>
+                <span id="delete-memo" className="memo">
+                  Delete recipe?
+                </span>
               </>
             ) : (
               <DeleteOutline />
@@ -94,13 +117,17 @@ const Recipe = (props: RecipeProps): JSX.Element => {
               {isFavorite && isFavoriteHover ? (
                 <>
                   <HeartBroken color="error" />
-                  <span className="memo">Delete favorite?</span>
+                  <span id="delete-favorite-memo" className="memo">
+                    Delete favorite?
+                  </span>
                 </>
               ) : (
                 <>
                   {isFavorite ? <Favorite color="error" /> : <FavoriteBorder />}
                   {isFavoriteHover && (
-                    <span className="memo">Favorite recipe?</span>
+                    <span id="favorite-memo" className="memo">
+                      Favorite recipe?
+                    </span>
                   )}
                 </>
               )}
@@ -123,7 +150,6 @@ const Recipe = (props: RecipeProps): JSX.Element => {
           autoFocus
         />
       )}
-
       <p className="recipe-text">{recipeText}</p>
     </div>
   );
