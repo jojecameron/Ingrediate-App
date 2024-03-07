@@ -15,8 +15,6 @@ const Recipe = (props: RecipeProps): JSX.Element => {
     favoriteRecipe,
     recipeTitle,
     recipeText,
-    recipeLinkTitle,
-    recipeLink,
     favorite,
     updateRecipeTitle,
   } = props;
@@ -48,8 +46,6 @@ const Recipe = (props: RecipeProps): JSX.Element => {
       id: id,
       recipeTitle: recipeTitle,
       recipeText: recipeText,
-      recipeLinkTitle: recipeLinkTitle,
-      recipeLink: recipeLink,
     });
   };
 
@@ -122,15 +118,6 @@ const Recipe = (props: RecipeProps): JSX.Element => {
       )}
 
       <p className="recipe-text">{recipeText}</p>
-      <h3 className="recipe-linkTitle">{recipeLinkTitle}</h3>
-      <a
-        className="recipe-link"
-        target="_blank"
-        rel="noopener noreferrer"
-        href={recipeLink}
-      >
-        {recipeLink}
-      </a>
     </div>
   );
 };

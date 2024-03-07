@@ -25,14 +25,14 @@ const FavoritesController: FavoritesController = {
     const { favorites, userId } = req.body;
     const text = `INSERT INTO
       favorites 
-      (id, "userId", "recipeTitle", "recipeText", "recipeLinkTitle", "recipeLink")
+      (id, "userId", "recipeTitle", "recipeText")
       VALUES 
-      ($1, $2, $3, $4, $5, $6) 
+      ($1, $2, $3, $4) 
       ON CONFLICT (id) DO NOTHING
       `;
     try {
       for (const favorite of favorites) {
-        const { id, recipeTitle, recipeText, recipeLinkTitle, recipeLink } =
+        const { id, recipeTitle, recipeText } =
           favorite;
         await query({
           text: text,
@@ -41,8 +41,6 @@ const FavoritesController: FavoritesController = {
             userId,
             recipeTitle,
             recipeText,
-            recipeLinkTitle,
-            recipeLink,
           ],
         });
       }

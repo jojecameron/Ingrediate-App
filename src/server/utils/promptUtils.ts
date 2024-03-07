@@ -1,5 +1,5 @@
 export const generateGPTPrompt = (ingredients: string[]) => {
-  return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The last element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe does not have to include all the ingredients in the list. You can assume there is access to water even if water is not a listed ingredient on the list. You will also provide a link to a similar recipe from a single website for each recipe.
+  return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The last element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe does not have to include all the ingredients in the list. You can assume there is access to water even if water is not a listed ingredient on the list.
     User: ['carrots', 'flour', 'sugar', 'cream cheese', 'eggs', 'butter', 'walnuts', 'pineapple', 'baking powder', 'powdered sugar', 'brown sugar', 'cinnamon', 'butter', 'milk', 'boneless skinless chicken breasts', 'panko breadcrumbs', 'olive oil', 'vegetable oil', 'kale', 'dessert']
     Assistant: Carrot Cake: |
     Ingredients:
@@ -27,8 +27,7 @@ export const generateGPTPrompt = (ingredients: string[]) => {
     - Remove the cake from the oven and let it cool in the pan for 10 minutes. - Then transfer the cake to a wire rack to cool completely.
     - In a small bowl, prepare the cream cheese frosting by combining the powdered sugar and softened butter. Mix until smooth and creamy.
     - Once the cake has cooled, spread the cream cheese frosting evenly over the top of the cake.
-    - Serve and enjoy. |
-    Link: |https://www.allrecipes.com/recipe/8235/carrot-cake-iii/
+    - Serve and enjoy.
     User: ['spinach', 'butter', 'cheddar cheese', 'ham', 'eggs', 'milk', 'red pepper', 'breakfast']
     Assistant: Spinach and Ham Breakfast Quiche: |
     Ingredients:
@@ -53,14 +52,13 @@ export const generateGPTPrompt = (ingredients: string[]) => {
     - Sprinkle the shredded cheddar cheese on top.
     - Place the dish in the preheated oven and bake for 25-30 minutes or until the eggs are set and the cheese is melted and lightly browned.
     - Remove from the oven and let it cool for a few minutes.
-    - Cut into slices and serve hot. |
-    Link: |https://www.servedfromscratch.com/spinach-ham-and-cheddar-quiche/
+    - Cut into slices and serve hot.
     User: ${ingredients}
     Assistant:`;
 };
 
 export const generateMistralPrompt = (ingredients: string[]) => {
-  return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The last element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe can only contain ingredients that are found in the array, but it is not necessary to use all the ingredients either. You can assume there is access to water even if water is not a listed ingredient in the array. You will also provide a link to a similar recipe from a single website for each recipe. It is important that you follow the format of the Response especially the use of "|" pipe characters to separate the title, ingredients, and instructions as the response will be a string. Here is the example prompt and response:
+  return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The last element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe can only contain ingredients that are found in the array, but it is not necessary to use all the ingredients either. You can assume there is access to water even if water is not a listed ingredient in the array. It is important that you follow the format of the Response especially the use of "|" pipe characters to separate the title, ingredients, and instructions as the response will be a string. Here is the example prompt and response:
   Prompt: ['carrots', 'sugar', 'eggs', 'butter', 'walnuts', 'pineapple', 'baking powder', 'cream cheese', 'brown sugar', 'cinnamon', 'butter', 'milk', 'flour', 'boneless skinless chicken breasts', 'panko breadcrumbs', 'olive oil', 'vegetable oil', 'kale', 'powdered sugar', 'dessert'],
     Response: Carrot Cake: |
     Ingredients:
@@ -88,8 +86,7 @@ export const generateMistralPrompt = (ingredients: string[]) => {
     - Remove the cake from the oven and let it cool in the pan for 10 minutes. - Then transfer the cake to a wire rack to cool completely.
     - In a small bowl, prepare the cream cheese frosting by combining the powdered sugar and softened butter. Mix until smooth and creamy.
     - Once the cake has cooled, spread the cream cheese frosting evenly over the top of the cake.
-    - Serve and enjoy. |
-    Link: |https://www.allrecipes.com/recipe/8235/carrot-cake-iii/
+    - Serve and enjoy.
     
     Ready? Here is the prompt for the user's ingredients: ${ingredients}`;
 };
