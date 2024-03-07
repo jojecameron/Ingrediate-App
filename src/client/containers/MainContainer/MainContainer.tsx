@@ -245,7 +245,7 @@ const MainContainer = (): JSX.Element => {
             onClose={() => setRecipeModal({ isOpen: false, recipe: null })}
           >
             <h3>{recipeModal.recipe?.recipeTitle}</h3>
-            <p>{recipeModal.recipe?.recipeText}</p>
+            <p id="modal-recipe">{recipeModal.recipe?.recipeText}</p>
           </Modal>
         )}
         <section className="generatorConfiguration">
