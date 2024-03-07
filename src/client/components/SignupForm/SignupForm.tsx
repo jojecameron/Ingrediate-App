@@ -51,9 +51,9 @@ const SignupForm = (props: SignupFormProps) => {
 
   return (
     <>
-      <h1>Sign up</h1>
-      <form onSubmit={handleSubmit}>
-        <section>
+      <h1 id="signup-title">Sign up</h1>
+      <form id="signup-form" onSubmit={handleSubmit}>
+        <section className="form-field">
           <label>Email Address</label>
           <input
             type="text"
@@ -62,7 +62,7 @@ const SignupForm = (props: SignupFormProps) => {
             onChange={handleChange}
           />
         </section>
-        <section>
+        <section className="form-field">
           <label>
             Password {' '}<span>(Min. 8 characters)</span>
           </label>
@@ -87,8 +87,8 @@ const SignupForm = (props: SignupFormProps) => {
           />
         </section>
       </form>
-      <p>Already have an account?</p>
-      <span
+      <p id="have-account">Already have an account?</p>
+      <span id="login-link"
         onClick={() => setAccountModal({ isOpen: true, modalType: 'Log in' })}
       >
         Log in

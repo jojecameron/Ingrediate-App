@@ -59,9 +59,9 @@ const LoginForm = (props: LoginFormProps) => {
 
   return (
     <>
-      <h1>Log in</h1>
-      <form onSubmit={handleSubmit}>
-        <section>
+      <h1 id="login-title">Log in</h1>
+      <form id="login-form" onSubmit={handleSubmit}>
+        <section className="form-field">
           <label>Email Address</label>
           <input
             type="text"
@@ -70,7 +70,7 @@ const LoginForm = (props: LoginFormProps) => {
             onChange={handleChange}
           />
         </section>
-        <section>
+        <section className="form-field">
           <label>Password</label>
           <input
             type="password"
@@ -93,8 +93,8 @@ const LoginForm = (props: LoginFormProps) => {
           />
         </section>
       </form>
-      <p>Need an account?</p>
-      <span
+      <p id="need-account">Need an account?</p>
+      <span id="signup-link"
         onClick={() => setAccountModal({ isOpen: true, modalType: 'Sign up' })}
       >
         Sign up
