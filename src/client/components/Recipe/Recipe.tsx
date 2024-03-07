@@ -4,6 +4,7 @@ import {
   DeleteOutline,
   DeleteForever,
   HeartBroken,
+  AspectRatio,
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { RecipeProps } from '../../types';
@@ -17,6 +18,7 @@ const Recipe = (props: RecipeProps): JSX.Element => {
     recipeText,
     favorite,
     updateRecipeTitle,
+    setRecipeModal,
   } = props;
 
   const [isFavorite, setIsFavorite] = useState(favorite || false);
@@ -53,10 +55,15 @@ const Recipe = (props: RecipeProps): JSX.Element => {
     <div className="Recipe">
       <div className="recipe-header">
         {isFavorite ? (
-          <div className="delete-invisible">
-            {/* Placeholder to maintain space */}
-            <DeleteOutline style={{ visibility: 'hidden' }} />
-          </div>
+          <>
+            <button onClick={() => setRecipeModal({isOpen: true, recipe: {recipeText: recipeText, recipeTitle: recipeTitle}})}>
+              <AspectRatio />
+            </button>
+            <div className="delete-invisible">
+              {/* Placeholder to maintain space */}
+              <DeleteOutline style={{ visibility: 'hidden' }} />
+            </div>
+          </>
         ) : (
           <button
             onMouseEnter={() => setIsDeleteHover(true)}
