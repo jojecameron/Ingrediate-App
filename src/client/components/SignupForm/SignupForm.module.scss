@@ -37,19 +37,20 @@
   align-items: center;
   display: flex;
   justify-content: center;
+
   #button {
     background-color: $primaryGreen;
     border: 1px solid $tertiaryGreen;
     border-radius: 5px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
     color: $offWhite;
+    display: flex;
     font-family: $mainFont;
     font-size: 18px;
-    margin-bottom: 20px;
-    width: 115px;
-    padding: 5px;
-    display: flex;
     justify-content: center;
+    margin-bottom: 20px;
+    padding: 5px;
+    width: 115px;
   }
   #button:hover {
     background-color: $tertiaryGreen;
@@ -67,7 +68,7 @@
 }
 
 #have-account {
-  font-family: $mainFont;
   color: $primaryGreen;
+  font-family: $mainFont;
   font-size: 18px;
 }

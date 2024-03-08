@@ -7,7 +7,7 @@ export interface AccountModal {
 
 export interface RecipeModal {
   isOpen: boolean;
-  recipe: {recipeTitle: string, recipeText: string} | null;
+  recipe: {recipeTitle: string, recipeText: string, id: string};
 }
 
 export interface ModalProps {
@@ -20,8 +20,9 @@ export interface HeaderProps {
   setModalState: React.Dispatch<React.SetStateAction<AccountModal>>;
   isLoggedIn: User;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<User>>;
-  saveFavorites: () => void;
+  saveFavorites: (isLoggedIn: User, favoriteRecipes: Favorite[]) => void;
   setFavoriteRecipes: React.Dispatch<React.SetStateAction<Favorite[]>>;
+  favoriteRecipes: Favorite[];
 }
 
 export interface LoginFormProps {
