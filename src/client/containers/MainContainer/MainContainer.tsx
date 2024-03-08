@@ -62,25 +62,17 @@ const MainContainer = (): JSX.Element => {
     });
   };
 
-  // preps dishType and ingredients to be sent to server
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  // preps dishType and ingredients and sends model to server
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const listOfIngredients = [];
+    const listOfIngredients: string[] = [];
     ingredientChoices.forEach((ingredient) => {
-      listOfIngredients.push(ingredient.label);
+      listOfIngredients.push(String(ingredient.label));
     });
     listOfIngredients.push(dishType);
-    sendIngredientsToServer(listOfIngredients);
-  };
-
-  // sends ingredients to recipe generator service
-  const sendIngredientsToServer = async (ingredients: string[]) => {
-    if (!ingredients.length) {
-      return alert('Please enter ingredients...');
-    }
     setIsLoading(true);
     try {
-      const result = await generateRecipe(ingredients, model);
+      const result = await generateRecipe(listOfIngredients, model);
       setRecipeList([result, ...recipeList]);
       setIsLoading(false);
       setFavoriteMode(false);
@@ -117,9 +109,10 @@ const MainContainer = (): JSX.Element => {
   };
 
   // updates recipe title in state and db if logged in
-  const updateRecipeTitle = async (
+  const updateRecipe = async (
     id: string,
     newTitle: string,
+    newText: string,
     isFavorite: boolean,
   ) => {
     // for favorited recipes
@@ -136,6 +129,7 @@ const MainContainer = (): JSX.Element => {
             body: JSON.stringify({
               id: id,
               newTitle: newTitle,
+              newText: newText,
             }),
           });
         } catch (err) {
@@ -145,7 +139,7 @@ const MainContainer = (): JSX.Element => {
       setFavoriteRecipes((currentFavorites) => {
         return currentFavorites.map((recipe) => {
           if (recipe.id === id) {
-            return { ...recipe, recipeTitle: newTitle };
+            return { ...recipe, recipeTitle: newTitle, recipeText: newText};
           }
           return recipe;
         });
@@ -155,7 +149,7 @@ const MainContainer = (): JSX.Element => {
       setRecipeList((currentRecipes) => {
         return currentRecipes.map((recipe) => {
           if (recipe.id === id) {
-            return { ...recipe, recipeTitle: newTitle };
+            return { ...recipe, recipeTitle: newTitle, recipeText: newText};
           }
           return recipe;
         });
@@ -233,7 +227,7 @@ const MainContainer = (): JSX.Element => {
           >
             <ExpandedRecipe
               recipeModal={recipeModal}
-              updateRecipeTitle={updateRecipeTitle}
+              updateRecipe={updateRecipe}
             />
           </Modal>
         )}
@@ -258,7 +252,6 @@ const MainContainer = (): JSX.Element => {
           favoriteRecipe={favoriteRecipe}
           favoriteRecipes={favoriteRecipes}
           setFavoriteRecipes={setFavoriteRecipes}
-          updateRecipeTitle={updateRecipeTitle}
           favoriteMode={favoriteMode}
           setFavoriteMode={setFavoriteMode}
           setRecipeModal={setRecipeModal}

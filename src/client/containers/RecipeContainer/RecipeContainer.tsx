@@ -7,7 +7,6 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
     deleteRecipe,
     favoriteRecipe,
     favoriteRecipes,
-    updateRecipeTitle,
     favoriteMode,
     setFavoriteMode,
     setRecipeModal,
@@ -22,7 +21,6 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
         favoriteRecipe={favoriteRecipe}
         recipeTitle={recipe.recipeTitle}
         recipeText={recipe.recipeText}
-        updateRecipeTitle={updateRecipeTitle}
         setRecipeModal={setRecipeModal}
       />
     );
@@ -37,7 +35,6 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
         favoriteRecipe={favoriteRecipe}
         recipeTitle={favorite.recipeTitle}
         recipeText={favorite.recipeText}
-        updateRecipeTitle={updateRecipeTitle}
         favorite={true}
         setRecipeModal={setRecipeModal}
       />
