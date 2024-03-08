@@ -32,16 +32,10 @@ const FavoritesController: FavoritesController = {
       `;
     try {
       for (const favorite of favorites) {
-        const { id, recipeTitle, recipeText } =
-          favorite;
+        const { id, recipeTitle, recipeText } = favorite;
         await query({
           text: text,
-          params: [
-            id,
-            userId,
-            recipeTitle,
-            recipeText,
-          ],
+          params: [id, userId, recipeTitle, recipeText],
         });
       }
       return next();
@@ -71,12 +65,12 @@ const FavoritesController: FavoritesController = {
 
   //updating favorite in database
   updateFavorite: async (req: Request, res: Response, next: NextFunction) => {
-    const { id, newTitle } = req.body;
-    const text = `UPDATE favorites SET "recipeTitle" = $1 WHERE id = $2`;
+    const { id, newTitle, newText } = req.body;
+    const text = `UPDATE favorites SET "recipeTitle" = $1, "recipeText" = $2 WHERE id = $3`;
     try {
       await query({
         text: text,
-        params: [newTitle, id],
+        params: [newTitle, newText, id],
       });
       return next();
     } catch (err) {

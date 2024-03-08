@@ -1,18 +1,15 @@
-import { useState } from 'react';
 import { Recipe } from '../../components';
-import { RecipeContainerProps, Favorite } from '../../types';
+import { RecipeContainerProps } from '../../types';
 
 const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
-
   const {
     recipeList,
     deleteRecipe,
     favoriteRecipe,
     favoriteRecipes,
-    setFavoriteRecipes,
-    updateRecipeTitle,
     favoriteMode,
-    setFavoriteMode
+    setFavoriteMode,
+    setRecipeModal,
   } = props;
 
   const recipes = recipeList.map((recipe, i) => {
@@ -24,7 +21,7 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
         favoriteRecipe={favoriteRecipe}
         recipeTitle={recipe.recipeTitle}
         recipeText={recipe.recipeText}
-        updateRecipeTitle={updateRecipeTitle}
+        setRecipeModal={setRecipeModal}
       />
     );
   });
@@ -38,8 +35,8 @@ const RecipeContainer = (props: RecipeContainerProps): JSX.Element => {
         favoriteRecipe={favoriteRecipe}
         recipeTitle={favorite.recipeTitle}
         recipeText={favorite.recipeText}
-        updateRecipeTitle={updateRecipeTitle}
         favorite={true}
+        setRecipeModal={setRecipeModal}
       />
     );
   });

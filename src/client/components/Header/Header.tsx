@@ -7,11 +7,12 @@ const Header = (props: HeaderProps): JSX.Element => {
     setIsLoggedIn,
     saveFavorites,
     setFavoriteRecipes,
+    favoriteRecipes,
   } = props;
 
   const handleLogOut = async () => {
     try {
-      await saveFavorites();
+      saveFavorites(isLoggedIn, favoriteRecipes);
       const response = await fetch('http://localhost:3000/user/logout', {
         method: 'POST',
         headers: {
