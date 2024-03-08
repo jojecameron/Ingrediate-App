@@ -1,0 +1,27 @@
+#modal-recipe-title {
+  color: $primaryGreen;
+  font-family: $mainFont;
+  font-size: 28px;
+}
+#modal-recipe {
+  color: $primaryGreen;
+  float: left;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 18px;
+  margin: 0px;
+  overflow: auto;
+  white-space: pre-line;
+}
+#modal-recipe::-webkit-scrollbar {
+  background-color: $secondaryGreen;
+  border-radius: 15px;
+}
+
+#modal-recipe::-webkit-scrollbar-thumb {
+  background-color: $primaryGreen;
+  border-radius: 15px;
+}
+#modal-recipe::-webkit-scrollbar-track {
+  background-color: $secondaryGreen;
+  border-radius: 15px;
+}

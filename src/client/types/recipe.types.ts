@@ -47,3 +47,8 @@ export interface RecipeContainerProps {
   setFavoriteMode: React.Dispatch<React.SetStateAction<boolean>>;
   setRecipeModal: React.Dispatch<React.SetStateAction<RecipeModal>>;
 }
+
+export interface ExpandedRecipeProps {
+  recipeModal: RecipeModal;
+  updateRecipeTitle: (id: string, title: string, isFavorite: boolean) => void;
+}

@@ -9,6 +9,7 @@ import {
   DropDown,
   LoginForm,
   SignupForm,
+  ExpandedRecipe,
 } from '../../components';
 
 import {
@@ -21,7 +22,7 @@ import {
   Model,
   RecipeModal,
 } from '../../types';
-import { generateRecipe } from '../../utils/apiUtils';
+import { generateRecipe, saveFavorites } from '../../utils/apiUtils';
 
 const MainContainer = (): JSX.Element => {
   const [model, setModel] = useState<Model>('mistral:7b');
@@ -33,7 +34,7 @@ const MainContainer = (): JSX.Element => {
   const [favoriteMode, setFavoriteMode] = useState<boolean>(false);
   const [recipeModal, setRecipeModal] = useState<RecipeModal>({
     isOpen: false,
-    recipe: null,
+    recipe: { recipeTitle: '', recipeText: '', id: '' },
   });
   const [accountModal, setAccountModal] = useState<AccountModal>({
     isOpen: false,
@@ -59,29 +60,6 @@ const MainContainer = (): JSX.Element => {
         );
       }
     });
-  };
-
-  // stores favorited recipes in db
-  const saveFavorites = async () => {
-    const favoritesUrl = 'http://localhost:3000/favorites';
-    if (isLoggedIn.loggedIn) {
-      try {
-        const result = await fetch(favoritesUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            favorites: favoriteRecipes,
-            userId: isLoggedIn.userId,
-          }),
-        });
-      } catch (err) {
-        console.error(err);
-      }
-    } else {
-      alert('Please log in to save favorites');
-    }
   };
 
   // preps dishType and ingredients to be sent to server
@@ -116,7 +94,7 @@ const MainContainer = (): JSX.Element => {
     if (favoriteRecipes.some((recipe) => recipe.id === id)) {
       try {
         const favoritesUrl = 'http://localhost:3000/favorites';
-        const result = await fetch(favoritesUrl, {
+        await fetch(favoritesUrl, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
@@ -150,7 +128,7 @@ const MainContainer = (): JSX.Element => {
       if (isLoggedIn.loggedIn) {
         try {
           const favoritesUrl = 'http://localhost:3000/favorites';
-          const result = await fetch(favoritesUrl, {
+          await fetch(favoritesUrl, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -197,6 +175,7 @@ const MainContainer = (): JSX.Element => {
         setIsLoggedIn={setIsLoggedIn}
         saveFavorites={saveFavorites}
         setFavoriteRecipes={setFavoriteRecipes}
+        favoriteRecipes={favoriteRecipes}
       />
       <section className="MainContainer">
         {accountModal.isOpen && (
@@ -235,17 +214,27 @@ const MainContainer = (): JSX.Element => {
           <div
             className="overlay"
             onClick={() =>
-              setRecipeModal({ isOpen: false, recipe: null })
+              setRecipeModal({
+                isOpen: false,
+                recipe: { recipeTitle: '', recipeText: '', id: '' },
+              })
             }
           />
         )}
         {recipeModal.isOpen && (
           <Modal
             isOpen={recipeModal.isOpen}
-            onClose={() => setRecipeModal({ isOpen: false, recipe: null })}
+            onClose={() =>
+              setRecipeModal({
+                isOpen: false,
+                recipe: { recipeTitle: '', recipeText: '', id: '' },
+              })
+            }
           >
-            <h3>{recipeModal.recipe?.recipeTitle}</h3>
-            <p id="modal-recipe">{recipeModal.recipe?.recipeText}</p>
+            <ExpandedRecipe
+              recipeModal={recipeModal}
+              updateRecipeTitle={updateRecipeTitle}
+            />
           </Modal>
         )}
         <section className="generatorConfiguration">
