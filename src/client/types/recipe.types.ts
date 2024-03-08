@@ -1,3 +1,5 @@
+import { RecipeModal } from '../types/modal.types';
+
 export interface Recipe {
   recipeTitle: string;
   recipeText: string;
@@ -18,11 +20,7 @@ export interface RecipeProps {
   recipeTitle: string;
   recipeText: string;
   favorite?: boolean;
-  updateRecipeTitle: (
-    id: string,
-    newTitle: string,
-    isFavorite: boolean,
-  ) => void;
+  setRecipeModal: React.Dispatch<React.SetStateAction<RecipeModal>>;
 }
 
 export interface RecipeContainerProps {
@@ -35,11 +33,12 @@ export interface RecipeContainerProps {
   favoriteRecipe: (isFavorite: boolean, recipe: Favorite) => void;
   favoriteRecipes: Favorite[];
   setFavoriteRecipes: React.Dispatch<React.SetStateAction<Favorite[]>>;
-  updateRecipeTitle: (
-    id: string,
-    newTitle: string,
-    isFavorite: boolean,
-  ) => void;
   favoriteMode: boolean;
   setFavoriteMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setRecipeModal: React.Dispatch<React.SetStateAction<RecipeModal>>;
+}
+
+export interface ExpandedRecipeProps {
+  recipeModal: RecipeModal;
+  updateRecipe: (id: string, title: string, text: string, isFavorite: boolean) => void;
 }

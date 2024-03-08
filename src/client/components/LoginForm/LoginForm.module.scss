@@ -1,0 +1,74 @@
+#login-title {
+  color: $primaryGreen;
+  font-family: $mainFont;
+  font-size: 34px;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  width: 100%;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    color: $primaryGreen;
+    font-family: $mainFont;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  input {
+    background-color: whitesmoke;
+    border: 2px solid $primaryGreen;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    color: $primaryGreen;
+    font-size: 20px;
+    height: 2em;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+}
+#bottom {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  #button {
+    background-color: $primaryGreen;
+    border: 1px solid $tertiaryGreen;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    color: $offWhite;
+    display: flex;
+    font-family: $mainFont;
+    font-size: 18px;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 5px;
+    width: 115px;
+  }
+  #button:hover {
+    background-color: $tertiaryGreen;
+    border: $primaryGreen 1px solid;
+    color: $primaryGreen;
+    transition-duration: 700ms;
+  }
+}
+
+#signup-link {
+  color: $primaryGreen;
+  cursor: pointer;
+  font-family: $mainFont;
+  font-size: 18px;
+}
+
+#need-account {
+  color: $primaryGreen;
+  font-family: $mainFont;
+  font-size: 18px;
+}
