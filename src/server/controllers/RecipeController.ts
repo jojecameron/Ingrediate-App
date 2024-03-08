@@ -32,7 +32,8 @@ const RecipeController: RecipeController = {
   parseRecipe: (req: Request, res: Response, next: NextFunction) => {
     try {
       const { recipe } = res.locals;
-      const splitRecipe = recipe.split('|');
+      const trimRecipe = recipe.trim();
+      const splitRecipe = trimRecipe.split('|');
       res.locals.recipeTitle = splitRecipe[0];
       res.locals.recipeText = splitRecipe[1];
       return next();

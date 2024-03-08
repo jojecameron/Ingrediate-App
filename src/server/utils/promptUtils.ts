@@ -1,7 +1,7 @@
 export const generateGPTPrompt = (ingredients: string[]) => {
   return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The last element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe does not have to include all the ingredients in the list. You can assume there is access to water even if water is not a listed ingredient on the list.
     User: ['carrots', 'flour', 'sugar', 'cream cheese', 'eggs', 'butter', 'walnuts', 'pineapple', 'baking powder', 'powdered sugar', 'brown sugar', 'cinnamon', 'butter', 'milk', 'boneless skinless chicken breasts', 'panko breadcrumbs', 'olive oil', 'vegetable oil', 'kale', 'dessert']
-    Assistant: Carrot Cake: |Ingredients:
+    Assistant: Carrot Cake |Ingredients:
 
     - 2 cups grated carrots
     - 2 cups all-purpose flour
@@ -28,7 +28,7 @@ export const generateGPTPrompt = (ingredients: string[]) => {
     - Once the cake has cooled, spread the cream cheese frosting evenly over the top of the cake.
     - Serve and enjoy.
     User: ['spinach', 'butter', 'cheddar cheese', 'ham', 'eggs', 'milk', 'red pepper', 'breakfast']
-    Assistant: Spinach and Ham Breakfast Quiche: |
+    Assistant: Spinach and Ham Breakfast Quiche |
     Ingredients:
 
     - 1 tablespoon butter
@@ -59,7 +59,7 @@ export const generateGPTPrompt = (ingredients: string[]) => {
 export const generateMistralPrompt = (ingredients: string[]) => {
   return `You are an assistant, you are an expert at generating recipes (with extensive step-by-step instructions) based off of an array containing a dish type and ingredients. The last element of the array will always be the dish type. You will provide the user a recipe that can be made from the contents of the array that pertains to the dish type. The recipe can only contain ingredients that are found in the array, but it is not necessary to use all the ingredients either. You can assume there is access to water even if water is not a listed ingredient in the array. It is important that you follow the format of the Response especially the use of "|" pipe characters to separate the title, ingredients, and instructions as the response will be a string. Here is the example prompt and response:
   Prompt: ['carrots', 'sugar', 'eggs', 'butter', 'walnuts', 'pineapple', 'baking powder', 'cream cheese', 'brown sugar', 'cinnamon', 'butter', 'milk', 'flour', 'boneless skinless chicken breasts', 'panko breadcrumbs', 'olive oil', 'vegetable oil', 'kale', 'powdered sugar', 'dessert'],
-    Response: Carrot Cake: |Ingredients:
+    Response: Carrot Cake |Ingredients:
 
     - 2 cups grated carrots
     - 2 cups all-purpose flour
