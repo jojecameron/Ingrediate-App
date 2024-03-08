@@ -20,6 +20,7 @@
   h3 {
     color: $primaryGreen;
     font-family: $mainFont;
+    position: relative;
   }
   a {
     color: $primaryGreen;
@@ -41,6 +42,7 @@
     margin: 0px;
     overflow: auto;
     white-space: pre-line;
+    padding-right: 10px;
   }
   p::-webkit-scrollbar {
     background-color: $secondaryGreen;
@@ -54,18 +56,6 @@
   p::-webkit-scrollbar-track {
     background-color: $secondaryGreen;
     border-radius: 15px;
-  }
-  input {
-    background-color: whitesmoke;
-    border: 2px solid $primaryGreen;
-    border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    color: $primaryGreen;
-    font-size: 20px;
-    font-family: $mainFont;
-    margin-top: 0.775em;
-    margin-bottom: 0.775em;
-    width: 100%;
   }
 }
 
@@ -91,6 +81,18 @@
   color: $primaryGreen;
   cursor: pointer;
   padding: 0px;
+}
+
+.expand {
+  background-color: transparent;
+  border: none;
+  color: $primaryGreen;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.expand:hover {
+  color: $secondaryGreen;
   transform: scale(1.1);
 }
 
@@ -98,12 +100,10 @@
   background-color: $primaryGreen;
   border: solid $offWhite 2px;
   border-radius: 5px;
-  bottom: 20px;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   color: $offWhite;
   font-family: $mainFont;
   font-size: 16px;
-  left: 20px;
   padding: 5px;
   position: absolute;
   width: 100px;

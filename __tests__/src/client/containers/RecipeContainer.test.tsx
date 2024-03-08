@@ -11,6 +11,7 @@ const mockProps = {
   updateRecipeTitle: jest.fn(),
   favoriteMode: false,
   setFavoriteMode: jest.fn(),
+  setRecipeModal: jest.fn(),
 };
 
 test('renders a basic snapshot', () => {

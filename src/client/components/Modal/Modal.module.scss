@@ -8,78 +8,14 @@
   flex-direction: column;
   justify-content: flex-start;
   left: 50%;
+  max-height: 75%;
   padding: 50px;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 40%;
+  width: 60%;
   z-index: 9999;
 
-  form {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  h1 {
-    color: $primaryGreen;
-    font-family: $mainFont;
-    font-size: 34px;
-  }
-  label {
-    color: $primaryGreen;
-    font-family: $mainFont;
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  section {
-    display: flex;
-    flex-direction: column;
-  }
-  input {
-    background-color: whitesmoke;
-    border: 2px solid $primaryGreen;
-    border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    color: $primaryGreen;
-    font-size: 20px;
-    height: 2em;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  #bottom {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-  }
-  #button {
-    background-color: $primaryGreen;
-    border: 1px solid $tertiaryGreen;
-    border-radius: 5px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    color: $offWhite;
-    font-family: $mainFont;
-    font-size: 18px;
-    margin-bottom: 20px;
-    width: 115px;
-  }
-  #button:hover {
-    background-color: $tertiaryGreen;
-    border: $primaryGreen 1px solid;
-    color: $primaryGreen;
-    transition-duration: 700ms;
-  }
-  p {
-    font-family: $mainFont;
-  }
-  span {
-    color: $primaryGreen;
-    cursor: pointer;
-    font-family: $mainFont;
-    font-size: 18px;
-  }
   #clear {
     background-color: tomato;
     border: none;

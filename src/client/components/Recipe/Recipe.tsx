@@ -4,6 +4,7 @@ import {
   DeleteOutline,
   DeleteForever,
   HeartBroken,
+  OpenInFull,
 } from '@mui/icons-material';
 import { useState } from 'react';
 import { RecipeProps } from '../../types';
@@ -16,29 +17,13 @@ const Recipe = (props: RecipeProps): JSX.Element => {
     recipeTitle,
     recipeText,
     favorite,
-    updateRecipeTitle,
+    setRecipeModal,
   } = props;
 
   const [isFavorite, setIsFavorite] = useState(favorite || false);
   const [isDeleteHover, setIsDeleteHover] = useState(false);
   const [isFavoriteHover, setIsFavoriteHover] = useState(false);
-  const [isEditingTitle, setIsEditingTitle] = useState(false);
-  const [title, setTitle] = useState(recipeTitle);
-
-  const handleTitleClick = () => {
-    setIsEditingTitle(true);
-  };
-
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
-
-  const handleEnter = () => {
-    if (title.length) {
-      setIsEditingTitle(false);
-      updateRecipeTitle(id, title, isFavorite);
-    }
-  };
+  const [isExpandHover, setIsExpandHover] = useState(false);
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -53,10 +38,38 @@ const Recipe = (props: RecipeProps): JSX.Element => {
     <div className="Recipe">
       <div className="recipe-header">
         {isFavorite ? (
-          <div className="delete-invisible">
-            {/* Placeholder to maintain space */}
-            <DeleteOutline style={{ visibility: 'hidden' }} />
-          </div>
+          <>
+            <button
+              className="expand"
+              onClick={() =>
+                setRecipeModal({
+                  isOpen: true,
+                  recipe: {
+                    recipeText: recipeText,
+                    recipeTitle: recipeTitle,
+                    id: id,
+                  },
+                })
+              }
+              onMouseEnter={() => setIsExpandHover(true)}
+              onMouseLeave={() => setIsExpandHover(false)}
+            >
+              {isExpandHover ? (
+                <>
+                  <OpenInFull />
+                  <span id="expand-memo" className="memo">
+                    Expand
+                  </span>
+                </>
+              ) : (
+                <OpenInFull />
+              )}
+            </button>
+            <div className="delete-invisible">
+              {/* Placeholder to maintain space */}
+              <DeleteOutline style={{ visibility: 'hidden' }} />
+            </div>
+          </>
         ) : (
           <button
             onMouseEnter={() => setIsDeleteHover(true)}
@@ -67,7 +80,9 @@ const Recipe = (props: RecipeProps): JSX.Element => {
             {isDeleteHover ? (
               <>
                 <DeleteForever color="error" />
-                <span className="memo">Delete recipe?</span>
+                <span id="delete-memo" className="memo">
+                  Delete recipe?
+                </span>
               </>
             ) : (
               <DeleteOutline />
@@ -87,13 +102,17 @@ const Recipe = (props: RecipeProps): JSX.Element => {
               {isFavorite && isFavoriteHover ? (
                 <>
                   <HeartBroken color="error" />
-                  <span className="memo">Delete favorite?</span>
+                  <span id="delete-favorite-memo" className="memo">
+                    Delete favorite?
+                  </span>
                 </>
               ) : (
                 <>
                   {isFavorite ? <Favorite color="error" /> : <FavoriteBorder />}
                   {isFavoriteHover && (
-                    <span className="memo">Favorite recipe?</span>
+                    <span id="favorite-memo" className="memo">
+                      Favorite recipe?
+                    </span>
                   )}
                 </>
               )}
@@ -101,22 +120,9 @@ const Recipe = (props: RecipeProps): JSX.Element => {
           </button>
         </div>
       </div>
-      {!isEditingTitle ? (
-        <h3 className="recipe-title" onClick={handleTitleClick}>
+        <h3 className="recipe-title">
           {recipeTitle}
         </h3>
-      ) : (
-        <input
-          className="recipe-title-edit"
-          type="text"
-          value={title}
-          onChange={handleTitleChange}
-          onBlur={() => handleEnter()}
-          onKeyDown={(e) => e.key === 'Enter' && handleEnter()}
-          autoFocus
-        />
-      )}
-
       <p className="recipe-text">{recipeText}</p>
     </div>
   );
