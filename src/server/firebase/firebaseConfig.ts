@@ -7,7 +7,7 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBoxa8YJJqaiibr2rH_YwUB4BQIRz7kJf8",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "ingrediate.firebaseapp.com",
   projectId: "ingrediate",
   storageBucket: "ingrediate.appspot.com",
