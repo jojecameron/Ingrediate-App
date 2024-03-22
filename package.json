@@ -10,7 +10,7 @@
     "build-client": "webpack --mode production",
     "start-server": "nodemon --exec ts-node -- src/server/server.ts",
     "start": "npm-run-all start-client start-server",
-    "dev": "concurrently \"npm run start-client\" \"npm run start-server\"",
+    "dev": "concurrently \"npm run start-client\" \"npm run start-server\" \"ollama run llama2\"",
     "prepare": "husky install"
   },
   "repository": {
