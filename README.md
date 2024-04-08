@@ -29,7 +29,7 @@ Simply type in the contents of your fridge/pantry, choose a meal type you would 
 <br />
 
 <div align="center">
-    <img src="/public/assets/ingrediate-demo.gif">
+    <img src="/public/assets/Ingrediate_demo.gif">
 </div>
 
 # Installation
@@ -38,13 +38,14 @@ Simply type in the contents of your fridge/pantry, choose a meal type you would 
 
 1. For use of Open Source LLM's within the application, download and install <a href="https://ollama.com/download" target="_blank">Ollama</a>, and make sure you have both mistral:7b and llama2 downloaded locally.
 2. Ingrediate can also generate custom recipes with the paid <a href="https://openai.com/blog/openai-api" target="_blank">OpenAI API</a> service, you must have an account and your own personal API key to use. This will only apply if you want to use the text-davinci-003 model in the application.
-2. You must also have a <a href="https://www.postgresql.org" target="_blank">PostgreSQL</a> database instance with a connection string to be able to persist favorited recipes to the database.
+3. You must also have a <a href="https://www.postgresql.org" target="_blank">PostgreSQL</a> database instance with a connection string to be able to persist favorited recipes to the database.
+4. Finally, for user authentication you should set up a <a href="https://firebase.google.com/" target="_blank">Firebase</a> instance with a Web API key.
 
 ## How to use
 
 1. Fork and clone this repo.
 2. `cd` to the root directory run `npm install`
-4. Create a .env in server following the .env.example. <br />
+3. Create a .env in server following the .env.example. <br />
      `# Do not share your OpenAI API key with anyone! It should remain a secret.`
      <br />
     `OPENAI_API_KEY=`
@@ -56,10 +57,9 @@ Simply type in the contents of your fridge/pantry, choose a meal type you would 
     `NODE_ENV=`
      <br />
     `FIREBASE_API_KEY=`
-    ```
 
-5. Paste in your OpenAI API & Firebase API key for user auth, PG_URI connection string, and port to run your server.
-6. Run `npm run dev`, ollama will launch, the development server and client will run concurrently, and Ingrediate will open in your web browser!
+4. Paste in your OpenAI API & Firebase API key for user auth, PG_URI connection string, and port to run your server.
+5. Run `npm run dev`, ollama will launch, the development server and client will run concurrently, and Ingrediate will open in your web browser!
 
 
 # Author
